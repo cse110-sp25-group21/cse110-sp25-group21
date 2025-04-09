@@ -8,8 +8,10 @@ Our project, "(project name)" is (project desc)
 (what it does, will fill out once we have smth)
 
 # How we built it
+(what tech/workflow/design)
 
 # Challenges we ran into
+(will fill out when they arise)
 
 # What's next for (project name)
 (will fill out once we finish)
