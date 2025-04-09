@@ -3,7 +3,8 @@
 
 # Introduction
 Our project, "(project name)" is (project desc)
-team wiki in [admin/team.md](./admin/team.md`)
+
+team wiki: [admin/team.md](./admin/team.md`)
 
 # What it does
 (what it does, will fill out once we have smth)
