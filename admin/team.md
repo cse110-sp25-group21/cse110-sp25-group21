@@ -73,4 +73,4 @@ We are a team of **11 developers** with roots across the world — from the Unit
 
 just say a blurb
 
-[Team Video](admin/videos/teamintro.mp4)
+[Team Video](videos/teamintro.mp4)
