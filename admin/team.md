@@ -73,8 +73,8 @@ Sophie said she will write a funny quick blurb to introduce us here.
 ### Darian Tan  
 - **Role**: Developer  
 - **GitHub**: [@darkotoni](https://github.com/darkotoni)  
-- **Skills**:  
-- **Bio**:  
+- **Skills**:  C++, C, Python, Communication
+- **Bio**:  My name is Darian, I'm a 3rd year Computer Science major at UCSD. Hope we have a great quarter!
 
 ### Edison Zhang  
 - **Role**: Developer  
