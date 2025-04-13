@@ -37,8 +37,8 @@ Sophie said she will write a funny quick blurb to introduce us here.
 ### Lisa Fritsche  
 - **Role**: Developer  
 - **GitHub**: [@lisafritsche](https://github.com/lisafritsche)  
-- **Skills**:  
-- **Bio**:  
+- **Skills**: Teamwork, Communication, SQL, Qlik Sense 
+- **Bio**: Hi, I’m a second-year Business Information Systems student from Germany, currently spending a semester abroad at UC San Diego. I’m combining CSE and Econ courses and working in the field of Authorization Management at KPMG. I’m excited to work with this amazing team!
 
 ### Chester Huey  
 - **Role**: Developer  
