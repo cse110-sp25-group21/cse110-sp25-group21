@@ -28,6 +28,12 @@ Sophie said she will write a funny quick blurb to introduce us here.
 - **Skills**: Full-Stack Development, Project Management, Leadership, Communication, and Team Collaboration.
 - **Bio**: My name is Tommy Tran and I’m a third year, double majoring in Math-CS and Cognitive Science ML. Nice to meet you!
 
+### Ryan Ni  
+- **Role**: Developer  
+- **GitHub**: [@ryunzz](https://github.com/ryunzz)  
+- **Skills**: full stack, infra, distributed systems
+- **Bio**: 2nd yr cs @ ucsd
+
 ### Mohan Dong  
 - **Role**: Developer  
 - **GitHub**: [@TeslaAngel](https://github.com/TeslaAngel)  
@@ -39,12 +45,6 @@ Sophie said she will write a funny quick blurb to introduce us here.
 - **GitHub**: [@lisafritsche](https://github.com/lisafritsche)  
 - **Skills**: Teamwork, Communication, SQL, Qlik Sense 
 - **Bio**: Hi, I’m a second-year Business Information Systems student from Germany, currently spending a semester abroad at UC San Diego. I’m combining CSE and Econ courses and working in the field of Authorization Management at KPMG. I’m excited to work with this amazing team!
-
-### Ryan Ni  
-- **Role**: Developer  
-- **GitHub**: [@ryunzz](https://github.com/ryunzz)  
-- **Skills**: full stack, infra, distributed systems
-- **Bio**: 2nd yr cs @ ucsd
 
 ### Chester Huey  
 - **Role**: Developer  
