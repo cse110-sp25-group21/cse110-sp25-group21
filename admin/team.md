@@ -31,8 +31,8 @@ Sophie said she will write a funny quick blurb to introduce us here.
 ### Mohan Dong  
 - **Role**: Developer  
 - **GitHub**: [@TeslaAngel](https://github.com/TeslaAngel)  
-- **Skills**:  
-- **Bio**:  
+- **Skills**: Game Development, 3D modelling, Music making
+- **Bio**:  Hello, I'm Mohan. I'm a third year CS student focusing on Computer Graphic and Game Development. Let's go and have fun!
 
 ### Lisa Fritsche  
 - **Role**: Developer  
