@@ -80,7 +80,8 @@ Sophie said she will write a funny quick blurb to introduce us here.
 - **Role**: Developer  
 - **GitHub**: [@EdisonZhangUCSD](https://github.com/EdisonZhangUCSD)  
 - **Skills**: **FullStack Development, API Development, Databases, Debugging**  
-- **Bio**:  
+- **Bio**: Hey everyone! Im Edison, a third-year Computer Science student. I am looking forward to creating something exciting for our project this quarter! 
+
 
 
 ---
