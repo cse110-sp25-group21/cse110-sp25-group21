@@ -40,15 +40,15 @@ Sophie said she will write a funny quick blurb to introduce us here.
 - **Skills**: Teamwork, Communication, SQL, Qlik Sense 
 - **Bio**: Hi, I’m a second-year Business Information Systems student from Germany, currently spending a semester abroad at UC San Diego. I’m combining CSE and Econ courses and working in the field of Authorization Management at KPMG. I’m excited to work with this amazing team!
 
-### Chester Huey  
-- **Role**: Developer  
-- **GitHub**: [@ChesterHuey](https://github.com/ChesterHuey)  
-- **Skills**:  
-- **Bio**:  
-
 ### Ryan Ni  
 - **Role**: Developer  
 - **GitHub**: [@ryunzz](https://github.com/ryunzz)  
+- **Skills**: full stack, infra, distributed systems
+- **Bio**: 2nd yr cs @ ucsd
+
+### Chester Huey  
+- **Role**: Developer  
+- **GitHub**: [@ChesterHuey](https://github.com/ChesterHuey)  
 - **Skills**:  
 - **Bio**:  
 
@@ -88,7 +88,7 @@ Sophie said she will write a funny quick blurb to introduce us here.
 ## Our Values
 
 - **Strong Communication** – Clear, timely responses and open dialogue, especially when big decisions are made.  
-- **Integrity** – Take ownership. Do the work and do it right.  
+- **Integrity** – It's okay to make mistakes, but take ownership. Do the work and do it right. 
 - **Collaboration** – We don’t just work side by side — we *work together*. Openness, support, and constructive feedback are what make us strong.  
 - **Respect** – Listen actively, stay patient, and value everyone's voice.  
 - **Willingness to Learn** – Every challenge is an opportunity to grow — whether it’s technical, procedural, or interpersonal.  
