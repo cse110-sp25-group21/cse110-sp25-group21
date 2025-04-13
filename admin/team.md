@@ -10,6 +10,8 @@ Welcome to the official team page for **Seekdeep-V2.1**, a cross-disciplinary gr
 
 We are a team of **11 developers** with roots across the world — from the United States 🇺🇸, China 🇨🇳, to Germany 🇩🇪. Our diversity drives creativity and brings unique perspectives to everything we build.
 
+Sophie said she will write a funny quick blurb to introduce us here.
+
 ---
 
 ## Team 21 Roster
@@ -17,67 +19,81 @@ We are a team of **11 developers** with roots across the world — from the Unit
 ### Charlotte Kim  
 - **Role**: Team Lead  
 - **GitHub**: [@CharlotteKim123](https://github.com/CharlotteKim123)  
-- *Skills*: 
-- *Bio*: I am a third-year Computer Science and Engineering student, with a minor in Entrepreneurship and Innovation. I am looking forward to seeing what our team will achieve this quarter😄 
+- **Skills**: 
+- **Bio**: I am a third-year Computer Science and Engineering student, with a minor in Entrepreneurship and Innovation. I am looking forward to seeing what our team will achieve this quarter😄 
 
 ### Tommy Tran  
 - **Role**: Team Lead  
 - **GitHub**: [@ttran29](https://github.com/ttran29)  
-- *Skills*: 
-  
-### Sophie Phung  
-- **Role**: Developer  
-- **GitHub**: [@sophiepng](https://github.com/sophiepng)  
-- *Skills*: 
-  
-### Chester Huey  
-- **Role**: Developer  
-- **GitHub**: [@ChesterHuey](https://github.com/ChesterHuey)  
-- *Skills*:  
-
-### Darian Tan  
-- **Role**: Developer  
-- **GitHub**: [@darkotoni](https://github.com/darkotoni)  
-- *Skills*: 
-
-### Lisa Fritsche  
-- **Role**: Developer  
-- **GitHub**: [@lisafritsche](https://github.com/lisafritsche)  
-- *Skills*:   
+- **Skills**: Full-Stack Development, Project Management, Leadership, Communication, and Team Collaboration.
+- **Bio**: My name is Tommy Tran and I’m a third year, double majoring in Math-CS and Cognitive Science ML. Nice to meet you!
 
 ### Mohan Dong  
 - **Role**: Developer  
 - **GitHub**: [@TeslaAngel](https://github.com/TeslaAngel)  
-- *Skills*: 
+- **Skills**:  
+- **Bio**:  
+
+### Lisa Fritsche  
+- **Role**: Developer  
+- **GitHub**: [@lisafritsche](https://github.com/lisafritsche)  
+- **Skills**:  
+- **Bio**:  
+
+### Chester Huey  
+- **Role**: Developer  
+- **GitHub**: [@ChesterHuey](https://github.com/ChesterHuey)  
+- **Skills**:  
+- **Bio**:  
 
 ### Ryan Ni  
 - **Role**: Developer  
 - **GitHub**: [@ryunzz](https://github.com/ryunzz)  
-- *Skills*: 
+- **Skills**:  
+- **Bio**:  
+
+### Sophie Phung  
+- **Role**: Developer  
+- **GitHub**: [@sophiepng](https://github.com/sophiepng)  
+- **Skills**:  
+- **Bio**:  
 
 ### Vijay Sinha  
 - **Role**: Developer  
 - **GitHub**: [@coderfreeze](https://github.com/coderfreeze)  
-- *Skills*: 
+- **Skills**:  
+- **Bio**:  
 
 ### Akhil Subbarao  
 - **Role**: Developer  
 - **GitHub**: [@Jvaladeus](https://github.com/JvalaDeus)  
-- *Skills*:  
+- **Skills**:  
+- **Bio**:  
+
+### Darian Tan  
+- **Role**: Developer  
+- **GitHub**: [@darkotoni](https://github.com/darkotoni)  
+- **Skills**:  
+- **Bio**:  
 
 ### Edison Zhang  
 - **Role**: Developer  
 - **GitHub**: [@EdisonZhangUCSD](https://github.com/EdisonZhangUCSD)  
-- *Skills*: FullStack Development, API Development, Databases, Debugging  
+- **Skills**: **FullStack Development, API Development, Databases, Debugging**  
+- **Bio**:  
+
 
 ---
 
 ## Our Values
 
-- **Strong Communication** – Respond (on time too)  
-- **Integrity** – Do the work  
-- **Collaboration** – Work together  
-- **Respect** – Listen to each other and be patient with one another
+- **Strong Communication** – Clear, timely responses and open dialogue, especially when big decisions are made.  
+- **Integrity** – Take ownership. Do the work and do it right.  
+- **Collaboration** – We don’t just work side by side — we *work together*. Openness, support, and constructive feedback are what make us strong.  
+- **Respect** – Listen actively, stay patient, and value everyone's voice.  
+- **Willingness to Learn** – Every challenge is an opportunity to grow — whether it’s technical, procedural, or interpersonal.  
+- **Transparency** – We believe in sharing progress, decisions, and blockers openly so everyone stays in the loop.  
+- **Innovation** – Embrace creative solutions and fresh ideas. We're not afraid to try new things.  
 
 ---
 
