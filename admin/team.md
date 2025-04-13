@@ -49,8 +49,8 @@ Sophie said she will write a funny quick blurb to introduce us here.
 ### Chester Huey  
 - **Role**: Developer  
 - **GitHub**: [@ChesterHuey](https://github.com/ChesterHuey)  
-- **Skills**:  
-- **Bio**:  
+- **Skills**:  web-dev, JavaScript, React.js, Node.js, Express.js, Figma
+- **Bio**:  Hi, I'm a 3rd year computer science student. Nice to meet you all.
 
 ### Sophie Phung  
 - **Role**: Developer  
