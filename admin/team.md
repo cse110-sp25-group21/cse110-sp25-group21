@@ -19,7 +19,7 @@ Sophie said she will write a funny quick blurb to introduce us here.
 ### Charlotte Kim  
 - **Role**: Team Lead  
 - **GitHub**: [@CharlotteKim123](https://github.com/CharlotteKim123)  
-- **Skills**: 
+- **Skills**: WebDev Tools, Python, Java, C++, Communication, and Resposibility.
 - **Bio**: I am a third-year Computer Science and Engineering student, with a minor in Entrepreneurship and Innovation. I am looking forward to seeing what our team will achieve this quarter😄 
 
 ### Tommy Tran  
