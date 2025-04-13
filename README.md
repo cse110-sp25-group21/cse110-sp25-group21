@@ -1,5 +1,5 @@
 # Hello! We are cse110-sp25-group21 aka SeekDeep v2.1
-@ryunzz, @darkotoni (Darian), @EdisonZhangUCSD (Edison) (fill in ur name/username here)
+@ryunzz, @darkotoni (Darian), @EdisonZhangUCSD (Edison), @coderfreeze (Vijay) (fill in ur name/username here)
 
 # Introduction
 Our project, "(project name)" is (project desc)
