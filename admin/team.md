@@ -2,9 +2,7 @@
 
 Welcome to the official team page for **Seekdeep-V2.1**, a cross-disciplinary group of passionate undergraduate students from **UC San Diego**. *Nice to meet you!*  
 
-<p align="center">
-  <img src="images/Team.png" alt="Team 21" width="400"/>
-</p>
+![Team Photo](/admin/assets/Team.png)
 
 ---
 
