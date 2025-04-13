@@ -17,6 +17,7 @@ We are a team of **11 developers** with roots across the world — from the Unit
 ### Charlotte Kim  
 - **Role**: Team Lead  
 - **GitHub**: [@CharlotteKim123](https://github.com/CharlotteKim123)
+- I am a third-year Computer Science and Engineering student, with a minor in Entrepreneuship and Innovation. I am looking forward to seeing what our team will achieve this quarter😄 
 
 ### Tommy Tran  
 - **Role**: Team Lead  
