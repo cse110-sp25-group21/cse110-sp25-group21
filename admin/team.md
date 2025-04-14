@@ -62,7 +62,7 @@ Our mission is to build a card-based website, and make sure to take showers alon
 - **Role**: Developer  
 - **GitHub**: [@coderfreeze](https://github.com/coderfreeze)  
 - **Skills**: Full-Stack Development, React, Node, Express, C/C++, Python, API Development  
-- **Bio**: Hello everyone, I'm a 3rd year Computer Science student. I look forward working with you all to make a cool project.   
+- **Bio**: Hello everyone, I'm a 3rd year Computer Science student. I look forward to working everyone to make a cool project.   
 
 ### Akhil Subbarao  
 - **Role**: Developer  
