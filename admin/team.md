@@ -67,8 +67,8 @@ Our mission is to build a card-based website, and make sure to take showers alon
 ### Akhil Subbarao  
 - **Role**: Developer  
 - **GitHub**: [@Jvaladeus](https://github.com/JvalaDeus)  
-- **Skills**:  
-- **Bio**:  
+- **Skills**:  C++, Java, Python, Communication, CSS, Deep Learning (Pytorch/tensorFlow), Machine Learning, Neural Signal Processing
+- **Bio**:  My name is Akhil, and Im a 3rd year transfer majoring in Cognitive Science w/ spec. Machine Learning & Neural Computation as well as double minoring in Computer Science & Biology. It is nice to meet all of you! 
 
 ### Darian Tan  
 - **Role**: Developer  
