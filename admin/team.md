@@ -8,7 +8,7 @@ Welcome to the official team page for **Seekdeep-V2.1**, a cross-disciplinary gr
 
 ## 🧑‍🚀 Who is Seekdeep?
 
-![Team Video]([https://www.youtube.com/watch?v=eZbGnfITl6k](https://camo.githubusercontent.com/ad416d0350f678bdc9908b2b114230fc0132fc6cc37f3d4c2cee7eb1d6c3ca24/68747470733a2f2f7777772e796f75747562652e636f6d2f77617463683f763d655a62476e6649546c366b))
+Team Video: https://www.youtube.com/watch?v=eZbGnfITl6k
 
 We are a team of **11 developers** with roots across the world — from the United States 🇺🇸, China 🇨🇳, to Germany 🇩🇪. Our diversity drives creativity and brings unique perspectives to everything we build. Our super creative name got inspiration from our group number 21, and is in no way affiliated with anything else. We love national security! 
 
