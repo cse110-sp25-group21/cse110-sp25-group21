@@ -8,9 +8,9 @@ Welcome to the official team page for **Seekdeep-V2.1**, a cross-disciplinary gr
 
 ## 🧑‍🚀 Who is Seekdeep?
 
-We are a team of **11 developers** with roots across the world — from the United States 🇺🇸, China 🇨🇳, to Germany 🇩🇪. Our diversity drives creativity and brings unique perspectives to everything we build.
+We are a team of **11 developers** with roots across the world — from the United States 🇺🇸, China 🇨🇳, to Germany 🇩🇪. Our diversity drives creativity and brings unique perspectives to everything we build. Our super creative name got inspiration from our group number 21, and is in no way affiliated with anything else. We love national security! 
 
-Sophie said she will write a funny quick blurb to introduce us here.
+Our mission is to build a card-based website, and make sure to take showers along the way. As we seek deeper into our codebase in search of bugs, we hope to gain newfound skills and appreciation for software engineering, improving ourselves as both developers and teammates. Armed with GitHub, dreams, and way too many tabs open, Seekdeep is diving headfirst into the world of web development. Pray for our sleep schedules.  
 
 ---
 
@@ -55,8 +55,8 @@ Sophie said she will write a funny quick blurb to introduce us here.
 ### Sophie Phung  
 - **Role**: Developer  
 - **GitHub**: [@sophiepng](https://github.com/sophiepng)  
-- **Skills**:  
-- **Bio**:  
+- **Skills**:  C/C++, Embedded Systems, Java, Python
+- **Bio**:  Hi! I'm a second-year Computer Science major. Looking forward to building something great!
 
 ### Vijay Sinha  
 - **Role**: Developer  
