@@ -8,6 +8,8 @@ Welcome to the official team page for **Seekdeep-V2.1**, a cross-disciplinary gr
 
 ## 🧑‍🚀 Who is Seekdeep?
 
+![Team Video](https://www.youtube.com/watch?v=eZbGnfITl6k)
+
 We are a team of **11 developers** with roots across the world — from the United States 🇺🇸, China 🇨🇳, to Germany 🇩🇪. Our diversity drives creativity and brings unique perspectives to everything we build. Our super creative name got inspiration from our group number 21, and is in no way affiliated with anything else. We love national security! 
 
 Our mission is to build a card-based website, and make sure to take showers along the way. As we seek deeper into our codebase in search of bugs, we hope to gain newfound skills and appreciation for software engineering, improving ourselves as both developers and teammates. Armed with GitHub, dreams, and way too many tabs open, Seekdeep is diving headfirst into the world of web development. Pray for our sleep schedules.  
