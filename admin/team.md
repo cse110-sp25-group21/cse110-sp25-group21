@@ -61,8 +61,8 @@ Our mission is to build a card-based website, and make sure to take showers alon
 ### Vijay Sinha  
 - **Role**: Developer  
 - **GitHub**: [@coderfreeze](https://github.com/coderfreeze)  
-- **Skills**:  
-- **Bio**:  
+- **Skills**: Full-Stack Development, React, Node, Express, C/C++, Python, API Development  
+- **Bio**: My name is Vijay, I'm a 3rd year Computer Science student. I look forward working with you all to make a cool project.   
 
 ### Akhil Subbarao  
 - **Role**: Developer  
