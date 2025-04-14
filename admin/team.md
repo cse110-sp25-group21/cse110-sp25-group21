@@ -81,7 +81,7 @@ Our mission is to build a card-based website, and make sure to take showers alon
 ### Edison Zhang  
 - **Role**: Developer  
 - **GitHub**: [@EdisonZhangUCSD](https://github.com/EdisonZhangUCSD)  
-- **Skills**: **FullStack Development, API Development, Databases, Debugging**  
+- **Skills**: FullStack Development, API Development, Databases, Debugging 
 - **Bio**: Hey everyone! Im Edison, a third-year Computer Science student. I am looking forward to creating something exciting for our project this quarter! 
 
 
