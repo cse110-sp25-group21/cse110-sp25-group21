@@ -1,6 +1,6 @@
 # Meeting Minutes
 ## Date: 4/24/25
-## Time: 9:30 pm - 
+## Time: 9:30 pm - 11:30 pm
 ### Attendance
 - Tommy Tran
 - Charlotte Kim
