@@ -1,6 +1,6 @@
 # Meeting Minutes
 ## Date: 4/24/25
-## Time: 9:30 pm
+## Time: 9:30 pm - 
 ### Attendance
 - Tommy Tran
 - Charlotte Kim
@@ -25,6 +25,10 @@
 - Started on our project outline.
 - Delegated roles and tasks to each member (design, research, and slides).
 
+### Unfinished Business for Next Meeting
+- Project Roadmap.
+
 ### Tasks Until Next Meeting
 - Work on the research and slides.
 - Work on pitch.
+  
