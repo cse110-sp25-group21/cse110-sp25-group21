@@ -21,10 +21,10 @@
 - Talked about some of the features we want our project to have.
 - Voted on what our project will be.
 - Created user personas for our project.
-- Created our Minimum Viable Product.
-  
-### Unfinished Business for Next Meeting
-- Delegate roles and tasks to each member.
-  
+- Created our Minimum Viable Product (MVP).
+- Started on our project outline.
+- Delegated roles and tasks to each member (design, research, and slides).
+
 ### Tasks Until Next Meeting
-- 
+- Work on the research and slides.
+- Work on pitch.
