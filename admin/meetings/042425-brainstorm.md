@@ -1,6 +1,17 @@
 # Meeting Minutes
 ## Date: 4/24/25
 ## Time: 9:30 pm
+### Attendance
+- Tommy Tran
+- Charlotte Kim
+- Sophie Phung
+- Lisa Fritsche
+- Darian Tan
+- Chester Huey
+- Mohan Dong
+- Ryan Ni
+- Vijay Sinha
+- Edison Zhang
 ### What Was Discussed
 - Each member created their Miro accounts.
 - Started brainstorming.
