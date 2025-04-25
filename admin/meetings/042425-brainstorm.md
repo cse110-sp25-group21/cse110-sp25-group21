@@ -31,4 +31,6 @@
 ### Tasks Until Next Meeting
 - Work on the research and slides.
 - Work on pitch.
+- Work on roadmap.
+- Work on design.
   
