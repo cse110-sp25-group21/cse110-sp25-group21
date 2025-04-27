@@ -63,4 +63,4 @@ We will confirm adoption by holding our first full-team brainstorming on Miro, e
 
 ## More Information
 
-Professor’s course materials recommended Miro. We’ll archive each meeting’s board export in `/specs/brainstorm/`.
+Professor’s course materials recommended Miro. We’ll archive each meeting’s board export.
