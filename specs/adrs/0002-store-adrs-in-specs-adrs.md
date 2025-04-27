@@ -23,13 +23,14 @@ We need a consistent location for Architectural Decision Records so that all tea
 
 ## Considered Options
 
-* `docs/decisions/`  
-* `specs/adrs/`  
-* `architecture/adr/`  
+* Google Docs  
+* Slack
+* Miro
+
 
 ## Decision Outcome
 
-Chosen option: **`specs/adrs/`**, because our repository already has a `specs/` folder for planning artifacts, and ADRs conceptually fit under “specs.”
+Chosen option: **`specs/adrs/`**, because our repository already has a `specs/` folder for planning artifacts, and ADRs conceptually fit under “specs.” Also, professor's documents recommend it to be pushed in the github.
 
 ### Consequences
 
@@ -48,7 +49,7 @@ We will create the directory in the repo and add this ADR file there. Subsequent
 ### docs/decisions/
 
 * Good, because it follows typical ADR examples  
-* Bad, because we’re already using `docs/` for generated API docs  
+* Bad, because we’re already using Miro for a lot of the information holding of decisions.
 
 ### specs/adrs/
 
