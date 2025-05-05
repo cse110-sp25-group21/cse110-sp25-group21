@@ -17,15 +17,15 @@ Our team needs rules as well as roles for the group project and so we need to as
 
 ## Decision Drivers
 
-*Course Assignment
-*Need clear structure
+* Course Assignment
+* Need clear structure
 
 
 ## Considered Options
 
-*Everyone works at one time
-*Assigned pairs/small groups
-*Each given a role and work on it individually
+* Everyone works at one time
+* Assigned pairs/small groups
+* Each given a role and work on it individually
 
 ## Decision Outcome
 
