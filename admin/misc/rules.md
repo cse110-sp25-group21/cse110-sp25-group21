@@ -18,6 +18,10 @@
 ## Roles and Responsibilities
 - Team members are responsible for completing their assigned tasks and participating in discussions and meetings.
 - Team members are responsible for promptly communicating their progress and roadblocks when relevent.
+- PM/Documenter → runs sprint planning, creates tasks from the product backlog, adds documentation
+- Designers → handle the app’s design and layout
+- Frontend → build the UI
+- Backend → handle server/data logic
 
 ## Accountability
 - Everyone is responsible for completing their assigned tasks on time.
