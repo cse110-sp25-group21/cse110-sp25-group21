@@ -4,8 +4,8 @@ nav_order: 3
 title: Team Roles
 status: accepted
 date: 2025-05-08
-decision-makers: [Team]
-consulted: [Course professor]
+decision-makers: [Team Leads]
+consulted: [TA]
 informed: [All team members]
 ---
 
