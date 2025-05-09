@@ -1,7 +1,7 @@
 ---
 parent: Decisions
 nav_order: 3
-title: Team Contract Decision/Roles
+title: Team Roles
 status: In-Progress
 date: 2025-05-05
 decision-makers: [Team]
@@ -9,11 +9,11 @@ consulted: [Course professor]
 informed: [All team members]
 ---
 
-# Create Contract and Decide Rules/Positions
+# Decide Teams/How we will work on the project
 
 ## Context and Problem Statement
 
-Our team needs rules as well as roles for the group project and so we need to assign them as well as see how comfortable people are with coding
+Our team needs roles for the group project and so we need to assign them as well as see how comfortable people are with coding
 
 ## Decision Drivers
 
