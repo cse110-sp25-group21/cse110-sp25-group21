@@ -28,14 +28,26 @@ Our team needs rules as well as roles for the group project and so we need to as
 * Each given a role and work on it individually
 
 ## Decision Outcome
+* We will use teams for backend, frontend, documentation and design
+* To get exposure for the roles we will switch the teams around midway through
+
+| Teams | Week 6,7, 8| Week 9, 10|
+| ------- | ------------- | ---------- |
+| Documentation | Sophie | Mohan |
+| Designer | Charlotte, Darian, Vijay | Edison, Chester, Tommy |
+| Frontend | Lisa, Ryan, Tommy | Akhil, Charlotte, Vijay |
+| Backend | Akhil, Mohan, Edison, Chester | Lisa, Ryan, Sophie, Darian |
+
 
 
 ### Consequences
 
-* **Positive**:  
+* **Positive**:
+  - Quicker work
+  - People get exposure to different roles
 
-* **Negative**:  
+* **Negative**:
+  - People might struggle to understand the code or need time after switcing teams
 
 ### Confirmation
-
-## Pros and Cons of the Options
+We will confirm this by maintaining these teams throughout the quarter
