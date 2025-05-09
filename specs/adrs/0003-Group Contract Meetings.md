@@ -2,7 +2,7 @@
 parent: Decisions
 nav_order: 3
 title: Team Roles
-status: In-Progress
+status: accepted
 date: 2025-05-05
 decision-makers: [Team]
 consulted: [Course professor]
