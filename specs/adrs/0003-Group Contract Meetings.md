@@ -3,7 +3,7 @@ parent: Decisions
 nav_order: 3
 title: Team Roles
 status: accepted
-date: 2025-05-05
+date: 2025-05-08
 decision-makers: [Team]
 consulted: [Course professor]
 informed: [All team members]
