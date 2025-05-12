@@ -1,12 +1,13 @@
-parent	nav_order	title	status	date	decision-makers	consulted	informed
-Decisions
-5
-Use GitHub Actions for CI/CD Pipeline
-accepted
-2025-05-10
-Backend + Infrastructure Subgroup (lead: Ryan Ni)
-Frontend team, PM
-All team members
+---
+parent: Decisions
+nav_order: 5
+title: Use GitHub Actions for CI/CD Pipeline
+status: accepted
+date: 2025-05-10
+decision-makers: [Backend + Infrastructure Subgroup (lead: Ryan Ni)]
+consulted: [Frontend team, PM]
+informed: [All team members]
+---
 
 Use GitHub Actions for CI/CD Pipeline
 
