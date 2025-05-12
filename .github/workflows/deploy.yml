@@ -1,0 +1,33 @@
+name: deploy / CD
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        #we only need to checkout@v2 since we don't need to go further than depth 1 from v3
+        uses: actions/checkout@v2
+
+      # we'll figure out what server we're using later
+      - name: SSH to Remote Server 
+        uses: appleboy/ssh-action@master
+        with:
+          host: 52.9.199.73
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd powells-bowells
+            git pull
+            cd frontend
+            npm install
+            npm run build
+            cd ..
+            python 
+            sudo service [wtv server] restart

@@ -1,0 +1,63 @@
+name: tests / CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    #choosing to use Ubuntu test server since our server is most likely Linux based
+    runs-on: ubuntu-latest
+
+    # this is a docker container to pull node v20
+    container:
+      image: node:20
+
+    steps:
+      - name: Checkout code
+        # we only need to checkout@v2 since we don't need to go further than depth 1 from v3
+        uses: actions/checkout@v2
+        with:
+          # repository: https://github.com /ryunzz/powells-bowells.git        // repo to cloning
+          # ref: dev                                                          // the branch, tag, or SHA to checkout
+          # path: foo/bar                                                     // dir to clone the repository
+          # fetch-depth: 1                                                    // # of commits to fetch, default = 1
+
+      # never npm install in pipelines/actions, it should be npm ci :3!
+      - name: Clean Install
+        run: npm ci
+
+      - name: Run ESLint
+        run: eslint . --ext .js,.jsx
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: latest
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build project
+        run: npm run build
+
+      # will see if we deploy to ieng6
+      - name: Deploy to Remote Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: 8000.0.0.0
+          username: ryunzz
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd powells-bowells
+            git pull
+            cd frontend
+            npm install
+            npm run build
+            cd ..
+            sudo service [wtv server] restart

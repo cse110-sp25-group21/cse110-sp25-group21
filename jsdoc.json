@@ -1,0 +1,15 @@
+{
+  "tags": {
+    "allowUnknownTags": true
+  },
+  "source": {
+    "include": ["frontend/src"], 
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "opts": {
+    "destination": "./admin/cipipeline/docs",
+    "recurse": true,
+    "template": "default"
+  }
+}
