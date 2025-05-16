@@ -8,7 +8,7 @@ body {
 
 /* Header Styles */
 header {
-  background-color: #4455a0;
+  background-color: #FF964F;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -38,20 +38,20 @@ nav a:hover {
 }
 
 .main-content h1 {
-  color: #4455a0;
+  color: #FF964F;
   font-size: 3rem;
   margin-bottom: 1rem;
   font-weight: 600;
 }
 
 .subtext {
-  color: #a0b0e0;
+  color: #F9AE7A;
   font-size: 1.2rem;
   margin-bottom: 2rem;
 }
 
 .card-button {
-  background-color: #4455a0;
+  background-color: #FF964F;
   color: white;
   border: none;
   padding: 1rem 1.5rem;
@@ -61,7 +61,7 @@ nav a:hover {
 }
 
 .card-button:hover {
-  background-color: #3a4a8d;
+  background-color: #F97316;
 }
 
 /* Flip Card Animation */
@@ -93,9 +93,10 @@ nav a:hover {
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
-  background-color: #f3f3f3;
+  background-color: #FF8737;
   border: 1px solid #ccc;
   border-radius: 10px;
+  color: #FFFF
 }
 
 .card-back {
