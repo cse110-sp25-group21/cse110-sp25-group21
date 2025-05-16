@@ -1,0 +1,64 @@
+@import 'styles/fonts.css';
+
+body {
+  font-family: var(--font-main);
+  margin: 0;
+  background-color: white;
+}
+
+/* rest of your styles unchanged */
+header {
+  background-color: #4455a0;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem 3rem;
+}
+
+.nav-logo {
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+nav a {
+  color: white;
+  margin-left: 2rem;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.main-content {
+  padding: 1rem 2rem;
+}
+
+.main-content h1 {
+  color: #4455a0;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.subtext {
+  color: #a0b0e0;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.card-button {
+  background-color: #4455a0;
+  color: white;
+  border: none;
+  padding: 1rem 1.5rem;
+  font-size: 1.3rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.card-button:hover {
+  background-color: #3a4a8d;
+}
