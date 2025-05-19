@@ -23,3 +23,6 @@
 - Make channels for all of the teams
 - For Design and Backend: try to optimize the workflow and resolve issues
 - Complete the rest of the issues
+
+### Recording
+https://www.youtube.com/watch?v=RxfsUb6CsMQ
