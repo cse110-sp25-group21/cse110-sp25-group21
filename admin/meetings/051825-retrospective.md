@@ -24,3 +24,6 @@
 - Slack ping before meeting
 - Reminder: attend sprint planning at 2pm tomorrow
 - Complete the rest of the issues
+
+### Recording 
+https://www.youtube.com/watch?v=RxfsUb6CsMQ
