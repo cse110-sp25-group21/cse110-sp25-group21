@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Restaurant - Powell's Bowells</title>
+  <link rel="stylesheet" href="styles/fonts.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <style>
+    /* Restaurant Form Styles */
+    .form-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+    
+    .form-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background-color: #FF8C52;
+    }
+    
+    .form-row {
+      margin-bottom: 1.25rem;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #555;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+    
+    .form-textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 1rem;
+      resize: vertical;
+    }
+    
+    .form-columns {
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    .form-column {
+      flex: 1;
+    }
+    
+    .map-container {
+      width: 100%;
+      height: 250px;
+      background-color: #f0f0f0;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .map-placeholder {
+      color: #999;
+      font-size: 2rem;
+    }
+    
+    .submit-container {
+      text-align: center;
+    }
+    
+    .submit-button {
+      background-color: #FF8C52;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .icon {
+      color: #FF8C52;
+      margin-right: 5px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .form-columns {
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-logo">Powell's Bowells</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#">Contact Us</a>
+    </nav>
+  </header>
+
+  <section class="main-content">
+    <h1>Add New Restaurant</h1>
+    
+    <div class="form-container">
+      <form id="restaurant-form">
+        <!-- Row 1: Restaurant Name -->
+        <div class="form-row">
+          <label for="restaurant-name" class="form-label">Restaurant Name</label>
+          <input type="text" id="restaurant-name" name="restaurant-name" placeholder="enter name here..." class="form-input">
+        </div>
+        
+        <!-- Row 2: Food Genre -->
+        <div class="form-row">
+          <label for="food-genre" class="form-label">Food Genre</label>
+          <input type="text" id="food-genre" name="food-genre" placeholder="enter genre here..." class="form-input">
+        </div>
+        
+        <!-- Row 3: Menu -->
+        <div class="form-row">
+          <label for="menu" class="form-label">Menu</label>
+          <textarea id="menu" name="menu" placeholder="enter menu here..." class="form-textarea"></textarea>
+        </div>
+        
+        <!-- Row 4: Business Hour -->
+        <div class="form-row">
+          <label for="business-hour" class="form-label">Business Hour</label>
+          <input type="text" id="business-hour" name="business-hour" placeholder="enter business hour here..." class="form-input">
+        </div>
+        
+        <!-- Row 5: Address, Website, Phone in 3 columns -->
+        <div class="form-row form-columns">
+          <div class="form-column">
+            <label for="address" class="form-label">Address <span class="icon">📍</span></label>
+            <input type="text" id="address" name="address" placeholder="enter address here..." class="form-input">
+          </div>
+          <div class="form-column">
+            <label for="website" class="form-label">Website <span class="icon">🌐</span></label>
+            <input type="text" id="website" name="website" placeholder="enter website here..." class="form-input">
+          </div>
+          <div class="form-column">
+            <label for="phone" class="form-label">Phone Number <span class="icon">📞</span></label>
+            <input type="text" id="phone" name="phone" placeholder="enter phone number here..." class="form-input">
+          </div>
+        </div>
+        
+        <!-- Row 6: Map placeholder -->
+        <div class="form-row">
+          <label for="map" class="form-label">Map</label>
+          <div class="map-container" id="map" aria-label="Map display area">
+            <div class="map-placeholder">📷</div>
+          </div>
+        </div>
+        
+        <!-- Row 7: Submit button -->
+        <div class="form-row submit-container">
+          <button type="submit" class="submit-button">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</body>
+</html> 
