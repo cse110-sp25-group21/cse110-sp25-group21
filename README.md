@@ -8,6 +8,8 @@ team wiki: [admin/team.md](./admin/team.md)
 
 team video: https://www.youtube.com/watch?v=eZbGnfITl6k
 
+team status video 1: https://youtu.be/HzBl4257Jy0?si=hAaN9ytbD48uaKOF
+
 # What it does
 (what it does, will fill out once we have smth)
 
