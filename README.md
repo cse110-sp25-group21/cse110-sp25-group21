@@ -27,7 +27,7 @@ Here are some quick links to some of the resources we developed while creating o
 
 📐 • [Figma/Design](https://www.figma.com/design/Be0yovA8zXPQD3utug0jxc/Team-Project-Card-Pages?node-id=142-451&p=f&t=fPaDfToQYo9wfFUj-0)
 
-📢 • [Pitchdeck](will fill in link once we have one) 
+📢 • [Pitchdeck](https://miro.com/app/board/uXjVI-VbvaQ=/)
 
 📕 • [Documentation](will fill in link once we have one)
 
