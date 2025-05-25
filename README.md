@@ -1,5 +1,5 @@
 # Hello! We are cse110-sp25-group21 aka SeekDeep v2.1
-@ryunzz (Ryan), @darkotoni (Darian), @EdisonZhangUCSD (Edison), @coderfreeze (Vijay), @ttran29 (Tommy), @CharlotteKim123 (Charlotte), @ChesterHuey (Chester), @sophiepng (Sophie), @Jvaladeus (Akhil), @lisafritsche (Lisa), @TeslaAngel (Mohan)
+@ryunzz (Ryan), @darkotoni (Darian), @EdisonZhangUCSD (Edison), @coderfreeze (Vijay), @ttran29 (Tommy), @CharlotteKim123 (Charlotte), @ChesterHuey (Chester), @sophiepng (Sophie), @Jvaladeus (Akhil), @lisafritsche (Lisa), and @TeslaAngel (Mohan)
 
 # Introduction
 Our project, "Powell's Bowells" is a website where people can input the restaurants they want to save into decks and when they select each deck, it'll show one restaurant to reccommend, which makes deciding what restaurant to go to a lot easier!
