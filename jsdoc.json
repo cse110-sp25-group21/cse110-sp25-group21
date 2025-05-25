@@ -1,15 +1,45 @@
 {
   "tags": {
-    "allowUnknownTags": true
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
   },
   "source": {
-    "include": ["frontend/src"], 
-    "includePattern": ".+\\.js(doc|x)?$",
-    "excludePattern": "(^|\\/|\\\\)_"
+    "include": [
+      "./src/backend/",
+      "./src/frontend/",
+      "./"
+    ],
+    "includePattern": "\\.(js|jsx)$",
+    "excludePattern": "(node_modules/|\\.test\\.js$|\\.spec\\.js$|admin/cipipeline/docs/|coverage/)",
+    "exclude": [
+      "./node_modules/",
+      "./admin/cipipeline/docs/",
+      "./test/",
+      "./coverage/"
+    ]
   },
   "opts": {
-    "destination": "./admin/cipipeline/docs",
+    "destination": "./admin/cipipeline/docs/",
     "recurse": true,
-    "template": "default"
+    "readme": "./README.md",
+    "package": "./package.json",
+    "verbose": true
+  },
+  "plugins": [
+    "plugins/markdown"
+  ],
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "default": {
+      "outputSourceFiles": true,
+      "includeDate": true,
+      "useLongnameInNav": false,
+      "showInheritedInNav": true
+    }
+  },
+  "markdown": {
+    "hardwrap": true,
+    "idInHeadings": true
   }
 }
