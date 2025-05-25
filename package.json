@@ -4,7 +4,16 @@
     "jsdoc": "^4.0.4"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "docs": "jsdoc -c jsdoc.json",
+    "docs:watch": "nodemon --watch src --watch backend --watch frontend --watch *.js --ext js --exec 'npm run docs'",
+    "docs:serve": "http-server admin/cipipeline/docs -p 8080 -o",
+    "docs:clean": "rm -rf admin/cipipeline/docs && npm run docs",
+    "lint": "eslint src/ backend/ frontend/ *.js --ext .js",
+    "lint:fix": "eslint src/ backend/ frontend/ *.js --ext .js --fix",
+    "validate:docs": "find . -name '*.js' -not -path './node_modules/*' -not -path './admin/cipipeline/docs/*' | xargs grep -l '/\\*\\*' || echo 'Some files missing JSDoc comments'",
+    "build": "npm run lint && npm run test && npm run docs",
+    "ci:check": "npm run validate:docs && npm run lint && npm run test && npm run docs"
   },
   "type": "commonjs"
 }
