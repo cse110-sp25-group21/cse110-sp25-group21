@@ -4,8 +4,9 @@
  */
 
 // Example controller export
-// const UserController = require('./user.controller');
-
+const UserController = require('./user.controller');
+const DeckController = require('./deck.controller');
 module.exports = {
-  // UserController
+  UserController,
+  DeckController
 }; 
