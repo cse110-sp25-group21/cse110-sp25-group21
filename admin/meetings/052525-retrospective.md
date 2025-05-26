@@ -27,4 +27,4 @@
 - Keep working on issues
 
 ### Recording 
-TBD
+https://youtu.be/Y7VwzUir0zM
