@@ -28,4 +28,4 @@
 - Link backend functions to frontend elements
 
 ### Recording
-TBD
+https://youtu.be/Y7VwzUir0zM
