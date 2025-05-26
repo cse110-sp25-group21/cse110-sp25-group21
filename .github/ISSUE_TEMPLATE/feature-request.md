@@ -14,6 +14,9 @@ _What feature or page are you working on? What’s the goal?_
 - [ ] @username1  
 - [ ] @username2  
 
+### Date Assigned
+5/26/2025 Week 9
+
 ### 🔗 Related Pages or Components
 _List related screens, components, or Figma links if available._
 
