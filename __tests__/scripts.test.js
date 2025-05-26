@@ -18,18 +18,18 @@ describe("flip-card script", () => {
     flipCard();
   });
 
-  test("toggles the ‘flipped’ class on click", () => {
+  test("changes 'flipped' class on click", () => {
     const button = document.querySelector(".card-button");
     const card   = document.getElementById("flip-card");
 
-    // initial state is not flipped
+    // initially not flipped
     expect(card.classList.contains("flipped")).toBe(false);
 
     // click button
     button.click();
     expect(card.classList.contains("flipped")).toBe(true);
 
-    // click again to un-flip
+    // click to flip again
     button.click();
     expect(card.classList.contains("flipped")).toBe(false);
   });
