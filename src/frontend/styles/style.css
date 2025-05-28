@@ -1,4 +1,4 @@
-@import 'styles/fonts.css';
+@import 'fonts.css';
 
 body {
   font-family: var(--font-main);
@@ -69,42 +69,150 @@ nav a.active {
   background-color: #F97316;
 }
 
-/* Flip Card Animation */
-.card-container {
-  perspective: 1000px;
-  width: 300px;
-  height: 200px;
-  margin: 2rem auto;
+/* ─── Static card (image + title + rating) ───────────────────── */
+.back-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+/* Search bar */
+.search-container {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 25px;
+  padding: 0.5rem 1rem;
+  margin: 0 2rem;
+  flex: 1;
+  max-width: 400px;
 }
 
+.search-container input {
+  border: none;
+  outline: none;
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
 .card {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.6s;
+  width: 300px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  overflow: hidden;
+  text-align: center;
 }
 
-.card.flipped {
-  transform: rotateY(180deg);
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
 
-.card-front, .card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
+.card-details {
+  padding: 1rem;
+}
+
+.card-details h2 {
+  margin: 0 0 0.5rem;
+  color: #FF964F;
+  font-size: 1.5rem;
+}
+
+.rating {
+  font-size: 1.5rem;
+  letter-spacing: 0.1rem;
+  color: #333;
+}
+
+
+
+/* ─── Deck header: title + edit button ───────────────── */
+.deck-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  margin-bottom: 2rem;
+}
+.deck-header h1 {
+  margin: 0;
+  font-size: 3rem;
+  color: #FF964F;
+}
+.deck-header .card-button {
+  padding: 0.75rem 1.25rem;
+  font-size: 1.1rem;
+}
+
+/* ─── Card-select area: arrows + card ───────────────── */
+.card-select {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
-  background-color: #FF8737;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  color: #FFFF
+  gap: 2rem;
+  padding: 0 2rem;
+}
+/* reuse your existing .card-button styling, but make arrows square */
+.card-select .card-button {
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0; /* override the default padding */
+  font-size: 1.75rem;
+  border-radius: 0.5rem;
 }
 
-.card-back {
-  transform: rotateY(180deg);
-  background-color: #d9fdd3;
+/* ─── Make the card pop out in the middle ────────────── */
+.card-container {
+  /* you already have perspective here */
+  margin: 0; 
+}
+
+/* ─── Footer tweaks ───────────────────────────────────── */
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  background-color: #FF964F;
+  color: white;
+  margin-top: 2rem;
+  font-size: 1rem;
+}
+
+footer img {
+  height: 40px;
+  width: auto;
+}
+
+/* Left side - logo and brand name */
+footer > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 500;
+}
+
+/* Right side - contact info */
+footer > div:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3rem;
+  text-align: right;
+}
+
+footer > div:last-child > div:first-child {
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
 }
