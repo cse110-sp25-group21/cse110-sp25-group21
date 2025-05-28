@@ -23,11 +23,9 @@
       padding: 0.25rem 0.9rem;
       background-color: #fff;
       border: 1px solid #afafaf;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
       border-radius: 0.5rem;
       font-size: 1rem;
       cursor: pointer;
-      transition: box-shadow 0.15s, background-color 0.15s;
     }
 
     .edit-button:hover {
@@ -49,11 +47,10 @@
       max-width: 500px;
       border: none;
       border-radius: 9999px;
-      font-size: 1rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       outline: none;
     }
 
+    
     /* CARDS GRID */
 
     .cards-container {
@@ -101,10 +98,6 @@
 
     .card.add-card {
       justify-content: center;
-    }
-
-    .card.add-card .card-image {
-      display: none;
     }
 
     .card.add-card .card-title {
@@ -165,11 +158,11 @@
       display: none;
       position: absolute; 
       left: 50%;
+      top: -50%;
       transform: translateX(-50%);      
-      color: #FF8737;
-      font-size: 1rem;
-      text-align: center;
-      white-space: nowrap;   
+      color: #e43d00;
+      font-size: 1.2rem;
+      text-align: center;  
     }
 
     /* show in edit mode */
@@ -177,16 +170,20 @@
       display: flex;
     }
 
-    main.edit-mode .cards-toolbar .edit-text {
+    main.edit-mode .edit-text {
       display: block;
     }
+    @media (max-width: 650px) {
+      main.edit-mode .edit-text {
+        display: none;
+      }
+    }
+
     /* no hover in edit mode */
     main.edit-mode .card:hover {
       transform: translateY(0px);
     }
 
-
-    /* style the little circle buttons */
     .card-controls button {
       width: 2rem;
       height: 2rem;
@@ -197,13 +194,11 @@
       font-size: 1rem;
       cursor: pointer;
     }
-
     
     .card-controls .edit-btn {
       border-color: #FF8737;
       color: #FF8737;
     }
-
 
   </style>
 </head>
@@ -236,7 +231,7 @@
 
       <a href="#" class="card">
         <div class="card-controls">
-          <button class="remove-btn"><span>-</span></button>
+          <button class="remove-btn">-</button>
           <button class="edit-btn">✎</button>
         </div>
 
