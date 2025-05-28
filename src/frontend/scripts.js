@@ -19,7 +19,7 @@
 */
 function flipCard() {
   const button = document.querySelector(".card-button");
-  const card   = document.getElementById("flip-card");
+  const card = document.getElementById("flip-card");
   if (!button || !card) return;
   button.addEventListener("click", () => {
     card.classList.toggle("flipped");
@@ -30,3 +30,13 @@ document.addEventListener("DOMContentLoaded", flipCard);
 
 
 module.exports = { flipCard };
+
+
+function openDeck(cardElement) {
+  const deckContainer = cardElement.closest(".deck-container");
+  const deckContent = deckContainer.querySelector(".deck-content");
+  if(deckContent) {
+    deckContent.style.display = (deckContent.style.display === "none") ? "block" : "none";
+  }
+}
+window.openDeck = openDeck;
