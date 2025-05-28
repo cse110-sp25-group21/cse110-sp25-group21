@@ -1,71 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Card Select</title>
+  <meta charset="UTF-8">
+  <title>Powell's Bowells</title>
   <link rel="stylesheet" href="styles/fonts.css">
   <link rel="stylesheet" href="styles/style.css">
 </head>
+
 <body>
   <header>
-    <button class="back-button" onclick="goBack()">
-      ← Back
-    </button>
-    
-    <div class="search-container">
-      <input type="text" placeholder="Input text" />
-      <button style="background: none; border: none; padding: 0.25rem;">×</button>
-    </div>
-    
+    <div class="nav-logo">Powell's Bowells</div>
     <nav>
-      <a href="#home">Home</a>
-      <a href="#add-restaurant">Add Restaurant</a>
-      <a href="#decks">Decks</a>
-      <a href="#contact">Contact Us</a>
+      <a href="#">Home</a>
+      <a href="#">Contact Us</a>
     </nav>
   </header>
 
-  <main class="main-content">
-    <section class="deck-header">
-      <h1 id="deck-title">Deck Title</h1>
-      <button id="edit-deck" class="card-button">Edit Deck</button>
-    </section>
+  <section class="main-content">
+    <h1>Restaurant Recs in Cards</h1>
+    <p class="subtext">Lorem Ipsum</p>
+    <button class="card-button">Cards</button>
 
-    <section class="card-select">
-      <button id="prev" class="card-button">←</button>
-
-      <div class="card">
-        <img
-          id="restaurant-image"
-          src="design/cardCover_default.jpg"
-          alt="Restaurant cover"
-        />
-        <div class="card-details">
-          <h2 id="restaurant-title">Restaurant Title</h2>
-          <div id="restaurant-rating" class="rating">
-            ☆☆☆☆☆
-          </div>
+    <!-- Flip Card Section -->
+    <div class="card-container">
+      <div class="card" id="flip-card">
+        <div class="card-front">
+          <p>Taco Bell</p>
+        </div>
+        <div class="card-back">
+          <p>In-N-Out</p>
         </div>
       </div>
-
-      <button id="next" class="card-button">→</button>
-    </section>
-  </main>
-
-  <footer>
-    <div style="display: flex; align-items: center; gap: 1rem;">
-      <div style="width: 40px; height: 40px; background: white; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-        <span style="color: #FF964F; font-weight: bold;">🍽️</span>
-      </div>
-      <span>Powell's Bowells</span>
     </div>
-    <div style="text-align: right;">
-      <div>lorem@ipsum.com</div>
-      <div>xxx-xxx-xxxx</div>
-    </div>
-  </footer>
+  </section>
 
+  <!-- Script -->
   <script src="scripts.js"></script>
 </body>
 </html>

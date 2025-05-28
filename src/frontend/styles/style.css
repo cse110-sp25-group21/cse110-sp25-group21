@@ -1,9 +1,10 @@
-@import 'fonts.css';
+@import '/fonts.css';
 
 body {
   font-family: var(--font-main);
   margin: 0;
-  background-color: white;
+  background-color: #ffffff;
+  color: #333333;
 }
 
 /* Header Styles */
@@ -55,7 +56,8 @@ nav a.active {
   margin-bottom: 2rem;
 }
 
-.card-button {
+.card-button,
+.back-button {
   background-color: #FF964F;
   color: white;
   border: none;
@@ -65,26 +67,16 @@ nav a.active {
   cursor: pointer;
 }
 
-.card-button:hover {
+.card-button:hover,
+.back-button:hover {
   background-color: #F97316;
 }
 
-/* ─── Static card (image + title + rating) ───────────────────── */
-.back-button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
 /* Search bar */
 .search-container {
   display: flex;
   align-items: center;
-  background: white;
+  background: #ffffff;
   border-radius: 25px;
   padding: 0.5rem 1rem;
   margin: 0 2rem;
@@ -99,9 +91,11 @@ nav a.active {
   padding: 0.5rem;
   font-size: 1rem;
 }
+
+/* Card */
 .card {
   width: 300px;
-  background: #fff;
+  background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   overflow: hidden;
@@ -127,12 +121,10 @@ nav a.active {
 .rating {
   font-size: 1.5rem;
   letter-spacing: 0.1rem;
-  color: #333;
+  color: #333333;
 }
 
-
-
-/* ─── Deck header: title + edit button ───────────────── */
+/* Deck header: title + edit button */
 .deck-header {
   display: flex;
   justify-content: space-between;
@@ -140,17 +132,19 @@ nav a.active {
   padding: 0 2rem;
   margin-bottom: 2rem;
 }
+
 .deck-header h1 {
   margin: 0;
   font-size: 3rem;
   color: #FF964F;
 }
+
 .deck-header .card-button {
   padding: 0.75rem 1.25rem;
   font-size: 1.1rem;
 }
 
-/* ─── Card-select area: arrows + card ───────────────── */
+/* Card-select area: arrows + card */
 .card-select {
   display: flex;
   align-items: center;
@@ -158,58 +152,26 @@ nav a.active {
   gap: 2rem;
   padding: 0 2rem;
 }
-/* reuse your existing .card-button styling, but make arrows square */
+
 .card-select .card-button {
   width: 3.5rem;
   height: 3.5rem;
-  padding: 0; /* override the default padding */
+  padding: 0;
   font-size: 1.75rem;
   border-radius: 0.5rem;
 }
 
-/* ─── Make the card pop out in the middle ────────────── */
-.card-container {
-  /* you already have perspective here */
-  margin: 0; 
-}
-
-/* ─── Footer tweaks ───────────────────────────────────── */
+/* Footer tweaks */
 footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 2rem;
+  padding: 1rem 2rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   background-color: #FF964F;
   color: white;
-  margin-top: 2rem;
-  font-size: 1rem;
-}
-
-footer img {
-  height: 40px;
-  width: auto;
-}
-
-/* Left side - logo and brand name */
-footer > div:first-child {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-weight: 500;
-}
-
-/* Right side - contact info */
-footer > div:last-child {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.3rem;
-  text-align: right;
-}
-
-footer > div:last-child > div:first-child {
-  font-weight: 600;
-  margin-bottom: 0.2rem;
 }
 
 footer a {
