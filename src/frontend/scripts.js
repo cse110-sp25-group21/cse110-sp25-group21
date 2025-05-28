@@ -1,3 +1,4 @@
+
 /**
  * @fileoverview Scripts for any front end elements like cards flipping
  */
@@ -9,22 +10,23 @@
  * @listens document#DOMContentLoaded
  * @returns {void}
  */
-document.addEventListener("DOMContentLoaded", () => {
+
+
+/**
+  * Toggle the flipped state of the card element.
+  * @returns {void}
+  * @listens HTMLButtonElement#click
+*/
+function flipCard() {
   const button = document.querySelector(".card-button");
-  const card = document.getElementById("flip-card");
-
-  if (!button || !card) {
-    console.warn("Flip-card elements not found in DOM");
-    return;
-  }
-
-  /**
-   * Toggle the flipped state of the card element.
-   * @param {MouseEvent} event – the click event object
-   * @returns {void}
-   * @listens HTMLButtonElement#click
-   */
-  button.addEventListener("click", (event) => {
+  const card   = document.getElementById("flip-card");
+  if (!button || !card) return;
+  button.addEventListener("click", () => {
     card.classList.toggle("flipped");
   });
-});
+}
+
+document.addEventListener("DOMContentLoaded", flipCard);
+
+
+module.exports = { flipCard };
