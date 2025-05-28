@@ -70,17 +70,16 @@
     .card {
       background-color: #FF8737;
       border-radius: 0.5rem;
-      overflow: hidden;
       text-decoration: none;
       color: white;
       display: flex;
       flex-direction: column;
-      transition: transform 0.5s;
+      transition: transform 0.3s;
       aspect-ratio: 3/5;
     }
 
     .card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-4px);
     }
 
     .card-image {
@@ -150,6 +149,61 @@
       cursor: pointer;
     }
 
+    /* EDIT MODE */
+
+    .card .card-controls {
+      display: none;
+      position: absolute;
+      top: -0.5rem;
+      right: -0.5rem;
+      flex-direction: column;
+      gap: 0.25rem;
+      z-index: 2;
+    }
+
+    .cards-toolbar .edit-text {
+      display: none;
+      position: absolute; 
+      left: 50%;
+      transform: translateX(-50%);      
+      color: #FF8737;
+      font-size: 1rem;
+      text-align: center;
+      white-space: nowrap;   
+    }
+
+    /* show in edit mode */
+    main.edit-mode .card .card-controls {
+      display: flex;
+    }
+
+    main.edit-mode .cards-toolbar .edit-text {
+      display: block;
+    }
+    /* no hover in edit mode */
+    main.edit-mode .card:hover {
+      transform: translateY(0px);
+    }
+
+
+    /* style the little circle buttons */
+    .card-controls button {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      border: 2px solid rgba(0, 0, 0, 0.75);
+      background: #ffffff;
+      color: #000;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    
+    .card-controls .edit-btn {
+      border-color: #FF8737;
+      color: #FF8737;
+    }
+
 
   </style>
 </head>
@@ -174,37 +228,69 @@
   <main>
 
     <div class="cards-toolbar">
+      <h2 class="edit-text">To Modify Names Click on Deck, To upload a picture click the picture</h2>
       <button class="edit-button">Edit</button>
     </div>
     
     <div class="cards-container">
 
       <a href="#" class="card">
+        <div class="card-controls">
+          <button class="remove-btn"><span>-</span></button>
+          <button class="edit-btn">✎</button>
+        </div>
+
         <div class="card-image"></div>
         <div class="card-title">Favorites</div>
       </a>
 
       <a href="#" class="card">
+        <div class="card-controls">
+          <button class="remove-btn">-</button>
+          <button class="edit-btn">✎</button>
+        </div>
+
         <div class="card-image"></div>
         <div class="card-title">Chinese</div>
       </a>
 
       <a href="#" class="card">
+        <div class="card-controls">
+          <button class="remove-btn">-</button>
+          <button class="edit-btn">✎</button>
+        </div>
+
         <div class="card-image"></div>
         <div class="card-title">Mediterranean</div>
       </a>
 
       <a href="#" class="card">
+        <div class="card-controls">
+          <button class="remove-btn">-</button>
+          <button class="edit-btn">✎</button>
+        </div>
+
         <div class="card-image"></div>
         <div class="card-title">Mexican</div>
       </a>
 
       <a href="#" class="card">
+
+        <div class="card-controls">
+          <button class="remove-btn">-</button>
+          <button class="edit-btn">✎</button>
+        </div>
+
         <div class="card-image"></div>
         <div class="card-title">Vietnamese</div>
       </a>
 
       <a href="#" class="card">
+        <div class="card-controls">
+          <button class="remove-btn">-</button>
+          <button class="edit-btn">✎</button>
+        </div>
+
         <div class="card-image"></div>
         <div class="card-title">Japanese</div>
       </a>
@@ -215,5 +301,15 @@
 
     </div>
   </main>
+
+  <script>
+    const editBtn = document.querySelector('.edit-button');
+    const mainElement = document.querySelector('main');
+    editBtn.addEventListener('click', () => {
+      const isEditing = mainElement.classList.toggle('edit-mode');
+      editBtn.textContent = isEditing ? 'Done' : 'Edit';
+    });
+  </script>
+
 </body>
 </html>
