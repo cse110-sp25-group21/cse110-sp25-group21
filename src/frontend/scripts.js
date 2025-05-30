@@ -36,27 +36,53 @@ var restaurants = [
   {
     title: 'Chick-fil-A',
     image: '../design/chickfila.jpg',
-    rating: 5
+    rating: 5,
+    type: 'American',
+    phone: '(858) 450-4417',
+    website: 'chick-fil-a.com',
+    address: '3351 Nobel Dr, La Jolla, CA 92037',
+    hours: '8 AM - 11 PM',
   },
   {
     title: 'Cava Mediterranean',
     image: '../design/cava.jpg',
-    rating: 4
+    rating: 4,
+    type: "Mediterranean",
+    phone: '(858) 433-0356',
+    website: 'cava.com',
+    address: '8849 Villa La Jolla Dr Suite 301, La Jolla, CA, 92037',
+    hours: '10 AM - 10 PM'
   },
   {
     title: 'Hamburger Hut',
     image: '../design/hamburger.jpg',
-    rating: 3
+    rating: 3,
+    type: 'American',
+    phone: '(760) 230-1999',
+    website: 'hamburgerhut.com',
+    address: '576 N Coast Hwy 101, Encinitas, CA 92024',
+    hours: '11 AM - 9 PM'
+
   },
   {
     title: 'Tacos El Rey',
     image: '../design/foodspread.png',
-    rating: 4
+    rating: 4,
+    type: 'Mexican',
+    phone: '(858) 638-0003',
+    website: 'primosmex.com',
+    address: '7770 Regents Rd #109, San Diego, CA 92122',
+    hours: '11 AM - 12 PM'
   },
   {
     title: 'Default Restaurant',
     image: '../design/cardCover_default.jpg',
-    rating: 5
+    rating: 5,
+    type: 'American',
+    phone: '(xxx) xxx-xxxx',
+    website: 'website.com',
+    address: 'Address Address San Diego, CA',
+    hours: '10 AM - 9 PM'
   }
 ];
 
@@ -113,3 +139,13 @@ window.onload = function() {
   // Render first restaurant
   renderRestaurant();
 };
+
+// inside-card.html
+let card = document.querySelector('.card')
+
+card.addEventListener('click', () => {
+  let restaurant = restaurants[currentIndex];
+  console.log('⬇️ saving restaurant:', restaurant);
+  sessionStorage.setItem('selectedRestaurant', JSON.stringify(restaurant));
+  window.location.href = 'inside-card.html'
+});
