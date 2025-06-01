@@ -22,14 +22,21 @@ function updateRecommendations() {
     .sort((a, b) => b[1] - a[1])
     .map(entry => entry[0]);
 
-  const recList = document.getElementById("recommendation-list");
+  const recList = document.getElementById("recommendation-list"); //TODO: Make section in html
   recList.innerHTML = ""; // Clear old list
 
-  sortedCards.slice(0, 3).forEach(cardName => {
-    const li = document.createElement("li");
-    li.textContent = cardName;
-    recList.appendChild(li);
-  });
+
+  if (sortedCards.length > 0) {
+      const ul = document.createElement("ul");
+      sortedCards.slice(0, 3).forEach(cardName => {
+        const li = document.createElement("li");
+        li.textContent = cardName;
+        ul.appendChild(li);
+      });
+      recList.appendChild(ul);
+  }
+
+  saveClickData();
 }
 
 // Function: Initialize tracking (connect to cards)
@@ -42,5 +49,19 @@ function initCardTracking() {
 
 // Run the tracking setup on page load
 document.addEventListener("DOMContentLoaded", () => {
+  loadClickData(); // Load saved data first
   initCardTracking();
 });
+
+// Save/load click data to localStorage
+function saveClickData() {
+  localStorage.setItem('cardClickCounts', JSON.stringify(cardClickCounts));
+}
+
+function loadClickData() {
+  const saved = localStorage.getItem('cardClickCounts');
+  if (saved) {
+    cardClickCounts = JSON.parse(saved);
+    updateRecommendations();
+  }
+}
