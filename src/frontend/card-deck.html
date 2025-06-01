@@ -8,6 +8,11 @@
   <link rel="stylesheet" href="styles/style.css">
 
   <style>
+    :root {
+        --primary-orange: #FF8C42;
+        --text-light: #fff;
+    }
+
     header {
       height: 1.8rem;
     }
@@ -50,7 +55,7 @@
       outline: none;
     }
 
-    
+
     /* CARDS GRID */
 
     .cards-container {
@@ -61,7 +66,7 @@
       justify-content: center;
       max-width: calc( (14rem * 5) + (1.5rem * 3) );
       margin: 0 auto;
-      
+
     }
 
     .card {
@@ -112,15 +117,15 @@
       max-width: 500px;
     }
 
-    
+
     .search-input-wrapper input {
       padding: 0.75rem 2rem;
-      padding-left: 2.5rem; 
+      padding-left: 2.5rem;
       padding-right: 2.5rem;
       font-size: 1.1rem;
     }
 
-    
+
     .search-icon {
       position: absolute;
       left: 0.75rem;
@@ -156,13 +161,13 @@
 
     .cards-toolbar .edit-text {
       display: none;
-      position: absolute; 
+      position: absolute;
       left: 50%;
       top: -50%;
-      transform: translateX(-50%);      
+      transform: translateX(-50%);
       color: #e43d00;
       font-size: 1.2rem;
-      text-align: center;  
+      text-align: center;
     }
 
     /* show in edit mode */
@@ -194,12 +199,68 @@
       font-size: 1rem;
       cursor: pointer;
     }
-    
+
     .card-controls .edit-btn {
       border-color: #FF8737;
       color: #FF8737;
     }
 
+    /* Footer Styles */
+    footer {
+        background-color: var(--primary-orange);
+        color: var(--text-light);
+        padding: 1.5rem 3rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 3rem;
+    }
+
+    .footer-left {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+    }
+
+    .footer-left img {
+        height: 40px;
+        margin-right: 10px;
+    }
+
+    .footer-left .brand-name {
+        font-weight: 700;
+        font-size: 1.2rem;
+    }
+
+    .footer-right {
+        text-align: right;
+    }
+
+    .footer-right h3 {
+        margin: 0 0 5px 0;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .footer-right p {
+        margin: 0;
+        font-size: 0.9rem;
+    }
+
+    /* Responsive adjustments for footer */
+    @media (max-width: 768px) {
+        footer {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1.5rem;
+        }
+        .footer-left, .footer-right {
+            margin: 10px 0;
+            text-align: center;
+        }
+    }
   </style>
 </head>
 <body>
@@ -226,7 +287,7 @@
       <h2 class="edit-text">To Modify Names Click on Deck, To upload a picture click the picture</h2>
       <button class="edit-button">Edit</button>
     </div>
-    
+
     <div class="cards-container">
 
       <a href="#" class="card">
@@ -296,6 +357,18 @@
 
     </div>
   </main>
+
+  <footer>
+      <div class="footer-left">
+          <img src="../design/logo.png" alt="Company Logo">
+          <span class="brand-name">Powell's Bowells</span>
+      </div>
+      <div class="footer-right">
+          <h3>Contact Us</h3>
+          <p>Lorem ipsum</p>
+          <p>XXX-XXX-XXXX</p>
+      </div>
+  </footer>
 
   <script>
     const editBtn = document.querySelector('.edit-button');
