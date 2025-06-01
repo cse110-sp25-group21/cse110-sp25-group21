@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>View Card</title>
+  <link rel="stylesheet" href="styles/fonts.css">
+  <link rel="stylesheet" href="styles/style.css">
+<style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        overflow-x: hidden;
+        display: block;
+    }
+
+    header, main, footer {
+        position: static;
+    }
+
+    .main-content {
+        padding: 2rem 2rem 0 2rem;
+    }
+
+    .restaurant-view {
+        display: flex;
+        gap: 0.5rem;
+        width: 100%;
+    }
+
+    .left-panel {
+        flex: 0 0 60%;
+        padding-right: 0.5rem;
+    }
+
+
+    .left-panel > * {
+        margin-bottom: 1.25rem;
+    }
+    .left-panel > *:last-child {
+        margin-bottom: 0;
+    }
+
+    .right-panel {
+        flex: 0 0 40%;
+        padding-left: 0.5rem;
+        font-size: 1.75rem;
+    }
+
+    .image {
+        width: 80%;
+        height: 40%;
+        aspect-ratio: 1 / 1;
+        background-color: #e0e0e0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: #555;
+        max-width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+    <header>
+        <button class="back-button">← Back</button>
+        <div class="search-container">
+            <input type="text" placeholder="Input text" />
+            <button style="background: none; border: none; padding: 0.25rem;">X</button>
+        </div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#add-restaurant">Add Restaurant</a>
+            <a href="#decks">Decks</a>
+            <a href="#contact">Contact Us</a>
+        </nav>
+    </header>
+
+  <main class="main-content">
+    <div class="restaurant-view">
+        <!-- left side -->
+        <div class="left-panel">
+            <h1 class="title">Restaurant Title</h1>
+            <div class="rating" style="font-size: 3rem;">★★★★★</div>
+            <h2 class="type" style="color: #FF964F;">(type)</h2>
+            <h2 class="hours" style="font-size: 2rem; color: #FF964F;">10PM - 7 AM</h2>
+            <img class="image" src="../design/cardCover_default.jpg">
+        </div>
+
+        <!-- right side -->
+        <div class="right-panel">
+            <div class="contact-info">
+
+                <p style="color: #FF964F"><br />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" width="1.5rem">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                    </svg>
+                    <span class="phone">(123) 456-789</span>
+                </p>
+
+                <p style="color: #FF964F">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" width="1.5rem">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+                    </svg>
+                    <span class="website">www.example.com</span>
+                </p>
+
+                <p style="color: #FF964F">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" width="1.5rem">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                    </svg>
+
+                    <span class="address">123 Main St, Anytown</span>
+                </p>
+            </div>
+            <div class="menu-section">
+                <h3 style="font-size: 2rem; margin-top: 2rem;">Menu</h3>
+                <ul style="list-style: none; padding: 0; margin: 0.5rem 0 0 0;">
+                    <li>Food 1</li>
+                    <li>Food 2</li>
+                    <li>Food 3</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+  </main>
+
+    <footer>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <img src="../design/logo.png" alt="Powell's Bowells Logo" style="height: 40px;">
+            <span>Powell's Bowells</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; margin-top: 1rem;">
+            <div>Contact Us</div>
+            <div>lorem@ipsum.com</div>
+            <div>xxx-xxx-xxxx</div>
+        </div>
+    </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const restaurant = JSON.parse(sessionStorage.getItem('selectedRestaurant'));
+        console.log(restaurant);
+        if (restaurant) {
+            document.querySelector('.image').src = restaurant.image;
+            document.querySelector('.title').textContent = restaurant.title;
+            document.querySelector('.hours').textContent = restaurant.hours;
+            document.querySelector('.type').textContent = restaurant.type;
+            document.querySelector('.phone').textContent = restaurant.phone;
+            document.querySelector('.website').textContent = restaurant.website;
+            document.querySelector('.address').textContent = restaurant.address;
+            var stars = '';
+            for (var i = 0; i < restaurant.rating; i++) {
+                stars += '★';
+            }
+            for (var j = restaurant.rating; j < 5; j++) {
+                stars += '☆';
+            }
+            document.querySelector('.rating').textContent = stars;
+        }
+    })
+
+    document.querySelector('.back-button').addEventListener('click', () => {
+        window.location.href = 'card-select.html';
+    });
+  </script>
+</body>
+</html>
