@@ -24,7 +24,6 @@
             line-height: 1.6;
         }
 
-        /* Header */
         header {
             background-color: var(--primary-orange);
             color: var(--text-light);
@@ -53,7 +52,6 @@
             padding: 2rem 5%;
         }
 
-        /* Section: Restaurant Recs in cards */
         .section-recs {
             margin-bottom: 3rem;
         }
@@ -61,6 +59,7 @@
         .section-recs h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
+            color: var(--primary-orange);
         }
 
         .section-recs button {
@@ -75,17 +74,13 @@
             transition: background-color 0.3s ease;
             margin-bottom: 2rem;
         }
-
+        .restRecText{
+            color:#e07b39;
+        }
         .section-recs button:hover {
             background-color: #e07b39; 
         }
-
-
-
      
-
-
-
         .section-confused {
             display: flex;
             flex-wrap: wrap;
@@ -97,39 +92,44 @@
         .confused-text {
             flex: 1;
             min-width: 300px;
-            
         }
 
+        .confused-text h1,
         .confused-text h2 {
-            font-size: 1rem;
-            color: #e07b39;
+            color: var(--primary-orange);
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .confused-text h1 {
+            font-size: 1.8rem;
             margin-bottom: 1rem;
         }
-        .confused-text h1 {
-            color: #e07b39;
+        .confused-text h2 {
+            font-size: 1.1rem;
+        }
+        .confused-text h3 {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            font-weight: 400;
             margin-bottom: 1rem;
         }
 
         .confused-text p {
-            
             margin-bottom: 1rem;
         }
         .confused-image {
-        flex: 1;
-        display: flex;
-        justify-content: flex-end;
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
         }      
 
-      .confused-image img {
-        max-width: 100%;
-        height: auto;
-        max-height: 100%;
-        object-fit: contain;
-    }
-
-
-
-
+        .confused-image img {
+            max-width: 100%;
+            height: auto;
+            max-height: 100%;
+            object-fit: contain;
+        }
       
         .section-decks h2 {
             font-size: 2rem;
@@ -159,9 +159,19 @@
             display: block; 
         }
 
-        .deck-card p {
+        .deck-card .orange-label {
+            color: var(--primary-orange);
+            font-size: 0.85rem;
+            font-weight: 600;
             padding: 0 1rem;
             margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .deck-card p {
+            padding: 0 1rem;
+            margin-top: 0.5rem;
             font-size: 0.9rem;
             color: #555;
         }
@@ -183,21 +193,50 @@
         }
 
 
-        /* Footer */
         footer {
             background-color: var(--primary-orange);
             color: var(--text-light);
             padding: 1.5rem 5%;
-            text-align: center;
+            text-align: center; 
             margin-top: 3rem;
             border-top-left-radius: var(--border-radius-lg);
             border-top-right-radius: var(--border-radius-lg);
+            
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+            flex-wrap: wrap; 
         }
 
-        .footer-logo {
+        .footer-left {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        .footer-left img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .footer-left .brand-name {
             font-weight: 700;
             font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+        }
+
+        .footer-right {
+            text-align: right; /* Align text to the right within its container */
+        }
+
+        .footer-right h3 {
+            margin: 0 0 5px 0;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .footer-right p {
+            margin: 0;
+            font-size: 0.9rem;
         }
 
         @media (max-width: 768px) {
@@ -218,6 +257,16 @@
                 grid-template-columns: 1fr;
             }
 
+            footer {
+                flex-direction: column; /* Stack items vertically on small screens */
+                align-items: center; /* Center items when stacked */
+                text-align: center;
+            }
+
+            .footer-left, .footer-right {
+                margin: 10px 0; /* Add vertical space */
+                text-align: center; /* Center text within their sections */
+            }
         }
 
         @media (max-width: 480px) {
@@ -236,10 +285,9 @@
 </head>
 <body>
     <header>
-            Landing page
+            Powell's Bowells
         <nav class="header-nav">
             <a href="#">Home</a>
-            <a href="#">About</a>
             <a href="#">Contact</a>
         </nav>
     </header>
@@ -247,26 +295,27 @@
     <main class="container">
         <section class="section-recs">
             <h1>Restaurant Recs in cards</h1>
+            <h3 class = "restRecText">Lorem ipsum</h3>
             <button>Cards</button>
             <div class="image-banner">
-                <img src="https://t3.ftcdn.net/jpg/02/60/12/88/360_F_260128861_Q2ttKHoVw2VrmvItxyCVBnEyM1852MoJ.jpg" alt="Variety of dishes">
+                <img src="https://escapetoblueridge.icnd-cdn.com/images/blog/AdobeStock_104266750-2048x1311.jpeg" alt="Variety of dishes">
             </div>
         </section>
 
         <section class="section-confused">
             <div class="confused-text">
               <h1>Confused about where to eat?</h1>
-              <h2>some text</h2>
-              <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
-              <h2>Introducing</h2>
-              <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
-              <h2>Introducing</h2>
-              <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
+              <h2>Some text about confusion.</h2>
+              <h3>A longer description or thought.</h3>
+              <h2>Introducing our solution!</h2>
+              <h3>Discover your next favorite meal easily.</h3>
+              <h2>Get started today!</h2>
+              <h3>Find perfect recommendations tailored for you.</h3>
             </div>
           
             <div class="confused-image">
               <img 
-                src="https://www.foodandwine.com/thmb/DI29Houjc_ccAtFKly0BbVsusHc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/crispy-comte-cheesburgers-FT-RECIPE0921-6166c6552b7148e8a8561f7765ddf20b.jpg" 
+                src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/20/a9/ed/27/ci-impegnamo-a-mantenere.jpg?w=500&h=-1&s=1" 
                 alt="Burger"
               >
             </div>
@@ -278,15 +327,18 @@
             <h2>Examples of Decks</h2>
             <div class="deck-cards">
                 <div class="deck-card">
-                    <img src="https://cdn.stocksnap.io/img-thumbs/280h/strawberry-food_PROXEBKRSP.jpg">
+                    <img src="../design/chickfila.jpg">
+                    <span class="orange-label">Chef's Pick</span>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
                 <div class="deck-card">
-                    <img src="https://restaurantden.com/wp-content/uploads/2017/09/free-stock-food-photography-websites.jpg" >
+                    <img src="https://www.sandiego.org/-/media/fae4e93efb304f8494a1e2fd4ef7face.jpg?bc=black&h=340&w=453&c=1" >
+                    <span class="orange-label">Local Favorite</span>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
                 <div class="deck-card">
-                    <img src="https://images.squarespace-cdn.com/content/v1/57879a6cbebafb879f256735/1732056167772-AL6LKIL8ZNOYGDPLSWRT/AT_Rainbow_Carrots_with_Spices_on_Roasting_Pan.jpg">
+                    <img src="../design/cava.jpg">
+                    <span class="orange-label">Vegan Delights</span>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
             </div>
@@ -294,10 +346,15 @@
     </main>
 
     <footer>
-        <div class="footer-logo">
-            Landing page
+        <div class="footer-left">
+            <img src="../design/logo.png" alt="Company Logo">
+            <span class="brand-name">Powell's Bowells</span>
         </div>
-
+        <div class="footer-right">
+            <h3>Contact Us</h3>
+            <p>Lorem ipsum</p>
+            <p>XXX-XXX-XXXX</p>
+        </div>
     </footer>
 </body>
 </html>
