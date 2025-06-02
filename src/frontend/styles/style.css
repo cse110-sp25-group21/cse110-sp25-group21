@@ -97,8 +97,8 @@ nav a.active {
 
 /* Updated Card Styles - Much Bigger */
 .card {
-  width: 500px;
-  height: 600px;
+  width: 200px;
+  height: 340px;
   background: #FF964F;
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.15);
