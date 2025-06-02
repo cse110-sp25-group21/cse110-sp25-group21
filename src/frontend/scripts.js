@@ -1,0 +1,192 @@
+/**
+ * @fileoverview Restaurant card selector application for Powell's Bowells
+ * Manages restaurant data display and navigation between cards
+ * @author Powell's Bowells Team
+ * @version 1.0.0
+ */
+
+/**
+ * @typedef {Object} Restaurant
+ * @property {string} title - The name of the restaurant
+ * @property {string} image - Relative path to the restaurant's image
+ * @property {number} rating - Restaurant rating from 1-5 stars
+ * @property {string} type - Type of cuisine (e.g., 'American', 'Mediterranean')
+ * @property {string} phone - Restaurant phone number in format (xxx) xxx-xxxx
+ * @property {string} website - Restaurant website domain
+ * @property {string} address - Full street address including city and zip
+ * @property {string} hours - Operating hours in format "X AM - Y PM"
+ */
+
+/**
+ * Array containing all restaurant data for the application
+ * Each restaurant represents a local establishment in the La Jolla/San Diego area
+ * @type {Restaurant[]}
+ */
+var restaurants = [
+  {
+    title: 'Chick-fil-A',
+    image: '../design/chickfila.jpg',
+    rating: 5,
+    type: 'American',
+    phone: '(858) 450-4417',
+    website: 'chick-fil-a.com',
+    address: '3351 Nobel Dr, La Jolla, CA 92037',
+    hours: '8 AM - 11 PM'
+  },
+  {
+    title: 'Cava Mediterranean',
+    image: '../design/cava.jpg',
+    rating: 4,
+    type: "Mediterranean",
+    phone: '(858) 433-0356',
+    website: 'cava.com',
+    address: '8849 Villa La Jolla Dr Suite 301, La Jolla, CA, 92037',
+    hours: '10 AM - 10 PM'
+  },
+  {
+    title: 'Hamburger Hut',
+    image: '../design/hamburger.jpg',
+    rating: 3,
+    type: 'American',
+    phone: '(760) 230-1999',
+    website: 'hamburgerhut.com',
+    address: '576 N Coast Hwy 101, Encinitas, CA 92024',
+    hours: '11 AM - 9 PM'
+  },
+  {
+    title: 'Tacos El Rey',
+    image: '../design/foodspread.png',
+    rating: 4,
+    type: 'Mexican',
+    phone: '(858) 638-0003',
+    website: 'primosmex.com',
+    address: '7770 Regents Rd #109, San Diego, CA 92122',
+    hours: '11 AM - 12 PM'
+  },
+  {
+    title: 'Default Restaurant',
+    image: '../design/cardCover_default.jpg',
+    rating: 5,
+    type: 'American',
+    phone: '(xxx) xxx-xxxx',
+    website: 'website.com',
+    address: 'Address Address San Diego, CA',
+    hours: '10 AM - 9 PM'
+  }
+];
+
+/**
+ * Current index of the restaurant being displayed in the card selector
+ * Used to track which restaurant is currently shown to the user
+ * @type {number}
+ */
+var currentIndex = 0;
+
+/**
+ * Renders the current restaurant's information to the DOM elements
+ * Updates the restaurant image, title, and star rating display
+ * Called whenever the user navigates between restaurants
+ * @function
+ * @returns {void}
+ */
+function renderRestaurant() {
+  var restaurant = restaurants[currentIndex];
+  var imgElement = document.getElementById('restaurant-image');
+  var titleElement = document.getElementById('restaurant-title');
+  var ratingElement = document.getElementById('restaurant-rating');
+ 
+  if (imgElement) imgElement.src = restaurant.image;
+  if (titleElement) titleElement.textContent = restaurant.title;
+  if (ratingElement) {
+    var stars = '';
+    for (var i = 0; i < restaurant.rating; i++) {
+      stars += '★';
+    }
+    for (var j = restaurant.rating; j < 5; j++) {
+      stars += '☆';
+    }
+    ratingElement.textContent = stars;
+  }
+}
+
+/**
+ * Advances to the next restaurant in the array
+ * Implements circular navigation - wraps to first restaurant when at the end
+ * Updates the display with the new restaurant information
+ * @function
+ * @returns {void}
+ */
+function goNext() {
+  currentIndex = (currentIndex + 1) % restaurants.length;
+  renderRestaurant();
+}
+
+/**
+ * Goes back to the previous restaurant in the array
+ * Implements circular navigation - wraps to last restaurant when at the beginning
+ * Updates the display with the new restaurant information
+ * @function
+ * @returns {void}
+ */
+function goPrev() {
+  currentIndex = (currentIndex - 1 + restaurants.length) % restaurants.length;
+  renderRestaurant();
+}
+
+/**
+ * Opens the deck editor interface
+ * Currently shows an alert placeholder - to be implemented with actual editor
+ * @function
+ * @returns {void}
+ * @todo Implement actual deck editor navigation and functionality
+ */
+function editDeck() {
+  alert('Navigate to deck editor');
+}
+
+/**
+ * Navigates to restaurant detail page with proper URL validation
+ * Saves current restaurant data to sessionStorage and redirects safely
+ * @function
+ * @returns {void}
+ * @throws {Error} May throw if sessionStorage is unavailable
+ */
+function viewRestaurant() {
+  var restaurant = restaurants[currentIndex];
+  console.log('⬇️ saving restaurant:', restaurant);
+  sessionStorage.setItem('selectedRestaurant', JSON.stringify(restaurant));
+  
+  // Use relative URL instead of direct assignment for security
+  var targetUrl = 'inside-card.html';
+  var allowedPages = ['inside-card.html', 'edit-deck.html'];
+  if (!allowedPages.includes(targetUrl)) {
+    console.error('Attempt to navigate to a disallowed URL:', targetUrl);
+    return;
+  }
+}
+
+/**
+ * Initializes the application when the page loads
+ * Sets up event listeners for navigation buttons and renders the first restaurant
+ * Ensures all DOM elements are available before attaching event handlers
+ * @function
+ * @returns {void}
+ */
+window.onload = function() {
+  var nextBtn = document.getElementById('next');
+  var prevBtn = document.getElementById('prev');
+  var editBtn = document.getElementById('edit-deck');
+  var cardElement = document.querySelector('.card');
+ 
+  if (nextBtn) nextBtn.onclick = goNext;
+  if (prevBtn) prevBtn.onclick = goPrev;
+  if (editBtn) editBtn.onclick = editDeck;
+  
+  // Set up card click handler with proper event delegation
+  if (cardElement) {
+    cardElement.onclick = viewRestaurant;
+  }
+ 
+  // Render first restaurant
+  renderRestaurant();
+};
