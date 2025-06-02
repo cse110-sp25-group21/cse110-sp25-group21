@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Recs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-orange: #FF8C42; 
+            --text-dark: #333;
+            --text-light: #fff;
+            --bg-light: #f8f8f8;
+            --border-radius-md: 8px;
+            --border-radius-lg: 12px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-orange);
+            color: var(--text-light);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .header-nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-weight: 600;
+        }
+
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+        }
+
+        /* Section: Restaurant Recs in cards */
+        .section-recs {
+            margin-bottom: 3rem;
+        }
+
+        .section-recs h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-recs button {
+            background-color: var(--primary-orange);
+            color: var(--text-light);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius-md);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .section-recs button:hover {
+            background-color: #e07b39; 
+        }
+
+
+
+     
+
+
+
+        .section-confused {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .confused-text {
+            flex: 1;
+            min-width: 300px;
+            
+        }
+
+        .confused-text h2 {
+            font-size: 1rem;
+            color: #e07b39;
+            margin-bottom: 1rem;
+        }
+        .confused-text h1 {
+            color: #e07b39;
+            margin-bottom: 1rem;
+        }
+
+        .confused-text p {
+            
+            margin-bottom: 1rem;
+        }
+        .confused-image {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        }      
+
+      .confused-image img {
+        max-width: 100%;
+        height: auto;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+
+
+
+      
+        .section-decks h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .deck-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .deck-card {
+            background-color: #fff;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            overflow: hidden;
+            padding-bottom: 1rem; 
+        }
+
+        .deck-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: var(--border-radius-lg);
+            border-top-right-radius: var(--border-radius-lg);
+            display: block; 
+        }
+
+        .deck-card p {
+            padding: 0 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .image-banner {
+            width: 100%;
+            height: 60vh; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: var(--border-radius-lg);
+        }
+
+        .image-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--border-radius-lg);
+        }
+
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-orange);
+            color: var(--text-light);
+            padding: 1.5rem 5%;
+            text-align: center;
+            margin-top: 3rem;
+            border-top-left-radius: var(--border-radius-lg);
+            border-top-right-radius: var(--border-radius-lg);
+        }
+
+        .footer-logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .section-recs h1 {
+                font-size: 2rem;
+            }
+
+            .section-confused {
+                flex-direction: column;
+            }
+
+            .confused-text{
+                min-width: unset;
+                width: 100%;
+            }
+
+            .deck-cards {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+            .header-logo {
+                font-size: 1.2rem;
+            }
+            .header-nav a {
+                margin-left: 0.8rem;
+                font-size: 0.9rem;
+            }
+            .section-recs h1, .section-confused h2, .section-decks h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+            Landing page
+        <nav class="header-nav">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="section-recs">
+            <h1>Restaurant Recs in cards</h1>
+            <button>Cards</button>
+            <div class="image-banner">
+                <img src="https://t3.ftcdn.net/jpg/02/60/12/88/360_F_260128861_Q2ttKHoVw2VrmvItxyCVBnEyM1852MoJ.jpg" alt="Variety of dishes">
+            </div>
+        </section>
+
+        <section class="section-confused">
+            <div class="confused-text">
+              <h1>Confused about where to eat?</h1>
+              <h2>some text</h2>
+              <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
+              <h2>Introducing</h2>
+              <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
+              <h2>Introducing</h2>
+              <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
+            </div>
+          
+            <div class="confused-image">
+              <img 
+                src="https://www.foodandwine.com/thmb/DI29Houjc_ccAtFKly0BbVsusHc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/crispy-comte-cheesburgers-FT-RECIPE0921-6166c6552b7148e8a8561f7765ddf20b.jpg" 
+                alt="Burger"
+              >
+            </div>
+          </section>
+          
+          
+
+        <section class="section-decks">
+            <h2>Examples of Decks</h2>
+            <div class="deck-cards">
+                <div class="deck-card">
+                    <img src="https://cdn.stocksnap.io/img-thumbs/280h/strawberry-food_PROXEBKRSP.jpg">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+                <div class="deck-card">
+                    <img src="https://restaurantden.com/wp-content/uploads/2017/09/free-stock-food-photography-websites.jpg" >
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+                <div class="deck-card">
+                    <img src="https://images.squarespace-cdn.com/content/v1/57879a6cbebafb879f256735/1732056167772-AL6LKIL8ZNOYGDPLSWRT/AT_Rainbow_Carrots_with_Spices_on_Roasting_Pan.jpg">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-logo">
+            Landing page
+        </div>
+
+    </footer>
+</body>
+</html>
