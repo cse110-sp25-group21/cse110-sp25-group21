@@ -2,35 +2,44 @@
 // This module tracks clicks on .card elements and updates a "Recommended for You" section
 // Can be connected to the real card components when they are ready
 
-// Click count object
-let cardClickCounts = {};
+// Click count object - using Map for security
+let cardClickCounts = new Map();
 
 // Function: Track clicks on cards
 function trackCardClicks(cardElement) {
   const cardName = cardElement.innerText.trim();
-  if (cardClickCounts[cardName]) {
-    cardClickCounts[cardName]++;
+  
+  // Validate cardName to prevent injection
+  if (typeof cardName !== 'string' || cardName.length === 0) {
+    return;
+  }
+  
+  // Use Map methods for secure access
+  if (cardClickCounts.has(cardName)) {
+    cardClickCounts.set(cardName, cardClickCounts.get(cardName) + 1);
   } else {
-    cardClickCounts[cardName] = 1;
+    cardClickCounts.set(cardName, 1);
   }
   updateRecommendations();
 }
 
 // Function: Update recommendations list
 function updateRecommendations() {
-  const sortedCards = Object.entries(cardClickCounts)
+  const sortedCards = Array.from(cardClickCounts.entries())
     .sort((a, b) => b[1] - a[1])
     .map(entry => entry[0]);
 
   const recList = document.getElementById("recommendation-list"); //TODO: Make section in html
+  if (!recList) return; // Safety check
+  
   recList.innerHTML = ""; // Clear old list
-
 
   if (sortedCards.length > 0) {
       const ul = document.createElement("ul");
       sortedCards.slice(0, 3).forEach(cardName => {
         const li = document.createElement("li");
-        li.textContent = cardName;
+        // Sanitize output to prevent XSS
+        li.textContent = String(cardName);
         ul.appendChild(li);
       });
       recList.appendChild(ul);
@@ -55,13 +64,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Save/load click data to localStorage
 function saveClickData() {
-  localStorage.setItem('cardClickCounts', JSON.stringify(cardClickCounts));
+  try {
+    // Convert Map to Object for JSON serialization
+    const dataToSave = Object.fromEntries(cardClickCounts);
+    localStorage.setItem('cardClickCounts', JSON.stringify(dataToSave));
+  } catch (error) {
+    console.error('Failed to save click data:', error);
+  }
 }
 
 function loadClickData() {
-  const saved = localStorage.getItem('cardClickCounts');
-  if (saved) {
-    cardClickCounts = JSON.parse(saved);
-    updateRecommendations();
+  try {
+    const saved = localStorage.getItem('cardClickCounts');
+    if (saved) {
+      const parsedData = JSON.parse(saved);
+      // Validate and convert back to Map
+      if (typeof parsedData === 'object' && parsedData !== null) {
+        cardClickCounts = new Map(Object.entries(parsedData));
+        updateRecommendations();
+      }
+    }
+  } catch (error) {
+    console.error('Failed to load click data:', error);
+    cardClickCounts = new Map(); // Reset to empty Map on error
   }
 }
