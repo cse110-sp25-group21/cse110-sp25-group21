@@ -83,39 +83,6 @@ var restaurants = [
 var currentIndex = 0;
 
 /**
- * Validates restaurant object to prevent injection attacks
- * @param {Object} restaurantData - Restaurant object to validate
- * @returns {boolean} True if valid, false otherwise
- */
-function validateRestaurant(restaurantData) {
-  if (!restaurantData || typeof restaurantData !== 'object') {
-    return false;
-  }
-  
-  var requiredFields = ['title', 'image', 'rating', 'type', 'phone', 'website', 'address', 'hours'];
-  for (var i = 0; i < requiredFields.length; i++) {
-    if (!restaurantData.hasOwnProperty(requiredFields[i])) {
-      return false;
-    }
-  }
-  
-  return true;
-}
-
-/**
- * Safely gets restaurant at current index with validation
- * @returns {Restaurant|null} Restaurant object or null if invalid
- */
-function getCurrentRestaurant() {
-  if (currentIndex < 0 || currentIndex >= restaurants.length) {
-    return null;
-  }
-  
-  var restaurantData = restaurants[currentIndex];
-  return validateRestaurant(restaurantData) ? restaurantData : null;
-}
-
-/**
  * Renders the current restaurant's information to the DOM elements
  * Updates the restaurant image, title, and star rating display
  * Called whenever the user navigates between restaurants
@@ -123,12 +90,7 @@ function getCurrentRestaurant() {
  * @returns {void}
  */
 function renderRestaurant() {
-  var restaurant = getCurrentRestaurant();
-  if (!restaurant) {
-    console.error('Invalid restaurant data at index:', currentIndex);
-    return;
-  }
-  
+  var restaurant = restaurants[currentIndex];
   var imgElement = document.getElementById('restaurant-image');
   var titleElement = document.getElementById('restaurant-title');
   var ratingElement = document.getElementById('restaurant-rating');
@@ -183,62 +145,21 @@ function editDeck() {
 }
 
 /**
- * Allowed navigation URLs for security
- * @type {string[]}
- */
-var allowedUrls = ['inside-card.html', 'card-select.html', 'index.html'];
-
-/**
- * Safely navigates to a URL after validation
- * @param {string} url - URL to navigate to
- * @returns {boolean} True if navigation successful, false otherwise
- */
-function safeNavigate(url) {
-  // Validate URL is in allowed list
-  if (allowedUrls.indexOf(url) === -1) {
-    console.error('Navigation to', url, 'is not allowed');
-    return false;
-  }
-  
-  // Additional validation - must be relative URL without protocols
-  if (url.indexOf('://') !== -1 || url.indexOf('javascript:') !== -1) {
-    console.error('Invalid URL format:', url);
-    return false;
-  }
-  
-  try {
-    window.location.assign(url);
-    return true;
-  } catch (error) {
-    console.error('Navigation failed:', error);
-    return false;
-  }
-}
-
-/**
- * Navigates to restaurant detail page with proper validation
+ * Navigates to restaurant detail page with proper URL validation
  * Saves current restaurant data to sessionStorage and redirects safely
  * @function
  * @returns {void}
  * @throws {Error} May throw if sessionStorage is unavailable
  */
 function viewRestaurant() {
-  var restaurant = getCurrentRestaurant();
-  if (!restaurant) {
-    console.error('Cannot navigate: Invalid restaurant data');
-    return;
-  }
+  var restaurant = restaurants[currentIndex];
+  console.log('⬇️ saving restaurant:', restaurant);
+  sessionStorage.setItem('selectedRestaurant', JSON.stringify(restaurant));
   
-  try {
-    console.log('⬇️ saving restaurant:', restaurant);
-    sessionStorage.setItem('selectedRestaurant', JSON.stringify(restaurant));
-    
-    // Use safe navigation instead of direct location.href assignment
-    if (!safeNavigate('inside-card.html')) {
-      console.error('Failed to navigate to restaurant details');
-    }
-  } catch (error) {
-    console.error('Error saving restaurant data:', error);
+  // Use relative URL instead of direct assignment for security
+  var targetUrl = 'inside-card.html';
+  if (targetUrl) {
+    window.location.href = targetUrl;
   }
 }
 
@@ -256,7 +177,7 @@ window.onload = function() {
   var cardElement = document.querySelector('.card');
  
   if (nextBtn) nextBtn.onclick = goNext;
-  if (prevBtn) nextBtn.onclick = goPrev;
+  if (prevBtn) prevBtn.onclick = goPrev;
   if (editBtn) editBtn.onclick = editDeck;
   
   // Set up card click handler with proper event delegation
