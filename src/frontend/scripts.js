@@ -158,8 +158,10 @@ function viewRestaurant() {
   
   // Use relative URL instead of direct assignment for security
   var targetUrl = 'inside-card.html';
-  if (targetUrl) {
-    window.location.href = targetUrl;
+  var allowedPages = ['inside-card.html', 'edit-deck.html'];
+  if (!allowedPages.includes(targetUrl)) {
+    console.error('Attempt to navigate to a disallowed URL:', targetUrl);
+    return;
   }
 }
 
