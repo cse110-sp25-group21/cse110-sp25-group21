@@ -136,6 +136,42 @@ function deleteDeck(deckId) {
   return decks.length !== initialLength;
 }
 
+/**
+ * Adds a card to a deck
+ * @param {string} deckId - ID of the deck to add card to
+ * @param {string} restaurantId - ID of the restaurant to add as a card
+ * @returns {boolean} true if card was added, false if it already exists or deck not found
+ */
+function addCardToDeck(deckId, restaurantId) {
+  const deck = decks.find((d) => d.id === deckId);
+  if (!deck) return false;
+
+  if (!deck.cards.includes(restaurantId)) {
+    deck.cards.push(restaurantId);
+    return true;
+  }
+  return false;
+}
+
+/**
+ * Removes a card from a deck
+ * @param {string} deckId - ID of the deck to remove card from
+ * @param {string} restaurantId - ID of the restaurant to remove from the deck
+ * @returns {boolean} true if card was removed, false if it wasn't found or deck not found
+ */
+function removeCardFromDeck(deckId, restaurantId) {
+  const deck = decks.find((d) => d.id === deckId);
+  if (!deck) return false;
+
+  const index = deck.cards.indexOf(restaurantId);
+  if (index !== -1) {
+    deck.cards.splice(index, 1);
+    return true;
+  }
+  return false;
+}
+
+
 module.exports = {
   getShuffledDeck,
   saveToFavorites,
@@ -145,4 +181,7 @@ module.exports = {
   setUserPreferences,
   createDeck,
   deleteDeck,
+  getDecks,
+  addCardToDeck,
+  removeCardFromDeck
 };
