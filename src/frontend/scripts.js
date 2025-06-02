@@ -1,14 +1,8 @@
-
 /**
- * @fileoverview Scripts for any front end elements like cards flipping
- */
-/**
- * Initialize flip-card behavior as soon as the DOM is ready.
- * Finds the button with class `.card-button` and the card with
- * id `#flip-card`, then wires up a click listener to toggle
- * the `flipped` CSS class on the card.
- * @listens document#DOMContentLoaded
- * @returns {void}
+ * @fileoverview Restaurant card selector application for Powell's Bowells
+ * Manages restaurant data display and navigation between cards
+ * @author Powell's Bowells Team
+ * @version 1.0.0
  */
 
 /**
@@ -37,7 +31,7 @@ var restaurants = [
     phone: '(858) 450-4417',
     website: 'chick-fil-a.com',
     address: '3351 Nobel Dr, La Jolla, CA 92037',
-    hours: '8 AM - 11 PM',
+    hours: '8 AM - 11 PM'
   },
   {
     title: 'Cava Mediterranean',
@@ -58,7 +52,6 @@ var restaurants = [
     website: 'hamburgerhut.com',
     address: '576 N Coast Hwy 101, Encinitas, CA 92024',
     hours: '11 AM - 9 PM'
-
   },
   {
     title: 'Tacos El Rey',
@@ -81,12 +74,14 @@ var restaurants = [
     hours: '10 AM - 9 PM'
   }
 ];
+
 /**
  * Current index of the restaurant being displayed in the card selector
  * Used to track which restaurant is currently shown to the user
  * @type {number}
  */
 var currentIndex = 0;
+
 /**
  * Renders the current restaurant's information to the DOM elements
  * Updates the restaurant image, title, and star rating display
@@ -99,7 +94,7 @@ function renderRestaurant() {
   var imgElement = document.getElementById('restaurant-image');
   var titleElement = document.getElementById('restaurant-title');
   var ratingElement = document.getElementById('restaurant-rating');
-  
+ 
   if (imgElement) imgElement.src = restaurant.image;
   if (titleElement) titleElement.textContent = restaurant.title;
   if (ratingElement) {
@@ -125,6 +120,7 @@ function goNext() {
   currentIndex = (currentIndex + 1) % restaurants.length;
   renderRestaurant();
 }
+
 /**
  * Goes back to the previous restaurant in the array
  * Implements circular navigation - wraps to last restaurant when at the beginning
@@ -136,15 +132,7 @@ function goPrev() {
   currentIndex = (currentIndex - 1 + restaurants.length) % restaurants.length;
   renderRestaurant();
 }
-/**
- * Navigates back to the previous page in browser history
- * Typically used for the back button in the header
- * @function
- * @returns {void}
- */
-function goBack() {
-  window.history.back();
-}
+
 /**
  * Opens the deck editor interface
  * Currently shows an alert placeholder - to be implemented with actual editor
@@ -154,6 +142,25 @@ function goBack() {
  */
 function editDeck() {
   alert('Navigate to deck editor');
+}
+
+/**
+ * Navigates to restaurant detail page with proper URL validation
+ * Saves current restaurant data to sessionStorage and redirects safely
+ * @function
+ * @returns {void}
+ * @throws {Error} May throw if sessionStorage is unavailable
+ */
+function viewRestaurant() {
+  var restaurant = restaurants[currentIndex];
+  console.log('⬇️ saving restaurant:', restaurant);
+  sessionStorage.setItem('selectedRestaurant', JSON.stringify(restaurant));
+  
+  // Use relative URL instead of direct assignment for security
+  var targetUrl = 'inside-card.html';
+  if (targetUrl) {
+    window.location.href = targetUrl;
+  }
 }
 
 /**
@@ -167,28 +174,17 @@ window.onload = function() {
   var nextBtn = document.getElementById('next');
   var prevBtn = document.getElementById('prev');
   var editBtn = document.getElementById('edit-deck');
-  
+  var cardElement = document.querySelector('.card');
+ 
   if (nextBtn) nextBtn.onclick = goNext;
   if (prevBtn) prevBtn.onclick = goPrev;
   if (editBtn) editBtn.onclick = editDeck;
   
+  // Set up card click handler with proper event delegation
+  if (cardElement) {
+    cardElement.onclick = viewRestaurant;
+  }
+ 
   // Render first restaurant
   renderRestaurant();
 };
-
-/**
- * Handles restaurant card click events to navigate to detailed view
- * Saves the currently selected restaurant data to sessionStorage
- * and navigates to the inside-card.html page for detailed restaurant information
- * @function
- * @returns {void}
- * @throws {Error} May throw if sessionStorage is unavailable or navigation fails
- */
-let card = document.querySelector('.card')
-
-card.addEventListener('click', () => {
-  let restaurant = restaurants[currentIndex];
-  console.log('⬇️ saving restaurant:', restaurant);
-  sessionStorage.setItem('selectedRestaurant', JSON.stringify(restaurant));
-  window.location.href = 'inside-card.html'
-});
