@@ -23,26 +23,6 @@
  * @property {string} hours - Operating hours in format "X AM - Y PM"
  */
 
-
-/**
-  * Toggle the flipped state of the card element.
-  * @returns {void}
-  * @listens HTMLButtonElement#click
-*/
-function flipCard() {
-  const button = document.querySelector(".card-button");
-  const card   = document.getElementById("flip-card");
-  if (!button || !card) return;
-  button.addEventListener("click", () => {
-    card.classList.toggle("flipped");
-  });
-}
-
-document.addEventListener("DOMContentLoaded", flipCard);
-
-
-//module.exports = { flipCard };
-
 /**
  * Array containing all restaurant data for the application
  * Each restaurant represents a local establishment in the La Jolla/San Diego area
