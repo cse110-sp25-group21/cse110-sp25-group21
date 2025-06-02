@@ -26,7 +26,8 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
+            <pre class="prettyprint source linenums"><code>
+/**
  * @fileoverview Scripts for any front end elements like cards flipping
  */
 /**
@@ -37,24 +38,207 @@
  * @listens document#DOMContentLoaded
  * @returns {void}
  */
-document.addEventListener("DOMContentLoaded", () => {
+
+/**
+ * @typedef {Object} Restaurant
+ * @property {string} title - The name of the restaurant
+ * @property {string} image - Relative path to the restaurant's image
+ * @property {number} rating - Restaurant rating from 1-5 stars
+ * @property {string} type - Type of cuisine (e.g., 'American', 'Mediterranean')
+ * @property {string} phone - Restaurant phone number in format (xxx) xxx-xxxx
+ * @property {string} website - Restaurant website domain
+ * @property {string} address - Full street address including city and zip
+ * @property {string} hours - Operating hours in format "X AM - Y PM"
+ */
+
+
+/**
+  * Toggle the flipped state of the card element.
+  * @returns {void}
+  * @listens HTMLButtonElement#click
+*/
+function flipCard() {
   const button = document.querySelector(".card-button");
-  const card = document.getElementById("flip-card");
-
-  if (!button || !card) {
-    console.warn("Flip-card elements not found in DOM");
-    return;
-  }
-
-  /**
-   * Toggle the flipped state of the card element.
-   * @param {MouseEvent} event – the click event object
-   * @returns {void}
-   * @listens HTMLButtonElement#click
-   */
-  button.addEventListener("click", (event) => {
+  const card   = document.getElementById("flip-card");
+  if (!button || !card) return;
+  button.addEventListener("click", () => {
     card.classList.toggle("flipped");
   });
+}
+
+document.addEventListener("DOMContentLoaded", flipCard);
+
+
+//module.exports = { flipCard };
+
+/**
+ * Array containing all restaurant data for the application
+ * Each restaurant represents a local establishment in the La Jolla/San Diego area
+ * @type {Restaurant[]}
+ */
+var restaurants = [
+  {
+    title: 'Chick-fil-A',
+    image: '../design/chickfila.jpg',
+    rating: 5,
+    type: 'American',
+    phone: '(858) 450-4417',
+    website: 'chick-fil-a.com',
+    address: '3351 Nobel Dr, La Jolla, CA 92037',
+    hours: '8 AM - 11 PM',
+  },
+  {
+    title: 'Cava Mediterranean',
+    image: '../design/cava.jpg',
+    rating: 4,
+    type: "Mediterranean",
+    phone: '(858) 433-0356',
+    website: 'cava.com',
+    address: '8849 Villa La Jolla Dr Suite 301, La Jolla, CA, 92037',
+    hours: '10 AM - 10 PM'
+  },
+  {
+    title: 'Hamburger Hut',
+    image: '../design/hamburger.jpg',
+    rating: 3,
+    type: 'American',
+    phone: '(760) 230-1999',
+    website: 'hamburgerhut.com',
+    address: '576 N Coast Hwy 101, Encinitas, CA 92024',
+    hours: '11 AM - 9 PM'
+
+  },
+  {
+    title: 'Tacos El Rey',
+    image: '../design/foodspread.png',
+    rating: 4,
+    type: 'Mexican',
+    phone: '(858) 638-0003',
+    website: 'primosmex.com',
+    address: '7770 Regents Rd #109, San Diego, CA 92122',
+    hours: '11 AM - 12 PM'
+  },
+  {
+    title: 'Default Restaurant',
+    image: '../design/cardCover_default.jpg',
+    rating: 5,
+    type: 'American',
+    phone: '(xxx) xxx-xxxx',
+    website: 'website.com',
+    address: 'Address Address San Diego, CA',
+    hours: '10 AM - 9 PM'
+  }
+];
+/**
+ * Current index of the restaurant being displayed in the card selector
+ * Used to track which restaurant is currently shown to the user
+ * @type {number}
+ */
+var currentIndex = 0;
+/**
+ * Renders the current restaurant's information to the DOM elements
+ * Updates the restaurant image, title, and star rating display
+ * Called whenever the user navigates between restaurants
+ * @function
+ * @returns {void}
+ */
+function renderRestaurant() {
+  var restaurant = restaurants[currentIndex];
+  var imgElement = document.getElementById('restaurant-image');
+  var titleElement = document.getElementById('restaurant-title');
+  var ratingElement = document.getElementById('restaurant-rating');
+  
+  if (imgElement) imgElement.src = restaurant.image;
+  if (titleElement) titleElement.textContent = restaurant.title;
+  if (ratingElement) {
+    var stars = '';
+    for (var i = 0; i &lt; restaurant.rating; i++) {
+      stars += '★';
+    }
+    for (var j = restaurant.rating; j &lt; 5; j++) {
+      stars += '☆';
+    }
+    ratingElement.textContent = stars;
+  }
+}
+
+/**
+ * Advances to the next restaurant in the array
+ * Implements circular navigation - wraps to first restaurant when at the end
+ * Updates the display with the new restaurant information
+ * @function
+ * @returns {void}
+ */
+function goNext() {
+  currentIndex = (currentIndex + 1) % restaurants.length;
+  renderRestaurant();
+}
+/**
+ * Goes back to the previous restaurant in the array
+ * Implements circular navigation - wraps to last restaurant when at the beginning
+ * Updates the display with the new restaurant information
+ * @function
+ * @returns {void}
+ */
+function goPrev() {
+  currentIndex = (currentIndex - 1 + restaurants.length) % restaurants.length;
+  renderRestaurant();
+}
+/**
+ * Navigates back to the previous page in browser history
+ * Typically used for the back button in the header
+ * @function
+ * @returns {void}
+ */
+function goBack() {
+  window.history.back();
+}
+/**
+ * Opens the deck editor interface
+ * Currently shows an alert placeholder - to be implemented with actual editor
+ * @function
+ * @returns {void}
+ * @todo Implement actual deck editor navigation and functionality
+ */
+function editDeck() {
+  alert('Navigate to deck editor');
+}
+
+/**
+ * Initializes the application when the page loads
+ * Sets up event listeners for navigation buttons and renders the first restaurant
+ * Ensures all DOM elements are available before attaching event handlers
+ * @function
+ * @returns {void}
+ */
+window.onload = function() {
+  var nextBtn = document.getElementById('next');
+  var prevBtn = document.getElementById('prev');
+  var editBtn = document.getElementById('edit-deck');
+  
+  if (nextBtn) nextBtn.onclick = goNext;
+  if (prevBtn) prevBtn.onclick = goPrev;
+  if (editBtn) editBtn.onclick = editDeck;
+  
+  // Render first restaurant
+  renderRestaurant();
+};
+
+/**
+ * Handles restaurant card click events to navigate to detailed view
+ * Saves the currently selected restaurant data to sessionStorage
+ * and navigates to the inside-card.html page for detailed restaurant information
+ * @function
+ * @returns {void}
+ * @throws {Error} May throw if sessionStorage is unavailable or navigation fails
+ */
+let card = document.querySelector('.card')
+
+card.addEventListener('click', () => {
+  let restaurant = restaurants[currentIndex];
+  console.log('⬇️ saving restaurant:', restaurant);
+  sessionStorage.setItem('selectedRestaurant', JSON.stringify(restaurant));
+  window.location.href = 'inside-card.html'
 });
 </code></pre>
         </article>
@@ -66,13 +250,13 @@ document.addEventListener("DOMContentLoaded", () => {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#authenticateUser">authenticateUser</a></li><li><a href="global.html#config">config</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#getShuffledDeck">getShuffledDeck</a></li><li><a href="global.html#getUserActivity">getUserActivity</a></li><li><a href="global.html#getUserPreferences">getUserPreferences</a></li><li><a href="global.html#getUserProfile">getUserProfile</a></li><li><a href="global.html#logUserActivity">logUserActivity</a></li><li><a href="global.html#removeFromFavorites">removeFromFavorites</a></li><li><a href="global.html#resetPassword">resetPassword</a></li><li><a href="global.html#saveToFavorites">saveToFavorites</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#setUserPreferences">setUserPreferences</a></li><li><a href="global.html#updateUserProfile">updateUserProfile</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#authenticateUser">authenticateUser</a></li><li><a href="global.html#card">card</a></li><li><a href="global.html#config">config</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#currentIndex">currentIndex</a></li><li><a href="global.html#editDeck">editDeck</a></li><li><a href="global.html#flipCard">flipCard</a></li><li><a href="global.html#getShuffledDeck">getShuffledDeck</a></li><li><a href="global.html#getUserActivity">getUserActivity</a></li><li><a href="global.html#getUserPreferences">getUserPreferences</a></li><li><a href="global.html#getUserProfile">getUserProfile</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#goNext">goNext</a></li><li><a href="global.html#goPrev">goPrev</a></li><li><a href="global.html#logUserActivity">logUserActivity</a></li><li><a href="global.html#removeFromFavorites">removeFromFavorites</a></li><li><a href="global.html#renderRestaurant">renderRestaurant</a></li><li><a href="global.html#resetPassword">resetPassword</a></li><li><a href="global.html#restaurants">restaurants</a></li><li><a href="global.html#saveToFavorites">saveToFavorites</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#setUserPreferences">setUserPreferences</a></li><li><a href="global.html#updateUserProfile">updateUserProfile</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun May 25 2025 11:50:11 GMT-0700 (Pacific Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Jun 01 2025 16:57:57 GMT-0700 (Pacific Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -11,6 +11,18 @@
  * @returns {void}
  */
 
+/**
+ * @typedef {Object} Restaurant
+ * @property {string} title - The name of the restaurant
+ * @property {string} image - Relative path to the restaurant's image
+ * @property {number} rating - Restaurant rating from 1-5 stars
+ * @property {string} type - Type of cuisine (e.g., 'American', 'Mediterranean')
+ * @property {string} phone - Restaurant phone number in format (xxx) xxx-xxxx
+ * @property {string} website - Restaurant website domain
+ * @property {string} address - Full street address including city and zip
+ * @property {string} hours - Operating hours in format "X AM - Y PM"
+ */
+
 
 /**
   * Toggle the flipped state of the card element.
@@ -31,7 +43,11 @@ document.addEventListener("DOMContentLoaded", flipCard);
 
 //module.exports = { flipCard };
 
-// Restaurant data
+/**
+ * Array containing all restaurant data for the application
+ * Each restaurant represents a local establishment in the La Jolla/San Diego area
+ * @type {Restaurant[]}
+ */
 var restaurants = [
   {
     title: 'Chick-fil-A',
@@ -85,9 +101,19 @@ var restaurants = [
     hours: '10 AM - 9 PM'
   }
 ];
-
+/**
+ * Current index of the restaurant being displayed in the card selector
+ * Used to track which restaurant is currently shown to the user
+ * @type {number}
+ */
 var currentIndex = 0;
-
+/**
+ * Renders the current restaurant's information to the DOM elements
+ * Updates the restaurant image, title, and star rating display
+ * Called whenever the user navigates between restaurants
+ * @function
+ * @returns {void}
+ */
 function renderRestaurant() {
   var restaurant = restaurants[currentIndex];
   var imgElement = document.getElementById('restaurant-image');
@@ -108,25 +134,55 @@ function renderRestaurant() {
   }
 }
 
+/**
+ * Advances to the next restaurant in the array
+ * Implements circular navigation - wraps to first restaurant when at the end
+ * Updates the display with the new restaurant information
+ * @function
+ * @returns {void}
+ */
 function goNext() {
   currentIndex = (currentIndex + 1) % restaurants.length;
   renderRestaurant();
 }
-
+/**
+ * Goes back to the previous restaurant in the array
+ * Implements circular navigation - wraps to last restaurant when at the beginning
+ * Updates the display with the new restaurant information
+ * @function
+ * @returns {void}
+ */
 function goPrev() {
   currentIndex = (currentIndex - 1 + restaurants.length) % restaurants.length;
   renderRestaurant();
 }
-
+/**
+ * Navigates back to the previous page in browser history
+ * Typically used for the back button in the header
+ * @function
+ * @returns {void}
+ */
 function goBack() {
   window.history.back();
 }
-
+/**
+ * Opens the deck editor interface
+ * Currently shows an alert placeholder - to be implemented with actual editor
+ * @function
+ * @returns {void}
+ * @todo Implement actual deck editor navigation and functionality
+ */
 function editDeck() {
   alert('Navigate to deck editor');
 }
 
-// Set up everything when page loads
+/**
+ * Initializes the application when the page loads
+ * Sets up event listeners for navigation buttons and renders the first restaurant
+ * Ensures all DOM elements are available before attaching event handlers
+ * @function
+ * @returns {void}
+ */
 window.onload = function() {
   var nextBtn = document.getElementById('next');
   var prevBtn = document.getElementById('prev');
@@ -140,7 +196,14 @@ window.onload = function() {
   renderRestaurant();
 };
 
-// inside-card.html
+/**
+ * Handles restaurant card click events to navigate to detailed view
+ * Saves the currently selected restaurant data to sessionStorage
+ * and navigates to the inside-card.html page for detailed restaurant information
+ * @function
+ * @returns {void}
+ * @throws {Error} May throw if sessionStorage is unavailable or navigation fails
+ */
 let card = document.querySelector('.card')
 
 card.addEventListener('click', () => {

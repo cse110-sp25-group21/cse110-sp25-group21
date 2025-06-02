@@ -8,63 +8,58 @@
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-  <header>
-    <button class="back-button" onclick="goBack()">
-      ← Back
-    </button>
-    
-    <div class="search-container">
-      <input type="text" placeholder="Input text" />
-      <button style="background: none; border: none; padding: 0.25rem;">×</button>
-    </div>
-    
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#add-restaurant">Add Restaurant</a>
-      <a href="#decks">Decks</a>
-      <a href="#contact">Contact Us</a>
-    </nav>
-  </header>
-
-  <main class="main-content">
-    <section class="deck-header">
-      <h1 id="deck-title">Deck Title</h1>
-      <button id="edit-deck" class="card-button">Edit Deck</button>
-    </section>
-
-    <section class="card-select">
-      <button id="prev" class="card-button">←</button>
-
-      <div class="card">
-        <img
-          id="restaurant-image"
-          src="../design/cardCover_default.jpg"
-          alt="Restaurant cover"
-        />
-        <div class="card-details">
-          <h2 id="restaurant-title">Restaurant Title</h2>
-          <div id="restaurant-rating" class="rating">
-            ☆☆☆☆☆
-          </div>
+    <header>
+        <button class="back-button" onclick="goBack()">← Back</button>
+        <div class="search-container">
+            <input type="text" placeholder="Input text" />
+            <button style="background: none; border: none; padding: 0.25rem;">X</button>
         </div>
-      </div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#add-restaurant">Add Restaurant</a>
+            <a href="#decks">Decks</a>
+            <a href="#contact">Contact Us</a>
+        </nav>
+    </header>
 
-      <button id="next" class="card-button">→</button>
-    </section>
-  </main>
+    <main class="main-content">
+        <section class="deck-header">
+            <h1 id="deck-title">Deck Title</h1>
+            <button id="edit-deck" class="card-button">Edit Deck</button>
+        </section>
 
-  <footer>
-    <div style="display: flex; align-items: center; gap: 1rem;">
-      <img src="design/logo.png" alt="Powell's Bowells Logo" style="height: 40px;">
-      <span>Powell's Bowells</span>
-    </div>
-    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem;">
-      <div>Contact Us</div>
-      <div>lorem@ipsum.com</div>
-      <div>xxx-xxx-xxxx</div>
-    </div>
-  </footer>
+        <section class="card-select">
+            <button id="prev" class="card-button">←</button>
 
-  <script src="card-select-scripts.js"></script>
+            <div class="card">
+                <img
+                    id="restaurant-image"
+                    src="design/cardCover_default.jpg"
+                    alt="Restaurant cover"
+                />
+                <div class="card-details">
+                    <h2 id="restaurant-title">Restaurant Title</h2>
+                    <div id="restaurant-rating" class="rating">
+                        ☆☆☆☆☆
+                    </div>
+                </div>
+            </div>
+
+            <button id="next" class="card-button">→</button>
+        </section>
+    </main>
+
+    <footer>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <img src="../design/logo.png" alt="Powell's Bowells Logo" style="height: 40px;">
+            <span>Powell's Bowells</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; margin-top: 1rem;">
+            <div>Contact Us</div>
+            <div>lorem@ipsum.com</div>
+            <div>xxx-xxx-xxxx</div>
+        </div>
+    </footer>
+    <script src="scripts.js"></script>
 </body>
 </html>
