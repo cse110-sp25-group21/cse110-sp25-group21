@@ -24,4 +24,4 @@
 - cleaner codes and comments
 
 ### Recording 
-TBD
+https://youtu.be/4Y-srS487VU

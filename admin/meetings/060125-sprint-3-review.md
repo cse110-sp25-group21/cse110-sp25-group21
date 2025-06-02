@@ -26,4 +26,4 @@
 - deck creation functionality
 
 ### Recording
-TBD
+https://youtu.be/4Y-srS487VU

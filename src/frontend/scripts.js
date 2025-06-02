@@ -156,13 +156,8 @@ function viewRestaurant() {
   console.log('⬇️ saving restaurant:', restaurant);
   sessionStorage.setItem('selectedRestaurant', JSON.stringify(restaurant));
   
-  // Use relative URL instead of direct assignment for security
-  var targetUrl = 'inside-card.html';
-  var allowedPages = ['inside-card.html', 'edit-deck.html'];
-  if (!allowedPages.includes(targetUrl)) {
-    console.error('Attempt to navigate to a disallowed URL:', targetUrl);
-    return;
-  }
+  // Redirect to restaurant detail page
+  window.location.href = 'inside-card.html';
 }
 
 /**

@@ -1,0 +1,155 @@
+/* Main Content */
+.main-content {
+  padding: 1rem 2rem;
+  flex: 1;
+  min-height: calc(100vh - 200px);
+}
+
+.main-content h1 {
+  color: #FF964F;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.subtext {
+  color: #F9AE7A;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+/* Buttons */
+
+.card-button:hover,
+.back-button:hover {
+  background-color: #F97316;
+}
+
+/* Card */
+.card {
+  width: 600px;
+  background: #FF964F;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+
+.card:active {
+  transform: translateY(-2px);
+}
+
+.card img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+  flex-shrink: 0;
+}
+
+.card-details {
+  padding: 1.5rem 1.5rem 2rem;
+  background: white;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 0 0 16px 16px;
+  box-sizing: border-box;
+}
+
+.card-details h2 {
+  margin: 0 0 0.5rem;
+  color: #FF964F;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.rating {
+  font-size: 1.8rem;
+  letter-spacing: 0.15rem;
+  color: #FFB800;
+  text-align: center;
+}
+
+/* Deck header */
+.deck-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  margin-bottom: 2rem;
+}
+
+.deck-header h1 {
+  margin: 0;
+  font-size: 3rem;
+  color: #FF964F;
+}
+
+.deck-header .card-button {
+  padding: 0.75rem 1.25rem;
+  font-size: 1.1rem;
+}
+
+/* Card-select area */
+.card-select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.card-select .card-button {
+  width: 4rem;
+  height: 4rem;
+  padding: 0;
+  font-size: 2rem;
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card {
+    width: 90vw;
+    max-width: 400px;
+  }
+
+  .card img {
+    height: 200px;
+  }
+
+  .card-details h2 {
+    font-size: 1.5rem;
+  }
+
+  .rating {
+    font-size: 1.5rem;
+  }
+
+  .card-select {
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .card-select .card-button {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+  }
+}

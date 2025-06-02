@@ -1,0 +1,162 @@
+/* Rest of landing page */ 
+
+/* Section: Restaurant Recs */
+.section-recs {
+  margin-bottom: 3rem;
+}
+
+.section-recs h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.section-recs button {
+  background-color: var(--primary-orange);
+  color: var(--text-light);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.section-recs button:hover {
+  background-color: var(--primary-orange-dark);
+}
+
+.image-banner {
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: var(--border-radius-lg);
+}
+
+.image-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--border-radius-lg);
+}
+
+/* Section: Confused */
+.section-confused {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.confused-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.confused-text h1 {
+  color: var(--primary-orange-dark);
+  margin-bottom: 1rem;
+}
+
+.confused-text h2 {
+  font-size: 1rem;
+  color: var(--primary-orange-dark);
+  margin-bottom: 0.5rem;
+}
+
+.confused-text h3 {
+  margin-bottom: 1rem;
+  font-weight: normal;
+}
+
+.confused-image {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.confused-image img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Section: Decks */
+.section-decks h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.deck-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.deck-card {
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  padding-bottom: 1rem;
+}
+
+.deck-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: var(--border-radius-lg);
+  border-top-right-radius: var(--border-radius-lg);
+  display: block;
+}
+
+.deck-card p {
+  padding: 0 1rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+ /* Responsive */
+    @media (max-width: 768px) {
+      .section-recs h1 {
+        font-size: 2rem;
+      }
+
+      .section-confused {
+        flex-direction: column;
+      }
+
+      .confused-text {
+        width: 100%;
+        min-width: unset;
+      }
+
+      .deck-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-brand span {
+        font-size: 0.9rem;
+      }
+
+      .header-nav a {
+        margin-left: 0.8rem;
+        font-size: 0.9rem;
+      }
+
+      .section-recs h1,
+      .section-confused h2,
+      .section-decks h2 {
+        font-size: 1.8rem;
+      }
+    }
+
+/* End of "Rest of Landing page styling" */

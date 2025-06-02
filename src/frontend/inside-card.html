@@ -6,78 +6,25 @@
   <title>View Card</title>
   <link rel="stylesheet" href="styles/fonts.css">
   <link rel="stylesheet" href="styles/style.css">
-<style>
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        overflow-x: hidden;
-        display: block;
-    }
+  <link rel="stylesheet" href = "styles/insideCard.css">
 
-    header, main, footer {
-        position: static;
-    }
-
-    .main-content {
-        padding: 2rem 2rem 0 2rem;
-    }
-
-    .restaurant-view {
-        display: flex;
-        gap: 0.5rem;
-        width: 100%;
-    }
-
-    .left-panel {
-        flex: 0 0 60%;
-        padding-right: 0.5rem;
-    }
-
-
-    .left-panel > * {
-        margin-bottom: 1.25rem;
-    }
-    .left-panel > *:last-child {
-        margin-bottom: 0;
-    }
-
-    .right-panel {
-        flex: 0 0 40%;
-        padding-left: 0.5rem;
-        font-size: 1.75rem;
-    }
-
-    .image {
-        width: 80%;
-        height: 40%;
-        aspect-ratio: 1 / 1;
-        background-color: #e0e0e0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-        color: #555;
-        max-width: 100%;
-    }
-  </style>
 </head>
 
 <body>
     <header>
-        <button class="back-button">← Back</button>
-        <div class="search-container">
-            <input type="text" placeholder="Input text" />
-            <button style="background: none; border: none; padding: 0.25rem;">X</button>
+        <a href="card-deck.html">
+            <button class = "back-button">Back</button>
+        </a>
+        <div class="header-brand">
+        
         </div>
-        <nav>
+        <nav class="header-nav">
             <a href="#home">Home</a>
             <a href="#add-restaurant">Add Restaurant</a>
             <a href="#decks">Decks</a>
             <a href="#contact">Contact Us</a>
         </nav>
-    </header>
+  </header>
 
   <main class="main-content">
     <div class="restaurant-view">
@@ -129,17 +76,18 @@
     </div>
   </main>
 
-    <footer>
-        <div>
-            <img src="../design/logo.png" alt="Powell's Bowells Logo" style="height: 40px;">
-            <span>Powell's Bowells</span>
-        </div>
-        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; margin-top: 1rem;">
-            <div>Contact Us</div>
-            <div>lorem@ipsum.com</div>
-            <div>xxx-xxx-xxxx</div>
-        </div>
-    </footer>
+   <!-- Footer -->
+  <footer>
+    <div class="header-brand">
+      <img src="../design/logo.png" alt="Powell's Bowells Logo">
+      <span>Powell's Bowells</span>
+    </div>
+    <div style="text-align: right; line-height: 1.6; font-size: 13px;">
+      <div style="font-weight: bold;">Contact Us</div>
+      <div>Email: hello@powellsbowells.com</div>
+      <div>Phone: (123) 456-7890</div>
+    </div>
+  </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -170,3 +118,49 @@
   </script>
 </body>
 </html>
+
+
+
+<!-- <style>
+   
+    .main-content {
+        padding: 2rem 2rem 0 2rem;
+    }
+
+    .restaurant-view {
+        display: flex;
+        gap: 0.5rem;
+        width: 100%;
+    }
+
+    .left-panel {
+        flex: 0 0 60%;
+        padding-right: 0.5rem;
+    }
+
+    .left-panel > * {
+        margin-bottom: 1.25rem;
+    }
+    .left-panel > *:last-child {
+        margin-bottom: 0;
+    }
+
+    .right-panel {
+        flex: 0 0 40%;
+        padding-left: 0.5rem;
+        font-size: 1.75rem;
+    }
+
+    .image {
+        width: 80%;
+        height: 40%;
+        aspect-ratio: 1 / 1;
+        background-color: #e0e0e0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: #555;
+        max-width: 100%;
+    }
+  </style> -->

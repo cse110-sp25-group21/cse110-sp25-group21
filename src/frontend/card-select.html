@@ -5,22 +5,26 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Card Select</title>
   <link rel="stylesheet" href="styles/fonts.css">
-  <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/cardSelect.css">
 </head>
 <body>
+
+
     <header>
-        <button class="back-button" onclick="goBack()">← Back</button>
-        <div class="search-container">
-            <input type="text" placeholder="Input text" />
-            <button style="background: none; border: none; padding: 0.25rem;">X</button>
-        </div>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#add-restaurant">Add Restaurant</a>
-            <a href="#decks">Decks</a>
-            <a href="#contact">Contact Us</a>
-        </nav>
-    </header>
+    <a href="card-deck.html">
+        <button class = "back-button">Back</button>
+      </a>
+    <div class="header-brand">
+      
+    </div>
+    <nav class="header-nav">
+        <a href="#home">Home</a>
+        <a href="#add-restaurant">Add Restaurant</a>
+        <a href="#decks">Decks</a>
+        <a href="#contact">Contact Us</a>
+    </nav>
+  </header>
 
     <main class="main-content">
         <section class="deck-header">
@@ -49,17 +53,19 @@
         </section>
     </main>
 
-    <footer>
-        <div style="display: flex; align-items: center; gap: 1rem;">
-            <img src="../design/logo.png" alt="Powell's Bowells Logo" style="height: 40px;">
-            <span>Powell's Bowells</span>
-        </div>
-        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; margin-top: 1rem;">
-            <div>Contact Us</div>
-            <div>lorem@ipsum.com</div>
-            <div>xxx-xxx-xxxx</div>
-        </div>
-    </footer>
+   <!-- Footer -->
+  <footer>
+    <div class="header-brand">
+      <img src="../design/logo.png" alt="Powell's Bowells Logo">
+      <span>Powell's Bowells</span>
+    </div>
+    <div style="text-align: right; line-height: 1.6; font-size: 13px;">
+      <div style="font-weight: bold;">Contact Us</div>
+      <div>Email: hello@powellsbowells.com</div>
+      <div>Phone: (123) 456-7890</div>
+    </div>
+  </footer>
+
     <script src="scripts.js"></script>
 </body>
 </html>
