@@ -2,17 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deck Editor - Powell's Bowells</title>
+    <link rel="stylesheet" href="src/frontend/styles/deck-editor.css">
 </head>
 <body>
-    <h1>Deck Editor Page</h1>
-    <p>This page will allow users to create and manage restaurant decks.</p>
-    <nav>
-      <a href="landingPage.html">Home</a>
-      <a href="restaurant-form.html">Add Restaurant</a>
-      <a href="card-deck.html">Decks</a>
-      <a>Contact Us</a>
-    </nav>
-    <a href="card-deck.html">Back to Card Deck</a>
+    <header class="header">
+        <div class="header-left">
+            <button class="header-button">button</button>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Input text">
+            </div>
+        </div>
+        <div class="header-right">
+            <nav class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Add Restaurant</a>
+                <a href="#">Decks</a>
+                <a href="#">Contact Us</a>
+            </nav>
+        </div>
+        <button class="change-deck-photo-button">Change Deck Photo</button>
+    </header>
+
+    <main class="main-content">
+        <div class="deck-title-container">
+            <h1 class="deck-title">Deck Title</h1>
+        </div>
+
+        <div class="restaurant-grid-wrapper">
+            <div class="restaurant-grid">
+                <div class="restaurant-card">
+                    <div class="restaurant-card-image">
+                        <img src = "src/design/cardCover_default.jpg" alt = "card">
+                    </div>
+                    <div class="restaurant-title">Restaurant Title</div>
+                </div>
+                <div class="restaurant-card">
+                    <div class="restaurant-card-image">
+                         <img src = "src/design/cardCover_default.jpg" alt = "card">
+                    </div>
+                    <div class="restaurant-title">Restaurant Title</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-left">
+            <div class="footer-logo">
+                <img src = "src/design/logo.png" alt = "logo">
+            </div>
+            <div class="footer-text">Powell's Bowells</div>
+        </div>
+        <div class="footer-right">
+            <div class="footer-contact-info">
+                <a href="mailto:lorem@ipsum.com">lorem@ipsum.com</a>
+                <span>xxx-xxx-xxxx</span>
+            </div>
+            <p>Contact Us</p>
+        </div>
+    </footer>
 </body>
 </html> 
