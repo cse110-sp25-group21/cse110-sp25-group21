@@ -182,6 +182,11 @@ window.onload = function () {
   renderRestaurant();
 };
 
+/**
+  * Handles the form submission event.
+  * Prevents the default page reload, creates a new restaurant object,
+  * appends it to localStorage, and redirects to the main card deck view.
+*/
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('restaurant-form');
   if (form) {
@@ -190,10 +195,10 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', function (event) {
       event.preventDefault();
 
+
       const newRestaurant = {
         title: document.getElementById('restaurant-name').value.trim(),
         image: '../design/cardCover_default.jpg',
-        rating: 4,
         type: document.getElementById('food-genre').value.trim(),
         phone: document.getElementById('phone').value.trim(),
         website: document.getElementById('website').value.trim(),
