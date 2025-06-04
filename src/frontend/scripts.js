@@ -17,12 +17,14 @@
  * @property {string} hours - Operating hours in format "X AM - Y PM"
  */
 
+const LOCAL_STORAGE_KEY = 'restaurantsData';
+
 /**
  * Array containing all restaurant data for the application
  * Each restaurant represents a local establishment in the La Jolla/San Diego area
  * @type {Restaurant[]}
  */
-var restaurants = [
+var defaultStaticRestaurants = [
   {
     title: 'Chick-fil-A',
     image: '../design/chickfila.jpg',
@@ -62,18 +64,9 @@ var restaurants = [
     website: 'primosmex.com',
     address: '7770 Regents Rd #109, San Diego, CA 92122',
     hours: '11 AM - 12 PM'
-  },
-  {
-    title: 'Default Restaurant',
-    image: '../design/cardCover_default.jpg',
-    rating: 5,
-    type: 'American',
-    phone: '(xxx) xxx-xxxx',
-    website: 'website.com',
-    address: 'Address Address San Diego, CA',
-    hours: '10 AM - 9 PM'
   }
 ];
+var restaurants = [];
 
 /**
  * Current index of the restaurant being displayed in the card selector
@@ -94,7 +87,7 @@ function renderRestaurant() {
   var imgElement = document.getElementById('restaurant-image');
   var titleElement = document.getElementById('restaurant-title');
   var ratingElement = document.getElementById('restaurant-rating');
- 
+
   if (imgElement) imgElement.src = restaurant.image;
   if (titleElement) titleElement.textContent = restaurant.title;
   if (ratingElement) {
@@ -155,7 +148,7 @@ function viewRestaurant() {
   var restaurant = restaurants[currentIndex];
   console.log('⬇️ saving restaurant:', restaurant);
   sessionStorage.setItem('selectedRestaurant', JSON.stringify(restaurant));
-  
+
   // Redirect to restaurant detail page
   window.location.href = 'inside-card.html';
 }
@@ -167,21 +160,53 @@ function viewRestaurant() {
  * @function
  * @returns {void}
  */
-window.onload = function() {
+window.onload = function () {
+  const userCreatedRestaurants = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
+  restaurants = [...defaultStaticRestaurants, ...userCreatedRestaurants];
+
   var nextBtn = document.getElementById('next');
   var prevBtn = document.getElementById('prev');
   var editBtn = document.getElementById('edit-deck');
   var cardElement = document.querySelector('.card');
- 
+
   if (nextBtn) nextBtn.onclick = goNext;
   if (prevBtn) prevBtn.onclick = goPrev;
   if (editBtn) editBtn.onclick = editDeck;
-  
+
   // Set up card click handler with proper event delegation
   if (cardElement) {
     cardElement.onclick = viewRestaurant;
   }
- 
+
   // Render first restaurant
   renderRestaurant();
 };
+
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('restaurant-form');
+  if (form) {
+    console.log("Form detected. Adding submit handler.");
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const newRestaurant = {
+        title: document.getElementById('restaurant-name').value.trim(),
+        image: '../design/cardCover_default.jpg',
+        rating: 4,
+        type: document.getElementById('food-genre').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        website: document.getElementById('website').value.trim(),
+        address: document.getElementById('address').value.trim(),
+        hours: document.getElementById('business-hour').value.trim()
+      };
+
+      const existing = JSON.parse(localStorage.getItem('restaurantsData')) || [];
+      existing.push(newRestaurant);
+      localStorage.setItem('restaurantsData', JSON.stringify(existing));
+
+      console.log("Saved new restaurant:", newRestaurant);
+      window.location.href = 'card-deck.html';
+    });
+  }
+});
