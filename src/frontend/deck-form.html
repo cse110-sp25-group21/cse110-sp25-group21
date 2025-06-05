@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,22 +10,24 @@
   <link rel="stylesheet" href="styles/addDeck.css">
 
 </head>
+
 <body>
   <header>
     <div class="header-brand">
       <img src="../design/logo.png" alt="Powell's Bowells Logo">
       <span>Powell's Bowells</span>
     </div>
-    <nav class="header-nav">
-      <a href="landingPage.html">Home</a>
-      <a href="deck-form.html">Add Deck</a>
-      <a>Contact Us</a>
+    <nav class="nav-links">
+      <a href="../frontend/landingPage.html">Home</a>
+      <a href="../frontend/restaurant-form.html">Add Restaurant</a>
+      <a href="../frontend/card-deck.html">Decks</a>
+      <a href="#">Contact Us</a>
     </nav>
   </header>
 
   <section class="main-content">
-    <h1 id = "formTitle">Add New Deck</h1>
-    
+    <h1 id="formTitle">Add New Deck</h1>
+
     <div class="form-container">
       <form id="deck-form">
         <!-- Row 1: Deck Name -->
@@ -32,7 +35,7 @@
           <label for="deck-name" class="form-label">Deck Name</label>
           <input type="text" id="deck-name" name="deck-name" placeholder="enter name here..." class="form-input">
         </div>
-        
+
         <!-- Row 7: Submit button -->
         <div class="form-row submit-container">
           <button type="submit" class="submit-button">
@@ -42,7 +45,7 @@
       </form>
     </div>
   </section>
-    <footer>
+  <footer>
     <div class="header-brand">
       <img src="../design/logo.png" alt="Powell's Bowells Logo">
       <span>Powell's Bowells</span>
@@ -54,5 +57,6 @@
     </div>
   </footer>
 </body>
-</html> 
+
+</html>
 <script src="scripts.js"></script>
