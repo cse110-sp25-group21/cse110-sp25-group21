@@ -29,119 +29,69 @@
       <h2 class="edit-text">To Modify Names Click on Deck, To upload a picture click the picture</h2>
       <button class="edit-button">Edit</button>
     </div>
+    <div class="cards-container" id="cards-container"></div>
 
-    <div class="cards-container">
 
-      <a href="card-select.html" class="card">
-        <div class="card-controls">
-          <button class="remove-btn">-</button>
-          <button class="edit-btn">✎</button>
-        </div>
+    <!-- Footer -->
+    <footer>
+      <div class="header-brand">
+        <img src="../design/logo.png" alt="Powell's Bowells Logo">
+        <span>Powell's Bowells</span>
+      </div>
+      <div style="text-align: right; line-height: 1.6; font-size: 13px;">
+        <div style="font-weight: bold;">Contact Us</div>
+        <div>Email: hello@powellsbowells.com</div>
+        <div>Phone: (123) 456-7890</div>
+      </div>
+    </footer>
 
-        <div class="card-image">
-          <img src="../design/cardCover_default.jpg" alt="cardCoverImage"
-            style="width: 100%; height: 100%; object-fit: cover; border-radius: 0.25rem;">
-        </div>
+    <script src="../frontend/js/deckControllerFrontEnd.js"></script>
 
-        <div class="card-title">Favorites</div>
-      </a>
+    <script>
+      const editBtn = document.querySelector('.edit-button');
+      const mainElement = document.querySelector('main');
+      editBtn.addEventListener('click', () => {
+        const isEditing = mainElement.classList.toggle('edit-mode');
+        editBtn.textContent = isEditing ? 'Done' : 'Edit';
+      });
+    </script>
 
-      <a href="card-select.html" class="card">
-        <div class="card-controls">
-          <button class="remove-btn">-</button>
-          <button class="edit-btn">✎</button>
-        </div>
+    <script>
+      const deckList = getDecks();
+      const container = document.getElementById("cards-container");
 
-        <div class="card-image">
-          <img src="../design/cardCover_default.jpg" alt="cardCoverImage"
-            style="width: 100%; height: 100%; object-fit: cover; border-radius: 0.25rem;">
-        </div>
-        <div class="card-title">Chinese</div>
-      </a>
+      deckList.forEach(deck => {
+        const card = document.createElement('a');
+        card.className = 'card';
+        card.href = `card-select.html?deck=${deck.id}`;
 
-      <a href="card-select.html" class="card">
-        <div class="card-controls">
-          <button class="remove-btn">-</button>
-          <button class="edit-btn">✎</button>
-        </div>
+        card.innerHTML = `
+      <div class="card-controls">
+        <button class="remove-btn">-</button>
+        <button class="edit-btn">✎</button>
+      </div>
+      <div class="card-image">
+        <img src="${getDeckImage(deck)}" alt="cardCoverImage"
+          style="width: 100%; height: 100%; object-fit: cover; border-radius: 0.25rem;">
+      </div>
+      <div class="card-title">${deck.name}</div>
+    `;
+        card.querySelector(".edit-btn").addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation(); // prevent parent <a> from firing
+          window.location.href = `deck-editor.html?deck=${deck.id}`;
+        });
 
-        <div class="card-image">
-          <img src="../design/cardCover_default.jpg" alt="cardCoverImage"
-            style="width: 100%; height: 100%; object-fit: cover; border-radius: 0.25rem;">
-        </div>
-        <div class="card-title">Mediterranean</div>
-      </a>
+        container.appendChild(card);
+      });
 
-      <a href="card-select.html" class="card">
-        <div class="card-controls">
-          <button class="remove-btn">-</button>
-          <button class="edit-btn">✎</button>
-        </div>
+      const addCard = document.createElement('a');
+      addCard.className = 'card add-card';
+      addCard.href = 'deck-form.html';
+      addCard.innerHTML = `<div class="card-title">+</div>`;
+      container.appendChild(addCard);
+    </script>
 
-        <div class="card-image">
-          <img src="../design/cardCover_default.jpg" alt="cardCoverImage"
-            style="width: 100%; height: 100%; object-fit: cover; border-radius: 0.25rem;">
-        </div>
-        <div class="card-title">Mexican</div>
-      </a>
-
-      <a href="card-select.html" class="card">
-
-        <div class="card-controls">
-          <button class="remove-btn">-</button>
-          <button class="edit-btn">✎</button>
-        </div>
-
-        <div class="card-image">
-          <img src="../design/cardCover_default.jpg" alt="cardCoverImage"
-            style="width: 100%; height: 100%; object-fit: cover; border-radius: 0.25rem;">
-        </div>
-        <div class="card-title">Vietnamese</div>
-      </a>
-
-      <a href="card-select.html" class="card">
-        <div class="card-controls">
-          <button class="remove-btn">-</button>
-          <button class="edit-btn">✎</button>
-        </div>
-
-        <div class="card-image">
-          <img src="../design/cardCover_default.jpg" alt="cardCoverImage"
-            style="width: 100%; height: 100%; object-fit: cover; border-radius: 0.25rem;">
-        </div>
-        <div class="card-title">Japanese</div>
-      </a>
-
-      <a href="deck-form.html" class="card add-card">
-        <div class="card-title">+</div>
-      </a>
-
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <div class="header-brand">
-      <img src="../design/logo.png" alt="Powell's Bowells Logo">
-      <span>Powell's Bowells</span>
-    </div>
-    <div style="text-align: right; line-height: 1.6; font-size: 13px;">
-      <div style="font-weight: bold;">Contact Us</div>
-      <div>Email: hello@powellsbowells.com</div>
-      <div>Phone: (123) 456-7890</div>
-    </div>
-  </footer>
-
-  <script src="scripts/deckControllerFrontEnd.js"></script>
-
-  <script>
-    const editBtn = document.querySelector('.edit-button');
-    const mainElement = document.querySelector('main');
-    editBtn.addEventListener('click', () => {
-      const isEditing = mainElement.classList.toggle('edit-mode');
-      editBtn.textContent = isEditing ? 'Done' : 'Edit';
-    });
-  </script>
 
 </body>
 

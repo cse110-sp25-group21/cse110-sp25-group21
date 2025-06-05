@@ -215,3 +215,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
+
+document.getElementById("edit-deck").addEventListener("click", () => {
+  const currentDeckId = "favorites"; 
+  window.location.href = `deck-editor.html?deck=${currentDeckId}`;
+});

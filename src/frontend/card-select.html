@@ -1,59 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Card Select</title>
   <link rel="stylesheet" href="styles/fonts.css">
-    <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/cardSelect.css">
 </head>
+
 <body>
 
 
-    <header>
+  <header>
     <a href="card-deck.html">
-        <button class = "back-button">Back</button>
-      </a>
+      <button class="back-button">Back</button>
+    </a>
     <div class="header-brand">
-      
+
     </div>
     <nav class="header-nav">
-        <a href="#home">Home</a>
-        <a href="#add-restaurant">Add Restaurant</a>
-        <a href="#decks">Decks</a>
-        <a href="#contact">Contact Us</a>
+      <a href="#home">Home</a>
+      <a href="#add-restaurant">Add Restaurant</a>
+      <a href="#decks">Decks</a>
+      <a href="#contact">Contact Us</a>
     </nav>
   </header>
 
-    <main class="main-content">
-        <section class="deck-header">
-            <h1 id="deck-title">Deck Title</h1>
-            <button id="edit-deck" class="card-button">Edit Deck</button>
-        </section>
+  <main class="main-content">
+    <section class="deck-header">
+      <h1 id="deck-title">Deck Title</h1>
+      <button id="edit-deck" class="card-button">Edit Deck</button>
+    </section>
 
-        <section class="card-select">
-            <button id="prev" class="card-button">←</button>
+    <section class="card-select">
+      <button id="prev" class="card-button">←</button>
 
-            <div class="card">
-                <img
-                    id="restaurant-image"
-                    src="design/cardCover_default.jpg"
-                    alt="Restaurant cover"
-                />
-                <div class="card-details">
-                    <h2 id="restaurant-title">Restaurant Title</h2>
-                    <div id="restaurant-rating" class="rating">
-                        ☆☆☆☆☆
-                    </div>
-                </div>
-            </div>
+      <div class="card">
+        <img id="restaurant-image" src="design/cardCover_default.jpg" alt="Restaurant cover" />
+        <div class="card-details">
+          <h2 id="restaurant-title">Restaurant Title</h2>
+          <div id="restaurant-rating" class="rating">
+            ☆☆☆☆☆
+          </div>
+        </div>
+      </div>
 
-            <button id="next" class="card-button">→</button>
-        </section>
-    </main>
+      <button id="next" class="card-button">→</button>
+    </section>
+  </main>
 
-   <!-- Footer -->
+  <!-- Footer -->
   <footer>
     <div class="header-brand">
       <img src="../design/logo.png" alt="Powell's Bowells Logo">
@@ -66,6 +64,26 @@
     </div>
   </footer>
 
-    <script src="scripts.js"></script>
+  <script src="../frontend/js/deckControllerFrontEnd.js"></script>
+  <script src="../frontend/scripts.js"></script>
+
+  <script>
+    function getDeckIdFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("deck");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const deckId = getDeckIdFromUrl();
+      const deck = getDecks().find(d => d.id === deckId);
+
+      if (deck) {
+        document.getElementById("deck-title").textContent = deck.name;
+      } else {
+        document.getElementById("deck-title").textContent = "Deck Not Found";
+      }
+    });
+  </script>
 </body>
+
 </html>
