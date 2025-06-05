@@ -1,10 +1,10 @@
-// Define initial decks with empty cards arrays
-let decks = [
+// Load decks from localStorage key "restaurantsData"
+let decks = (JSON.parse(localStorage.getItem("restaurantsData")) || {}).decks || [
   {
     id: "fast_food",
     name: "Fast Food Favorites",
     isAtomic: true,
-    cards: ["Chick-fil-A", "Hamburger Hut"]
+    cards: ["Chick-fil-A", "Hamburger Hut", "hello"]
   },
   {
     id: "ucsd_dining_halls",
@@ -14,13 +14,17 @@ let decks = [
   }
 ];
 
-
+// Save current decks into restaurantsData key
+function saveDecks() {
+  const currentData = JSON.parse(localStorage.getItem("restaurantsData")) || {};
+  currentData.decks = decks;
+  localStorage.setItem("restaurantsData", JSON.stringify(currentData));
+}
 
 // Return the current list of decks
 function getDecks() {
   return decks;
 }
-
 
 // Create a new deck
 function createDeck(name, isAtomic = false) {
@@ -32,6 +36,7 @@ function createDeck(name, isAtomic = false) {
 
   const newDeck = { id, name, isAtomic, cards: [] };
   decks.push(newDeck);
+  saveDecks();
   return newDeck;
 }
 
@@ -39,7 +44,9 @@ function createDeck(name, isAtomic = false) {
 function deleteDeck(deckId) {
   const initialLength = decks.length;
   decks = decks.filter((deck) => deck.id !== deckId);
-  return decks.length !== initialLength;
+  const changed = decks.length !== initialLength;
+  if (changed) saveDecks();
+  return changed;
 }
 
 // Add a card to a deck
@@ -49,6 +56,7 @@ function addCardToDeck(deckId, restaurantId) {
 
   if (!deck.cards.includes(restaurantId)) {
     deck.cards.push(restaurantId);
+    saveDecks();
     return true;
   }
   return false;
@@ -62,6 +70,7 @@ function removeCardFromDeck(deckId, restaurantId) {
   const index = deck.cards.indexOf(restaurantId);
   if (index !== -1) {
     deck.cards.splice(index, 1);
+    saveDecks();
     return true;
   }
   return false;
@@ -71,7 +80,6 @@ function getDeckImage(deckID) {
   return "design/cardCover_default.jpg";
 }
 
-
 // Expose to global scope
 window.getDecks = getDecks;
 window.getDeckImage = getDeckImage;
@@ -79,4 +87,3 @@ window.createDeck = createDeck;
 window.deleteDeck = deleteDeck;
 window.addCardToDeck = addCardToDeck;
 window.removeCardFromDeck = removeCardFromDeck;
-
