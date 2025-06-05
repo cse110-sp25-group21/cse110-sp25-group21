@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Restaurant - Powell's Bowells</title>
+  <link rel="stylesheet" href="styles/fonts.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/addDeck.css">
+
+</head>
+<body>
+  <header>
+    <div class="header-brand">
+      <img src="../design/logo.png" alt="Powell's Bowells Logo">
+      <span>Powell's Bowells</span>
+    </div>
+    <nav class="header-nav">
+      <a href="landingPage.html">Home</a>
+      <a href="restaurant-form.html">Add Restaurant</a>
+      <a>Contact Us</a>
+    </nav>
+  </header>
+
+  <section class="main-content">
+    <h1 id = "formTitle">Add New Restaurant</h1>
+    
+    <div class="form-container">
+      <form id="restaurant-form">
+        <!-- Row 1: Restaurant Name -->
+        <div class="form-row">
+          <label for="restaurant-name" class="form-label">Restaurant Name</label>
+          <input type="text" id="restaurant-name" name="restaurant-name" placeholder="enter name here..." class="form-input">
+        </div>
+        
+        <!-- Row 2: Food Genre -->
+        <div class="form-row">
+          <label for="food-genre" class="form-label">Food Genre</label>
+          <input type="text" id="food-genre" name="food-genre" placeholder="enter genre here..." class="form-input">
+        </div>
+        
+        <!-- Row 3: Menu -->
+        <div class="form-row">
+          <label for="menu" class="form-label">Menu</label>
+          <textarea id="menu" name="menu" placeholder="enter menu here..." class="form-textarea"></textarea>
+        </div>
+        
+        <!-- Row 4: Business Hour -->
+        <div class="form-row">
+          <label for="business-hour" class="form-label">Business Hour</label>
+          <input type="text" id="business-hour" name="business-hour" placeholder="enter business hour here..." class="form-input">
+        </div>
+        
+        <!-- Row 5: Address, Website, Phone in 3 columns -->
+        <div class="form-row form-columns">
+          <div class="form-column">
+            <label for="address" class="form-label">Address <span class="icon">📍</span></label>
+            <input type="text" id="address" name="address" placeholder="enter address here..." class="form-input">
+          </div>
+          <div class="form-column">
+            <label for="website" class="form-label">Website <span class="icon">🌐</span></label>
+            <input type="text" id="website" name="website" placeholder="enter website here..." class="form-input">
+          </div>
+          <div class="form-column">
+            <label for="phone" class="form-label">Phone Number <span class="icon">📞</span></label>
+            <input type="text" id="phone" name="phone" placeholder="enter phone number here..." class="form-input">
+          </div>
+        </div>
+        
+        <!-- Row 6: Map placeholder -->
+        <div class="form-row">
+          <label for="map" class="form-label">Map</label>
+          <div class="map-container" id="map" aria-label="Map display area">
+            <div class="map-placeholder">📷</div>
+          </div>
+        </div>
+        
+        <!-- Row 7: Submit button -->
+        <div class="form-row submit-container">
+          <button type="submit" class="submit-button">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+    <footer>
+    <div class="header-brand">
+      <img src="../design/logo.png" alt="Powell's Bowells Logo">
+      <span>Powell's Bowells</span>
+    </div>
+    <div style="text-align: right; line-height: 1.6; font-size: 13px;">
+      <div style="font-weight: bold;">Contact Us</div>
+      <div>Email: hello@powellsbowells.com</div>
+      <div>Phone: (123) 456-7890</div>
+    </div>
+  </footer>
+</body>
+</html> 
+<script src="scripts.js"></script>
