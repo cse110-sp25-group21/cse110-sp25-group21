@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deck Editor - Powell's Bowells</title>
     <link rel="stylesheet" href="../frontend/styles/deck-editor.css">
 </head>
+
 <body>
     <header class="header">
         <div class="header-left">
@@ -18,7 +20,7 @@
             <nav class="nav-links">
                 <a href="#">Home</a>
                 <a href="#">Add Restaurant</a>
-                <a href="#">Decks</a>
+                <a href="../frontend/card-deck.html">Decks</a>
                 <a href="#">Contact Us</a>
             </nav>
         </div>
@@ -32,18 +34,7 @@
 
         <div class="restaurant-grid-wrapper">
             <div class="restaurant-grid">
-                <div class="restaurant-card">
-                    <div class="restaurant-card-image">
-                        <img src = "../design/cardCover_default.jpg" alt = "card">
-                    </div>
-                    <div class="restaurant-title">Restaurant Title</div>
-                </div>
-                <div class="restaurant-card">
-                    <div class="restaurant-card-image">
-                         <img src = "../design/cardCover_default.jpg" alt = "card">
-                    </div>
-                    <div class="restaurant-title">Restaurant Title</div>
-                </div>
+
             </div>
         </div>
     </main>
@@ -51,7 +42,7 @@
     <footer class="footer">
         <div class="footer-left">
             <div class="footer-logo">
-                <img src = "../design/logo.png" alt = "logo">
+                <img src="../design/logo.png" alt="logo">
             </div>
             <div class="footer-text">Powell's Bowells</div>
         </div>
@@ -63,5 +54,55 @@
             <p>Contact Us</p>
         </div>
     </footer>
+    <script src="../frontend/js/deckControllerFrontEnd.js"></script>
+    <script src="../frontend/scripts.js"></script>
+
+    <script>
+        function getDeckIdFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get("deck");
+        }
+
+        function renderDeckEditor() {
+            const deckId = getDeckIdFromUrl();
+            const deck = getDecks().find(d => d.id === deckId);
+
+            if (!deck) {
+                alert("Deck not found.");
+                return;
+            }
+
+            // Update deck title
+            document.querySelector(".deck-title").textContent = deck.name;
+
+            // Clear and populate restaurant grid
+            const grid = document.querySelector(".restaurant-grid");
+            grid.innerHTML = "";
+
+            const allRestaurants = [...defaultStaticRestaurants, ...(JSON.parse(localStorage.getItem('restaurantsData')) || [])];
+
+            deck.cards.forEach(cardId => {
+                const restaurant = allRestaurants.find(r => r.title === cardId);
+                if (!restaurant) return;
+
+                const cardDiv = document.createElement("div");
+                cardDiv.className = "restaurant-card";
+
+                cardDiv.innerHTML = `
+        <div class="restaurant-card-image">
+          <img src="${restaurant.image}" alt="${restaurant.title}">
+        </div>
+        <div class="restaurant-title">${restaurant.title}</div>
+      `;
+
+                grid.appendChild(cardDiv);
+            });
+        }
+
+        // Run on load
+        document.addEventListener("DOMContentLoaded", renderDeckEditor);
+    </script>
+
 </body>
-</html> 
+
+</html>
