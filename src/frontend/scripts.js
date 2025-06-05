@@ -168,7 +168,7 @@ window.onload = function () {
   const currentDeckId = params.get("deck");
 
   const allRestaurants = [...defaultStaticRestaurants, ...userCreatedRestaurants];
-  const deck = getDecks().find(d => d.id === currentDeckId);
+  const deck = getDecks().find(d => d.id === currentDeckId); // TODO: getDecks undefined
 
   if (deck) {
     restaurants = allRestaurants.filter(r => deck.cards.includes(r.title));
@@ -244,3 +244,25 @@ if (editDeckButton) {
     });
   }
 }
+
+/**
+  * Handles the deck form submission event.
+  * Prevents the default page reload, creates a new deck object,
+  * appends it to localStorage, and redirects to the deck editor view.
+*/
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('deck-form');
+  if (form) {
+    console.log("Form detected. Adding submit handler.");
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      let deckName = document.getElementById('deck-name').value;
+      let newDeck = createDeck(deckName);
+
+      console.log("Saved new deck");
+      window.location.href = 'deck-editor.html';
+    });
+  }
+});
