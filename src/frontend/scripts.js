@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function () {
       let newDeck = createDeck(deckName);
 
       console.log("Saved new deck");
-      window.location.href = 'deck-editor.html';
+      window.location.href = 'deck-editor.html?deck=' + deckName;
     });
   }
 });
