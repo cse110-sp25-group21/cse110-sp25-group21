@@ -79,7 +79,7 @@
     `;
         card.querySelector(".edit-btn").addEventListener("click", (e) => {
           e.preventDefault();
-          e.stopPropagation(); // prevent parent <a> from firing
+          e.stopPropagation();
           window.location.href = `deck-editor.html?deck=${deck.id}`;
         });
 

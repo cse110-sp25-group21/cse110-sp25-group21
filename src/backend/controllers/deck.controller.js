@@ -57,12 +57,9 @@ function setUserPreferences(userId, preferences) {
   );
 }
 
-// NOTE: I hard Coded Data that we may later change to be ported to a DB
-
 let decks = [
   { id: "favorites", name: "Favorites", isAtomic: true },
-  { id: "chinese", name: "Chinese", isAtomic: false },
-  { id: "chickfila", name: "Chickfila", isAtomic: false },
+  { id: "chinese", name: "Chinese", isAtomic: false }
 ];
 
 /**
@@ -77,24 +74,13 @@ export function getDecks() {
 }
 
 /**
- * get the image path for a specific deck
- * safeName: replaces white space w/ _ and sets everything to lower case, assume img is associated w name
  * default picture if user doesn't preset one for the deck is the cardCover_default.jpg we have
- * @param {Object} deck - deck object containing at least a `name` string
+ * @param {Object} deckID - The deck object containing id and name
  * @return {string} relative path to the image file for the deck
  */
-export function getDeckImage(deck) {
-  const safeName = deck.name.toLowerCase().replace(/\s+/g, "_");
-  const userAssignedPath = `design/${safeName}.jpg`;
+export function getDeckImage(deckID) {
 
-  const img = new Image();
-  img.src = userAssignedPath;
-
-  // preload image and fallback to default if it fails
-  img.onerror = () => {
-    img.src = "design/cardCover_default.jpg";
-  };
-
+  img.src = "design/cardCover_default.jpg";
   return img.src;
 }
 

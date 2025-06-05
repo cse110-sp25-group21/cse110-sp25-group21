@@ -1,4 +1,4 @@
-// Define initial decks with empty `cards` arrays
+// Define initial decks with empty cards arrays
 let decks = [
   { id: "favorites", name: "Favorites", isAtomic: true, cards: [] },
   { id: "chinese", name: "Chinese", isAtomic: false, cards: [] },
@@ -56,7 +56,6 @@ function removeCardFromDeck(deckId, restaurantId) {
 }
 
 function getDeckImage(deckID) {
-  // You can customize this logic based on deck.id if needed
   return "design/cardCover_default.jpg";
 }
 
