@@ -66,6 +66,8 @@ var defaultStaticRestaurants = [
     hours: '11 AM - 12 PM'
   }
 ];
+window.defaultStaticRestaurants = defaultStaticRestaurants;
+
 var restaurants = [];
 
 /**
@@ -215,8 +217,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
+const editDeckButton = document.getElementById("edit-deck");
+if (editDeckButton) {
+  const params = new URLSearchParams(window.location.search);
+  const currentDeckId = params.get("deck");
 
-document.getElementById("edit-deck").addEventListener("click", () => {
-  const currentDeckId = "favorites"; 
-  window.location.href = `deck-editor.html?deck=${currentDeckId}`;
-});
+  if (currentDeckId) {
+    editDeckButton.addEventListener("click", () => {
+      window.location.href = `deck-editor.html?deck=${currentDeckId}`;
+    });
+  }
+}
