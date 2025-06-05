@@ -1,4 +1,3 @@
-/* Body, Header, and Footer styling - the same for each page */
 :root {
   --primary-orange: #FF8C42;
   --primary-orange-dark: #e07b39;
@@ -18,6 +17,9 @@ body {
   background-color: var(--bg-light);
   color: var(--text-dark);
   line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .container {
@@ -67,16 +69,6 @@ header, footer {
   text-decoration: underline;
 }
 
-html, body {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
- 
-}
-body > main {
-  flex: 1 0 auto; 
-}
-
 .card-button,
 .back-button {
   background-color: #FF964F;
@@ -88,6 +80,15 @@ body > main {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-/* End of Body, Header, Footer styling */
 
+body > main {
+  flex: 1 0 auto;
+}
 
+main {
+  flex: 1;
+}
+
+footer {
+  flex-shrink: 0;
+}

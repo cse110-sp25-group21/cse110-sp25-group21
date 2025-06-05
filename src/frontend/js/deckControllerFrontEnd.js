@@ -1,8 +1,20 @@
 // Define initial decks with empty cards arrays
 let decks = [
-  { id: "favorites", name: "Favorites", isAtomic: true, cards: [] },
-  { id: "chinese", name: "Chinese", isAtomic: false, cards: [] },
+  {
+    id: "fast_food",
+    name: "Fast Food Favorites",
+    isAtomic: true,
+    cards: ["Chick-fil-A", "Hamburger Hut"]
+  },
+  {
+    id: "ucsd_dining_halls",
+    name: "UCSD Dining Halls",
+    isAtomic: true,
+    cards: ["Cava Mediterranean", "Tacos El Rey"]
+  }
 ];
+
+
 
 // Return the current list of decks
 function getDecks() {

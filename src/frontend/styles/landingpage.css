@@ -87,6 +87,9 @@
 }
 
 /* Section: Decks */
+.section-decks {
+  text-decoration: none;
+}
 .section-decks h2 {
   font-size: 2rem;
   margin-bottom: 1.5rem;

@@ -18,9 +18,9 @@
     <nav class="header-nav">
        <nav class="nav-links">
                 <a href="../frontend/landingPage.html">Home</a>
-                <a href="#">About</a>
+                <a href="#about">About</a>
                 <a href="../frontend/card-deck.html">Decks</a>
-                <a href="#">Contact Us</a>
+                <a href="#footer">Contact Us</a>
             </nav>
     </nav>
   </header>
@@ -38,7 +38,7 @@
     </section>
 
     <!-- Confusion & Solution Section -->
-    <section class="section-confused">
+    <section id = "about" class="section-confused">
       <div class="confused-text">
         <h1>Confused about where to eat?</h1>
         <h2>You're not alone!</h2>
@@ -54,27 +54,28 @@
     </section>
 
     <!-- Example Cards/Decks Section -->
-    <section class="section-decks">
-      <h2>Sample Recommendation Decks</h2>
-      <div class="deck-cards">
-        <div class="deck-card">
-          <img src="https://cdn.stocksnap.io/img-thumbs/280h/strawberry-food_PROXEBKRSP.jpg" alt="Fresh Strawberries">
-          <p>Fresh Fruit Picks – Sweet and healthy options to energize your day.</p>
-        </div>
-        <div class="deck-card">
-          <img src="https://restaurantden.com/wp-content/uploads/2017/09/free-stock-food-photography-websites.jpg" alt="Assorted dishes on wooden table">
-          <p>Global Fusion – Explore flavors from around the world all in one place.</p>
-        </div>
-        <div class="deck-card">
-          <img src="https://images.squarespace-cdn.com/content/v1/57879a6cbebafb879f256735/1732056167772-AL6LKIL8ZNOYGDPLSWRT/AT_Rainbow_Carrots_with_Spices_on_Roasting_Pan.jpg" alt="Colorful roasted carrots">
-          <p>Vegan & Veggie – Flavor-packed plant-based options for every craving.</p>
-        </div>
-      </div>
-    </section>
+<section class="section-decks">
+  <h2>Sample Recommendation Decks</h2>
+  <div class="deck-cards">
+
+    <a href="card-select.html?deck=fast_food" class="deck-card">
+      <img src="../design/fast_food.png" alt="Fast Food Burgers and Fries" />
+      <p>Fast Food Favorites - Classic quick bites like burgers, fries, and shakes to satisfy your cravings.</p>
+    </a>
+
+    <a href="card-select.html?deck=ucsd_dining_halls" class="deck-card">
+      <img src="../design/dining_halls.png" alt="UCSD Dining Hall" />
+      <p>UCSD Dining Halls - Explore the variety of dining options right on campus with great meals and healthy choices.</p>
+    </a>
+
+  </div>
+</section>
+
+
   </main>
 
   <!-- Footer -->
-  <footer>
+  <footer id = "footer">
     <div class="header-brand">
       <img src="../design/logo.png" alt="Powell's Bowells Logo">
       <span>Powell's Bowells</span>

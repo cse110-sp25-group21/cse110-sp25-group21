@@ -5,28 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deck Editor - Powell's Bowells</title>
+      <link rel="stylesheet" href="styles/style.css">
+
     <link rel="stylesheet" href="../frontend/styles/deck-editor.css">
 </head>
 
 <body>
-    <header class="header">
-        <div class="header-left">
-            <button class="header-button">button</button>
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="Input text">
-            </div>
-        </div>
-        <div class="header-right">
-            <nav class="nav-links">
+
+        <header>
+    <div class="header-brand">
+      <img src="../design/logo.png" alt="Powell's Bowells Logo">
+      <span>Powell's Bowells</span>
+    </div>
+    <nav class="header-nav">
+       <nav class="nav-links">
                 <a href="../frontend/landingPage.html">Home</a>
                 <a href="../frontend/restaurant-form.html">Add Restaurant</a>
                 <a href="../frontend/card-deck.html">Decks</a>
-                <a href="#">Contact Us</a>
+              
             </nav>
-        </div>
-        <button class="change-deck-photo-button">Change Deck Photo</button>
-    </header>
-
+    </nav>
+       <button class="change-deck-photo-button">Change Deck Photo</button>
+  </header>
     <main class="main-content">
         <div class="deck-title-container">
             <h1 class="deck-title">Deck Title</h1>
@@ -39,21 +39,18 @@
         </div>
     </main>
 
-    <footer class="footer">
-        <div class="footer-left">
-            <div class="footer-logo">
-                <img src="../design/logo.png" alt="logo">
-            </div>
-            <div class="footer-text">Powell's Bowells</div>
-        </div>
-        <div class="footer-right">
-            <div class="footer-contact-info">
-                <a href="mailto:lorem@ipsum.com">lorem@ipsum.com</a>
-                <span>xxx-xxx-xxxx</span>
-            </div>
-            <p>Contact Us</p>
-        </div>
-    </footer>
+  <!-- Footer -->
+  <footer id = "footer">
+    <div class="header-brand">
+      <img src="../design/logo.png" alt="Powell's Bowells Logo">
+      <span>Powell's Bowells</span>
+    </div>
+    <div style="text-align: right; line-height: 1.6; font-size: 13px;">
+      <div style="font-weight: bold;">Contact Us</div>
+      <div>Email: hello@powellsbowells.com</div>
+      <div>Phone: (123) 456-7890</div>
+    </div>
+  </footer>
     <script src="../frontend/js/deckControllerFrontEnd.js"></script>
     <script src="../frontend/scripts.js"></script>
 

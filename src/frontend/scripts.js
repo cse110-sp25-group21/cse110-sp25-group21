@@ -164,7 +164,18 @@ function viewRestaurant() {
  */
 window.onload = function () {
   const userCreatedRestaurants = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
-  restaurants = [...defaultStaticRestaurants, ...userCreatedRestaurants];
+  const params = new URLSearchParams(window.location.search);
+  const currentDeckId = params.get("deck");
+
+  const allRestaurants = [...defaultStaticRestaurants, ...userCreatedRestaurants];
+  const deck = getDecks().find(d => d.id === currentDeckId);
+
+  if (deck) {
+    restaurants = allRestaurants.filter(r => deck.cards.includes(r.title));
+  } else {
+    restaurants = allRestaurants; 
+  }
+
 
   var nextBtn = document.getElementById('next');
   var prevBtn = document.getElementById('prev');
@@ -189,34 +200,39 @@ window.onload = function () {
   * Prevents the default page reload, creates a new restaurant object,
   * appends it to localStorage, and redirects to the main card deck view.
 */
-document.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('restaurant-form');
-  if (form) {
-    console.log("Form detected. Adding submit handler.");
+form.addEventListener('submit', function (event) {
+  event.preventDefault();
 
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
+  const deckId = document.getElementById('deck-id').value;
 
+  const newRestaurant = {
+    title: document.getElementById('restaurant-name').value.trim(),
+    image: '../design/cardCover_default.jpg',
+    type: document.getElementById('food-genre').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
+    website: document.getElementById('website').value.trim(),
+    address: document.getElementById('address').value.trim(),
+    hours: document.getElementById('business-hour').value.trim(),
+    deck: deckId
+  };
 
-      const newRestaurant = {
-        title: document.getElementById('restaurant-name').value.trim(),
-        image: '../design/cardCover_default.jpg',
-        type: document.getElementById('food-genre').value.trim(),
-        phone: document.getElementById('phone').value.trim(),
-        website: document.getElementById('website').value.trim(),
-        address: document.getElementById('address').value.trim(),
-        hours: document.getElementById('business-hour').value.trim()
-      };
+  const existing = JSON.parse(localStorage.getItem('restaurantsData')) || [];
+  existing.push(newRestaurant);
+  localStorage.setItem('restaurantsData', JSON.stringify(existing));
 
-      const existing = JSON.parse(localStorage.getItem('restaurantsData')) || [];
-      existing.push(newRestaurant);
-      localStorage.setItem('restaurantsData', JSON.stringify(existing));
-
-      console.log("Saved new restaurant:", newRestaurant);
-      window.location.href = 'card-deck.html';
-    });
+  // Add the new restaurant title to the selected deck's cards array
+  if (window.addCardToDeck) {
+    window.addCardToDeck(deckId, newRestaurant.title);
+  } else {
+    console.warn("addCardToDeck function is not available on window");
   }
+
+  console.log("Saved new restaurant:", newRestaurant);
+  window.location.href = 'card-deck.html';
 });
+
+
+
 const editDeckButton = document.getElementById("edit-deck");
 if (editDeckButton) {
   const params = new URLSearchParams(window.location.search);
