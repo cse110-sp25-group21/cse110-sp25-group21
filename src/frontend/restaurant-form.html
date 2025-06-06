@@ -105,6 +105,34 @@
       <div>Phone: (123) 456-7890</div>
     </div>
   </footer>
+  <script>
+    // Populate deck dropdown with actual decks
+    document.addEventListener('DOMContentLoaded', function() {
+      const deckSelect = document.getElementById('deck-id');
+      
+      // Clear existing options
+      deckSelect.innerHTML = '';
+      
+      // Get all available decks
+      const availableDecks = getDecks();
+      
+      // Add each deck as an option
+      availableDecks.forEach(deck => {
+        const option = document.createElement('option');
+        option.value = deck.id;
+        option.textContent = deck.name;
+        deckSelect.appendChild(option);
+      });
+      
+      // Add a default option if no decks exist
+      if (availableDecks.length === 0) {
+        const option = document.createElement('option');
+        option.value = '';
+        option.textContent = 'No decks available - create a deck first';
+        deckSelect.appendChild(option);
+      }
+    });
+    </script>
 </body>
 </html> 
 <script src="js/deckControllerFrontEnd.js"></script>

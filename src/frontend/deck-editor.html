@@ -60,8 +60,16 @@
 
         function renderDeckEditor() {
             const deckId = getDeckIdFromUrl();
-            const deck = getDecks().find(d => d.id === deckId);
+
+            //debug localstorage
+            const rawData = localStorage.getItem('restaurantsData');
+            console.log("Raw localStorage data:", rawData);
+            console.log("Parsed localStorage:", JSON.parse(rawData || '{}'));
+            
+            const availableDecks = getDecks();
+            const deck = availableDecks.find(d => d.id === deckId);
             console.log("Deck ID from URL:", deckId);
+            console.log("Available decks:", availableDecks);
             console.log("Deck:", deck);
             console.log("Deck.cards:", deck.cards);
 
@@ -72,8 +80,10 @@
             const grid = document.querySelector(".restaurant-grid");
             grid.innerHTML = "";
 
+            const savedData = JSON.parse(localStorage.getItem('restaurantsData')) || {};
+            const userRestaurants = savedData.restaurants || [];
             const allRestaurants = [...(window.defaultStaticRestaurants || []), ...(JSON.parse(localStorage.getItem('restaurantsData')) || [])];
-
+            
             deck.cards.forEach(cardId => {
                 const restaurant = allRestaurants.find(r => r.title === cardId);
                 if (!restaurant) return;

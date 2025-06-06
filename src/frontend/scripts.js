@@ -216,7 +216,15 @@ document.addEventListener('DOMContentLoaded', function () {
       event.preventDefault();
 
       const deckId = document.getElementById('deck-id').value;
-
+      const restuarantName = document.getElementById('restaurant-name').value.trim();
+      if (!restuarantName){
+        alert('Please enter a restaurant name');
+        return;
+      }
+      if (!deckId) {
+        alert('Please select a deck');
+        return;
+      }
       const newRestaurant = {
         title: document.getElementById('restaurant-name').value.trim(),
         image: '../design/cardCover_default.jpg',
@@ -229,12 +237,16 @@ document.addEventListener('DOMContentLoaded', function () {
       };
 
 
-      const existing = JSON.parse(localStorage.getItem('restaurantsData')) || [];
-      existing.push(newRestaurant);
+      const existing = JSON.parse(localStorage.getItem('restaurantsData')) || {};
+      if (!existing.restaurants) existing.restaurants = [];
+      existing.restaurants.push(newRestaurant);
       localStorage.setItem('restaurantsData', JSON.stringify(existing));
-
-      console.log("Saved new restaurant:", newRestaurant);
-      window.location.href = 'card-deck.html';
+      const success = addCardToDeck(deckId, restuarantName);
+      if (success){
+        console.log("Saved new restaurant:", newRestaurant);
+        console.log("Add restaurant to deck: ", deckId)
+        window.location.href = 'card-deck.html';
+      }
     });
   }
 });
@@ -265,12 +277,14 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', function (event) {
       event.preventDefault();
 
-      let deckName = document.getElementById('deck-name').value;
-      createDeck(deckName);
+      let deckName = document.getElementById('deck-name').value.trim();
+      const newDeck = createDeck(deckName);
 
-      console.log("Saved new deck");
-      const deckParam = new URLSearchParams({ deck: deckName });
-      window.location.href = `deck-editor.html?${deckParam.toString()}`;
-    });
+      if(!newDeck) {
+        alert('Deck with this name already exists)');
+      }
+
+      console.log("Saved new deck: ", newDeck);
+      window.location.href = `deck-editor.html?deck=${newDeck.id}`; });
   }
 });
