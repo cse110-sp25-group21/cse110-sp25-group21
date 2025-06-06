@@ -163,12 +163,19 @@ function viewRestaurant() {
  * @returns {void}
  */
 window.onload = function () {
-  const userCreatedRestaurants = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
+  let userCreatedRestaurants;
+  try {
+    const data = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    userCreatedRestaurants = Array.isArray(data) ? data : [];
+  } catch (e) {
+    userCreatedRestaurants = [];
+  }
+  
   const params = new URLSearchParams(window.location.search);
   const currentDeckId = params.get("deck");
 
   const allRestaurants = [...defaultStaticRestaurants, ...userCreatedRestaurants];
-  const deck = getDecks().find(d => d.id === currentDeckId); // TODO: getDecks undefined
+  const deck = getDecks().find(d => d.id === currentDeckId);
 
   if (deck) {
     restaurants = allRestaurants.filter(r => deck.cards.includes(r.title));
