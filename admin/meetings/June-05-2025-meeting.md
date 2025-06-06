@@ -1,6 +1,6 @@
 # Meeting Minutes
 ## Date: 6/05/2025
-## Time: 2:00pm - 2:15pm (15 minutes)
+## Time: 1:59pm - 2:14pm (15 minutes)
 ### Attendance
 - Charlotte Kim
 - Tommy Tran
