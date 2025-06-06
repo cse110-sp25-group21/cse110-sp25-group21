@@ -165,13 +165,19 @@ function goPrev() {
 
 /**
  * Opens the deck editor interface
- * Currently shows an alert placeholder - to be implemented with actual editor
+ * Navigates directly to the deck editor page with current deck ID
  * @function
  * @returns {void}
- * @todo Implement actual deck editor navigation and functionality
  */
 function editDeck() {
-  alert('Navigate to deck editor');
+  const params = new URLSearchParams(window.location.search);
+  const currentDeckId = params.get("deck");
+  
+  if (currentDeckId) {
+    window.location.href = `deck-editor.html?deck=${currentDeckId}`;
+  } else {
+    console.error('No deck ID found in URL');
+  }
 }
 
 /**
