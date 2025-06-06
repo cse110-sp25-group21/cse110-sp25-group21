@@ -26,46 +26,68 @@ const LOCAL_STORAGE_KEY = 'restaurantsData';
  * Each restaurant represents a local establishment in the La Jolla/San Diego area
  * @type {Restaurant[]}
  */
+
+
 var defaultStaticRestaurants = [
   {
     title: 'Chick-fil-A',
     image: '../design/chickfila.jpg',
     rating: 5,
-    type: 'American',
+    type: 'Fast Food',
     phone: '(858) 450-4417',
-    website: 'chick-fil-a.com',
+    website: 'https://www.chick-fil-a.com/locations/ca/la-jolla-village?utm_source=yext&utm_medium=link',
     address: '3351 Nobel Dr, La Jolla, CA 92037',
     hours: '8 AM - 11 PM'
   },
-  {
-    title: 'Cava Mediterranean',
-    image: '../design/cava.jpg',
-    rating: 4,
-    type: "Mediterranean",
-    phone: '(858) 433-0356',
-    website: 'cava.com',
-    address: '8849 Villa La Jolla Dr Suite 301, La Jolla, CA, 92037',
-    hours: '10 AM - 10 PM'
+    {
+    title: 'Chick-fil',
+    image: '../design/chickfila.jpg',
+    rating: 5,
+    type: 'Fast Food',
+    phone: '(858) 450-4417',
+    website: 'https://www.chick-fil-a.com/locations/ca/la-jolla-village?utm_source=yext&utm_medium=link',
+    address: '3351 Nobel Dr, La Jolla, CA 92037',
+    hours: '8 AM - 11 PM'
   },
+  // {
+  //   title: 'McDonalds',
+  //   image: '../design/mcdonalds.png',
+  //   rating: 4,
+  //   type: "Fast Food",
+  //   phone: '(858) 626-2708',
+  //   website: 'https://www.mcdonalds.com/us/en-us/location/CA/SAN-DIEGO/4260-NOBEL-DR/11181.html?cid=RF:YXT:GMB::Clicks',
+  //   address: '4260 Nobel Dr, San Diego, CA 92122',
+  //   hours: 'Open 24 hours'
+  // },
   {
-    title: 'Hamburger Hut',
-    image: '../design/hamburger.jpg',
+    title: 'KFC',
+    image: '../design/kfc.png',
     rating: 3,
-    type: 'American',
-    phone: '(760) 230-1999',
-    website: 'hamburgerhut.com',
-    address: '576 N Coast Hwy 101, Encinitas, CA 92024',
-    hours: '11 AM - 9 PM'
+    type: 'Fast Food',
+    phone: '(858) 274-1287',
+    website: 'https://locations.kfc.com/ca/san-diego/4290-clairemont-mesa-blvd',
+    address: '4290 Clairemont Mesa Blvd, San Diego, CA 92117',
+    hours: '9:30 AM-11:30 PM'
   },
   {
-    title: 'Tacos El Rey',
-    image: '../design/foodspread.png',
-    rating: 4,
-    type: 'Mexican',
-    phone: '(858) 638-0003',
-    website: 'primosmex.com',
-    address: '7770 Regents Rd #109, San Diego, CA 92122',
-    hours: '11 AM - 12 PM'
+    title: 'Makai',
+    image: '../design/makai.png',
+    rating: 5,
+    type: 'Japanese',
+    phone: '(858) 822-5268',
+    website: 'https://sixth.ucsd.edu/residence-life/index.html',
+    address: '9690 Scholars Drive North, La Jolla. CA 92093',
+    hours: '8 AM - 11 PM'
+  },
+  {
+    title: 'UMI',
+    image: '../design/UMI.png',
+    rating: 2,
+    type: 'Japanese',
+    phone: '(858) 534-4663',
+    website: 'https://revelle.ucsd.edu/contact/index.html',
+    address: '2980 Theatre District Drive, La Jolla, CA 92093',
+    hours: '8 AM - 11 PM'
   }
 ];
 window.defaultStaticRestaurants = defaultStaticRestaurants;

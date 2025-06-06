@@ -30,19 +30,20 @@ function loadDecks() {
   } else {
     // If no decks exist, create the default ones
     decks = [
-      // {
-      //   id: "fast_food",
-      //   name: "Fast Food Favorites",
-      //   isAtomic: true,
-      //   cards: ["Chick-fil-A", "Hamburger Hut"]
-      // },
-      // {
-      //   id: "ucsd_dining_halls",
-      //   name: "UCSD Dining Halls",
-      //   isAtomic: true,
-      //   cards: ["Cava Mediterranean", "Tacos El Rey"]
-      // }
+      {
+        id: "fast_food",
+        name: "Fast Food Favorites",
+        isAtomic: true,
+        cards: ["Chick-fil-A", "KFC"]
+      },
+      {
+        id: "ucsd_dining_halls",
+        name: "UCSD Dining Halls",
+        isAtomic: true,
+        cards: ["Makai", "UMI"]
+      }
     ];
+  
     saveDecks(); // Save the defaults
     console.log("Created default decks:", decks);
   }
