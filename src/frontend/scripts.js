@@ -5,6 +5,8 @@
  * @version 1.0.0
  */
 
+/* global getDecks, createDeck, addCardToDeck, removeCardFromDeck, deleteDeck */
+
 /**
  * @typedef {Object} Restaurant
  * @property {string} title - The name of the restaurant
