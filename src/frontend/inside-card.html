@@ -103,7 +103,7 @@
             const restaurant = JSON.parse(sessionStorage.getItem('selectedRestaurant'));
             console.log(restaurant);
             if (restaurant) {
-                document.querySelector('.image').src = restaurant.image;
+                document.querySelector('.image').src = restaurant.image || '../design/cardCover_default.jpg';
                 document.querySelector('.title').textContent = restaurant.title;
                 document.querySelector('.hours').textContent = restaurant.hours;
                 document.querySelector('.type').textContent = restaurant.type;
