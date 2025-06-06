@@ -196,7 +196,7 @@ window.onload = function () {
 };
 
 /**
-  * Handles the form submission event.
+  * Handles the card form submission event.
   * Prevents the default page reload, creates a new restaurant object,
   * appends it to localStorage, and redirects to the main card deck view.
 */
