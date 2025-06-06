@@ -5,7 +5,7 @@
  * @version 1.0.0
  */
 
-/* global getDecks, createDeck, addCardToDeck, removeCardFromDeck, deleteDeck */
+/* global getDecks, createDeck, addCardToDeck */
 
 /**
  * @typedef {Object} Restaurant
