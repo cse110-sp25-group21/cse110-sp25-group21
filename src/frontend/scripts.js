@@ -78,6 +78,29 @@ var restaurants = [];
 var currentIndex = 0;
 
 /**
+ * Updates navigation arrow visibility based on number of restaurants
+ * Hides arrows when there's 0 or 1 restaurant, shows them when there are 2+
+ * @function
+ * @returns {void}
+ */
+function updateArrowVisibility() {
+  var nextBtn = document.getElementById('next');
+  var prevBtn = document.getElementById('prev');
+  
+  if (nextBtn && prevBtn) {
+    if (restaurants.length <= 1) {
+      // Hide arrows when there's 0 or 1 restaurant
+      nextBtn.style.display = 'none';
+      prevBtn.style.display = 'none';
+    } else {
+      // Show arrows when there are 2+ restaurants
+      nextBtn.style.display = 'block';
+      prevBtn.style.display = 'block';
+    }
+  }
+}
+
+/**
  * Renders the current restaurant's information to the DOM elements
  * Updates the restaurant image, title, and star rating display
  * Called whenever the user navigates between restaurants
@@ -85,6 +108,18 @@ var currentIndex = 0;
  * @returns {void}
  */
 function renderRestaurant() {
+  // Handle empty deck case
+  if (restaurants.length === 0) {
+    var imgElement = document.getElementById('restaurant-image');
+    var titleElement = document.getElementById('restaurant-title');
+    var ratingElement = document.getElementById('restaurant-rating');
+    
+    if (imgElement) imgElement.src = '../design/cardCover_default.jpg';
+    if (titleElement) titleElement.textContent = 'No restaurants in this deck';
+    if (ratingElement) ratingElement.textContent = '';
+    return;
+  }
+
   var restaurant = restaurants[currentIndex];
   var imgElement = document.getElementById('restaurant-image');
   var titleElement = document.getElementById('restaurant-title');
@@ -166,7 +201,8 @@ window.onload = function () {
   let userCreatedRestaurants;
   try {
     const data = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-    userCreatedRestaurants = Array.isArray(data) ? data : [];
+    // Fix: Access restaurants from the .restaurants property, not the root array
+    userCreatedRestaurants = (data && data.restaurants) ? data.restaurants : [];
   } catch (e) {
     userCreatedRestaurants = [];
   }
@@ -198,8 +234,15 @@ window.onload = function () {
     cardElement.onclick = viewRestaurant;
   }
 
+  // Update arrow visibility based on deck size
+  updateArrowVisibility();
+  
   // Render first restaurant
-  renderRestaurant();
+  if (restaurants.length > 0) {
+    renderRestaurant();
+  } else {
+    renderRestaurant(); // This will handle the empty deck case
+  }
 };
 
 /**
@@ -267,7 +310,7 @@ if (editDeckButton) {
 /**
   * Handles the deck form submission event.
   * Prevents the default page reload, creates a new deck object,
-  * appends it to localStorage, and redirects to the deck editor view.
+  * appends it to localStorage, and redirects to the deck list view.
 */
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('deck-form');
@@ -278,13 +321,22 @@ document.addEventListener('DOMContentLoaded', function () {
       event.preventDefault();
 
       let deckName = document.getElementById('deck-name').value.trim();
+      
+      if (!deckName) {
+        alert('Please enter a deck name');
+        return;
+      }
+
       const newDeck = createDeck(deckName);
 
       if(!newDeck) {
-        alert('Deck with this name already exists)');
+        alert('Deck with this name already exists');
+        return;
       }
 
       console.log("Saved new deck: ", newDeck);
-      window.location.href = `deck-editor.html?deck=${newDeck.id}`; });
+      alert('Deck created successfully!');
+      window.location.href = 'card-deck.html';
+    });
   }
 });

@@ -63,39 +63,59 @@
     </script>
 
     <script>
-      const deckList = getDecks();
-      const container = document.getElementById("cards-container");
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log("Loading decks for card deck page...");
+        const deckList = getDecks();
+        console.log("Retrieved deck list:", deckList);
+        const container = document.getElementById("cards-container");
 
-      deckList.forEach(deck => {
-        const card = document.createElement('a');
-        card.className = 'card';
-        card.href = `card-select.html?deck=${deck.id}`;
+        deckList.forEach(deck => {
+          const card = document.createElement('a');
+          card.className = 'card';
+          card.href = `card-select.html?deck=${deck.id}`;
 
-        card.innerHTML = `
-      <div class="card-controls">
-        <button class="remove-btn">-</button>
-        <button class="edit-btn">✎</button>
-      </div>
-      <div class="card-image">
-        <img src="${getDeckImage(deck)}" alt="cardCoverImage"
-          style="width: 100%; height: 100%; object-fit: cover; border-radius: 0.25rem;">
-      </div>
-      <div class="card-title">${deck.name}</div>
-    `;
-        card.querySelector(".edit-btn").addEventListener("click", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          window.location.href = `deck-editor.html?deck=${deck.id}`;
+          card.innerHTML = `
+        <div class="card-controls">
+          <button class="remove-btn">-</button>
+        </div>
+        <div class="card-image">
+          <img src="${getDeckImage(deck)}" alt="cardCoverImage"
+            style="width: 100%; height: 100%; object-fit: cover; border-radius: 0.25rem;">
+        </div>
+        <div class="card-title">${deck.name}</div>
+      `;
+          
+          // Add delete functionality to remove button (only works in edit mode)
+          card.querySelector(".remove-btn").addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Only allow deletion if in edit mode
+            if (!mainElement.classList.contains('edit-mode')) {
+              return;
+            }
+            
+            if (confirm(`Are you sure you want to delete the "${deck.name}" deck?`)) {
+              const deleted = window.deleteDeck(deck.id);
+              if (deleted) {
+                console.log(`Deleted deck: ${deck.name}`);
+                // Remove the card from the page immediately
+                card.remove();
+              } else {
+                alert('Failed to delete deck');
+              }
+            }
+          });
+
+          container.appendChild(card);
         });
 
-        container.appendChild(card);
+        const addCard = document.createElement('a');
+        addCard.className = 'card add-card';
+        addCard.href = 'deck-form.html';
+        addCard.innerHTML = `<div class="card-title">+</div>`;
+        container.appendChild(addCard);
       });
-
-      const addCard = document.createElement('a');
-      addCard.className = 'card add-card';
-      addCard.href = 'deck-form.html';
-      addCard.innerHTML = `<div class="card-title">+</div>`;
-      container.appendChild(addCard);
     </script>
 
 

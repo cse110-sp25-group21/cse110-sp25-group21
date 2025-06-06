@@ -1,35 +1,68 @@
 // Load decks from localStorage key "restaurantsData"
 let decks = [];
 
+// Clear corrupted localStorage for testing
+function clearLocalStorage() {
+  localStorage.removeItem("restaurantsData");
+  console.log("Cleared localStorage");
+}
+
 // Initialize decks on first load
 function loadDecks() {
-  const savedData = JSON.parse(localStorage.getItem("restaurantsData")) || {};
+  let savedData = JSON.parse(localStorage.getItem("restaurantsData")) || {};
   
-  // If no decks exist, create the default ones
-  if (!savedData.decks || savedData.decks.length === 0) {
+  // Fix: Handle corrupted data structure (when savedData is an array instead of object)
+  if (Array.isArray(savedData)) {
+    console.log("Found corrupted array structure, converting to proper format");
+    savedData = { restaurants: savedData, decks: [] };
+    // Save the corrected structure
+    localStorage.setItem("restaurantsData", JSON.stringify(savedData));
+  }
+  
+  console.log("loadDecks() called - savedData:", savedData);
+  console.log("savedData.decks:", savedData.decks);
+  console.log("savedData.decks length:", savedData.decks ? savedData.decks.length : "undefined");
+  
+  // If decks exist in localStorage, use them
+  if (savedData.decks && savedData.decks.length > 0) {
+    decks = savedData.decks;
+    console.log("Loaded existing decks from localStorage:", decks);
+  } else {
+    // If no decks exist, create the default ones
     decks = [
-      {
-        id: "fast_food",
-        name: "Fast Food Favorites",
-        isAtomic: true,
-        cards: ["Chick-fil-A", "Hamburger Hut"]
-      },
-      {
-        id: "ucsd_dining_halls",
-        name: "UCSD Dining Halls",
-        isAtomic: true,
-        cards: ["Cava Mediterranean", "Tacos El Rey"]
-      }
+      // {
+      //   id: "fast_food",
+      //   name: "Fast Food Favorites",
+      //   isAtomic: true,
+      //   cards: ["Chick-fil-A", "Hamburger Hut"]
+      // },
+      // {
+      //   id: "ucsd_dining_halls",
+      //   name: "UCSD Dining Halls",
+      //   isAtomic: true,
+      //   cards: ["Cava Mediterranean", "Tacos El Rey"]
+      // }
     ];
     saveDecks(); // Save the defaults
-  } else {
-    decks = savedData.decks;
+    console.log("Created default decks:", decks);
   }
 }
 
 // Save current decks into restaurantsData key
 function saveDecks() {
-  const currentData = JSON.parse(localStorage.getItem("restaurantsData")) || {};
+  let currentData = JSON.parse(localStorage.getItem("restaurantsData")) || {};
+  
+  // Fix: Ensure currentData is always an object, not an array
+  if (Array.isArray(currentData)) {
+    console.log("Found array in localStorage, converting to proper structure");
+    currentData = { restaurants: currentData, decks: [] };
+  }
+  
+  // Ensure restaurants property exists
+  if (!currentData.restaurants) {
+    currentData.restaurants = [];
+  }
+  
   currentData.decks = decks;
   localStorage.setItem("restaurantsData", JSON.stringify(currentData));
   console.log("Saved decks to localStorage:", currentData);
@@ -108,3 +141,4 @@ window.createDeck = createDeck;
 window.deleteDeck = deleteDeck;
 window.addCardToDeck = addCardToDeck;
 window.removeCardFromDeck = removeCardFromDeck;
+window.clearLocalStorage = clearLocalStorage;
