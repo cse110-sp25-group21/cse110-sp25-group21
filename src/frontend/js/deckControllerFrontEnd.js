@@ -1,42 +1,98 @@
 // Load decks from localStorage key "restaurantsData"
-let decks = (JSON.parse(localStorage.getItem("restaurantsData")) || {}).decks || [
-  {
-    id: "fast_food",
-    name: "Fast Food Favorites",
-    isAtomic: true,
-    cards: ["Chick-fil-A", "Hamburger Hut", "hello"]
-  },
-  {
-    id: "ucsd_dining_halls",
-    name: "UCSD Dining Halls",
-    isAtomic: true,
-    cards: ["Cava Mediterranean", "Tacos El Rey"]
+let decks = [];
+
+// Clear corrupted localStorage for testing
+function clearLocalStorage() {
+  localStorage.removeItem("restaurantsData");
+  console.log("Cleared localStorage");
+}
+
+// Initialize decks on first load
+function loadDecks() {
+  let savedData = JSON.parse(localStorage.getItem("restaurantsData")) || {};
+  
+  // Fix: Handle corrupted data structure (when savedData is an array instead of object)
+  if (Array.isArray(savedData)) {
+    console.log("Found corrupted array structure, converting to proper format");
+    savedData = { restaurants: savedData, decks: [] };
+    // Save the corrected structure
+    localStorage.setItem("restaurantsData", JSON.stringify(savedData));
   }
-];
+  
+  console.log("loadDecks() called - savedData:", savedData);
+  console.log("savedData.decks:", savedData.decks);
+  console.log("savedData.decks length:", savedData.decks ? savedData.decks.length : "undefined");
+  
+  // If decks exist in localStorage, use them
+  if (savedData.decks && savedData.decks.length > 0) {
+    decks = savedData.decks;
+    console.log("Loaded existing decks from localStorage:", decks);
+  } else {
+    // If no decks exist, create the default ones
+    decks = [
+      // {
+      //   id: "fast_food",
+      //   name: "Fast Food Favorites",
+      //   isAtomic: true,
+      //   cards: ["Chick-fil-A", "Hamburger Hut"]
+      // },
+      // {
+      //   id: "ucsd_dining_halls",
+      //   name: "UCSD Dining Halls",
+      //   isAtomic: true,
+      //   cards: ["Cava Mediterranean", "Tacos El Rey"]
+      // }
+    ];
+    saveDecks(); // Save the defaults
+    console.log("Created default decks:", decks);
+  }
+}
 
 // Save current decks into restaurantsData key
 function saveDecks() {
-  const currentData = JSON.parse(localStorage.getItem("restaurantsData")) || {};
+  let currentData = JSON.parse(localStorage.getItem("restaurantsData")) || {};
+  
+  // Fix: Ensure currentData is always an object, not an array
+  if (Array.isArray(currentData)) {
+    console.log("Found array in localStorage, converting to proper structure");
+    currentData = { restaurants: currentData, decks: [] };
+  }
+  
+  // Ensure restaurants property exists
+  if (!currentData.restaurants) {
+    currentData.restaurants = [];
+  }
+  
   currentData.decks = decks;
   localStorage.setItem("restaurantsData", JSON.stringify(currentData));
+  console.log("Saved decks to localStorage:", currentData);
 }
 
 // Return the current list of decks
 function getDecks() {
+  if (decks.length === 0) {
+    loadDecks(); // Only load if decks is empty
+  }
   return decks;
 }
 
 // Create a new deck
 function createDeck(name, isAtomic = false) {
+  // Make sure decks are loaded
+  if (decks.length === 0) {
+    loadDecks();
+  }
+  
   const id = name.toLowerCase().replace(/\s+/g, "_");
   if (decks.some((deck) => deck.id === id)) {
     console.error(`Deck with name "${name}" already exists`);
     return null;
   }
-
+  
   const newDeck = { id, name, isAtomic, cards: [] };
   decks.push(newDeck);
   saveDecks();
+  console.log("Created new deck:", newDeck);
   return newDeck;
 }
 
@@ -53,7 +109,6 @@ function deleteDeck(deckId) {
 function addCardToDeck(deckId, restaurantId) {
   const deck = decks.find((d) => d.id === deckId);
   if (!deck) return false;
-
   if (!deck.cards.includes(restaurantId)) {
     deck.cards.push(restaurantId);
     saveDecks();
@@ -66,7 +121,6 @@ function addCardToDeck(deckId, restaurantId) {
 function removeCardFromDeck(deckId, restaurantId) {
   const deck = decks.find((d) => d.id === deckId);
   if (!deck) return false;
-
   const index = deck.cards.indexOf(restaurantId);
   if (index !== -1) {
     deck.cards.splice(index, 1);
@@ -77,7 +131,7 @@ function removeCardFromDeck(deckId, restaurantId) {
 }
 
 function getDeckImage(deckID) {
-  return "design/cardCover_default.jpg";
+  return "../design/deckCover_default.jpg";
 }
 
 // Expose to global scope
@@ -87,3 +141,4 @@ window.createDeck = createDeck;
 window.deleteDeck = deleteDeck;
 window.addCardToDeck = addCardToDeck;
 window.removeCardFromDeck = removeCardFromDeck;
+window.clearLocalStorage = clearLocalStorage;

@@ -60,8 +60,16 @@
 
         function renderDeckEditor() {
             const deckId = getDeckIdFromUrl();
-            const deck = getDecks().find(d => d.id === deckId);
+
+            //debug localstorage
+            const rawData = localStorage.getItem('restaurantsData');
+            console.log("Raw localStorage data:", rawData);
+            console.log("Parsed localStorage:", JSON.parse(rawData || '{}'));
+            
+            const availableDecks = getDecks();
+            const deck = availableDecks.find(d => d.id === deckId);
             console.log("Deck ID from URL:", deckId);
+            console.log("Available decks:", availableDecks);
             console.log("Deck:", deck);
             console.log("Deck.cards:", deck.cards);
 
@@ -72,21 +80,57 @@
             const grid = document.querySelector(".restaurant-grid");
             grid.innerHTML = "";
 
-            const allRestaurants = [...(window.defaultStaticRestaurants || []), ...(JSON.parse(localStorage.getItem('restaurantsData')) || [])];
-
+            // Get all restaurants (static + user created)
+            const savedData = JSON.parse(localStorage.getItem('restaurantsData')) || {};
+            const userRestaurants = savedData.restaurants || [];
+            const allRestaurants = [...(window.defaultStaticRestaurants || []), ...userRestaurants];
+            
             deck.cards.forEach(cardId => {
                 const restaurant = allRestaurants.find(r => r.title === cardId);
-                if (!restaurant) return;
+                if (!restaurant) {
+                    console.log(`Restaurant not found: ${cardId}`);
+                    return;
+                }
 
                 const cardDiv = document.createElement("div");
                 cardDiv.className = "restaurant-card";
 
                 cardDiv.innerHTML = `
-        <div class="restaurant-card-image">
-          <img src="${restaurant.image}" alt="${restaurant.title}">
-        </div>
-        <div class="restaurant-title">${restaurant.title}</div>
-      `;
+                    <button class="delete-restaurant-btn" aria-label="Remove restaurant from deck">×</button>
+                    <div class="restaurant-card-image">
+                        <img src="${restaurant.image}" alt="${restaurant.title}">
+                    </div>
+                    <div class="restaurant-title">${restaurant.title}</div>
+                `;
+
+                // Make the restaurant card clickable (except the delete button)
+                cardDiv.addEventListener('click', (e) => {
+                    // Don't navigate if clicking the delete button
+                    if (e.target.classList.contains('delete-restaurant-btn')) {
+                        return;
+                    }
+                    
+                    // Save restaurant data to sessionStorage and navigate
+                    console.log('Navigating to restaurant:', restaurant);
+                    sessionStorage.setItem('selectedRestaurant', JSON.stringify(restaurant));
+                    window.location.href = 'inside-card.html';
+                });
+
+                // Add delete functionality
+                const deleteBtn = cardDiv.querySelector('.delete-restaurant-btn');
+                deleteBtn.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent card click
+                    
+                    if (confirm(`Remove "${restaurant.title}" from this deck?`)) {
+                        const success = window.removeCardFromDeck(deckId, restaurant.title);
+                        if (success) {
+                            console.log(`Removed ${restaurant.title} from deck ${deckId}`);
+                            cardDiv.remove(); // Remove from UI immediately
+                        } else {
+                            alert('Failed to remove restaurant from deck');
+                        }
+                    }
+                });
 
                 grid.appendChild(cardDiv);
             });

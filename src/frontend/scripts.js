@@ -5,6 +5,8 @@
  * @version 1.0.0
  */
 
+/* global getDecks, createDeck, addCardToDeck */
+
 /**
  * @typedef {Object} Restaurant
  * @property {string} title - The name of the restaurant
@@ -78,6 +80,29 @@ var restaurants = [];
 var currentIndex = 0;
 
 /**
+ * Updates navigation arrow visibility based on number of restaurants
+ * Hides arrows when there's 0 or 1 restaurant, shows them when there are 2+
+ * @function
+ * @returns {void}
+ */
+function updateArrowVisibility() {
+  var nextBtn = document.getElementById('next');
+  var prevBtn = document.getElementById('prev');
+  
+  if (nextBtn && prevBtn) {
+    if (restaurants.length <= 1) {
+      // Hide arrows when there's 0 or 1 restaurant
+      nextBtn.style.display = 'none';
+      prevBtn.style.display = 'none';
+    } else {
+      // Show arrows when there are 2+ restaurants
+      nextBtn.style.display = 'block';
+      prevBtn.style.display = 'block';
+    }
+  }
+}
+
+/**
  * Renders the current restaurant's information to the DOM elements
  * Updates the restaurant image, title, and star rating display
  * Called whenever the user navigates between restaurants
@@ -85,6 +110,18 @@ var currentIndex = 0;
  * @returns {void}
  */
 function renderRestaurant() {
+  // Handle empty deck case
+  if (restaurants.length === 0) {
+    var imgElement = document.getElementById('restaurant-image');
+    var titleElement = document.getElementById('restaurant-title');
+    var ratingElement = document.getElementById('restaurant-rating');
+    
+    if (imgElement) imgElement.src = '../design/cardCover_default.jpg';
+    if (titleElement) titleElement.textContent = 'No restaurants in this deck';
+    if (ratingElement) ratingElement.textContent = '';
+    return;
+  }
+
   var restaurant = restaurants[currentIndex];
   var imgElement = document.getElementById('restaurant-image');
   var titleElement = document.getElementById('restaurant-title');
@@ -130,13 +167,19 @@ function goPrev() {
 
 /**
  * Opens the deck editor interface
- * Currently shows an alert placeholder - to be implemented with actual editor
+ * Navigates directly to the deck editor page with current deck ID
  * @function
  * @returns {void}
- * @todo Implement actual deck editor navigation and functionality
  */
 function editDeck() {
-  alert('Navigate to deck editor');
+  const params = new URLSearchParams(window.location.search);
+  const currentDeckId = params.get("deck");
+  
+  if (currentDeckId) {
+    window.location.href = `deck-editor.html?deck=${currentDeckId}`;
+  } else {
+    console.error('No deck ID found in URL');
+  }
 }
 
 /**
@@ -163,12 +206,20 @@ function viewRestaurant() {
  * @returns {void}
  */
 window.onload = function () {
-  const userCreatedRestaurants = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
+  let userCreatedRestaurants;
+  try {
+    const data = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    // Fix: Access restaurants from the .restaurants property, not the root array
+    userCreatedRestaurants = (data && data.restaurants) ? data.restaurants : [];
+  } catch (e) {
+    userCreatedRestaurants = [];
+  }
+  
   const params = new URLSearchParams(window.location.search);
   const currentDeckId = params.get("deck");
 
   const allRestaurants = [...defaultStaticRestaurants, ...userCreatedRestaurants];
-  const deck = getDecks().find(d => d.id === currentDeckId); // TODO: getDecks undefined
+  const deck = getDecks().find(d => d.id === currentDeckId);
 
   if (deck) {
     restaurants = allRestaurants.filter(r => deck.cards.includes(r.title));
@@ -191,12 +242,19 @@ window.onload = function () {
     cardElement.onclick = viewRestaurant;
   }
 
+  // Update arrow visibility based on deck size
+  updateArrowVisibility();
+  
   // Render first restaurant
-  renderRestaurant();
+  if (restaurants.length > 0) {
+    renderRestaurant();
+  } else {
+    renderRestaurant(); // This will handle the empty deck case
+  }
 };
 
 /**
-  * Handles the form submission event.
+  * Handles the card form submission event.
   * Prevents the default page reload, creates a new restaurant object,
   * appends it to localStorage, and redirects to the main card deck view.
 */
@@ -209,7 +267,15 @@ document.addEventListener('DOMContentLoaded', function () {
       event.preventDefault();
 
       const deckId = document.getElementById('deck-id').value;
-
+      const restuarantName = document.getElementById('restaurant-name').value.trim();
+      if (!restuarantName){
+        alert('Please enter a restaurant name');
+        return;
+      }
+      if (!deckId) {
+        alert('Please select a deck');
+        return;
+      }
       const newRestaurant = {
         title: document.getElementById('restaurant-name').value.trim(),
         image: '../design/cardCover_default.jpg',
@@ -222,12 +288,16 @@ document.addEventListener('DOMContentLoaded', function () {
       };
 
 
-      const existing = JSON.parse(localStorage.getItem('restaurantsData')) || [];
-      existing.push(newRestaurant);
+      const existing = JSON.parse(localStorage.getItem('restaurantsData')) || {};
+      if (!existing.restaurants) existing.restaurants = [];
+      existing.restaurants.push(newRestaurant);
       localStorage.setItem('restaurantsData', JSON.stringify(existing));
-
-      console.log("Saved new restaurant:", newRestaurant);
-      window.location.href = 'card-deck.html';
+      const success = addCardToDeck(deckId, restuarantName);
+      if (success){
+        console.log("Saved new restaurant:", newRestaurant);
+        console.log("Add restaurant to deck: ", deckId)
+        window.location.href = 'card-deck.html';
+      }
     });
   }
 });
@@ -248,7 +318,7 @@ if (editDeckButton) {
 /**
   * Handles the deck form submission event.
   * Prevents the default page reload, creates a new deck object,
-  * appends it to localStorage, and redirects to the deck editor view.
+  * appends it to localStorage, and redirects to the deck list view.
 */
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('deck-form');
@@ -258,12 +328,23 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', function (event) {
       event.preventDefault();
 
-      let deckName = document.getElementById('deck-name').value;
-      createDeck(deckName);
+      let deckName = document.getElementById('deck-name').value.trim();
+      
+      if (!deckName) {
+        alert('Please enter a deck name');
+        return;
+      }
 
-      console.log("Saved new deck");
-      const deckParam = new URLSearchParams({ deck: deckName });
-      window.location.href = `deck-editor.html?${deckParam.toString()}`;
+      const newDeck = createDeck(deckName);
+
+      if(!newDeck) {
+        alert('Deck with this name already exists');
+        return;
+      }
+
+      console.log("Saved new deck: ", newDeck);
+      alert('Deck created successfully!');
+      window.location.href = 'card-deck.html';
     });
   }
 });
