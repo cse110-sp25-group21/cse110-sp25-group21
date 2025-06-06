@@ -3,12 +3,13 @@
 /* Container holding all the cards */
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1rem;
   padding: 2rem;
   max-width: 80%;
   margin: 0 auto;
   flex-grow: 1;
+  
 }
 
 /* Each card */
@@ -47,9 +48,9 @@
 /* Card title section */
 .card-title {
   flex: 0 0 auto;
-  margin: 2rem auto 1rem;
   text-align: center;
   font-size: 1rem;
+  margin-top: 1rem;
   font-weight: 500;
   color: white;
 }
