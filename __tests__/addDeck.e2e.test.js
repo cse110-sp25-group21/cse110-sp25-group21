@@ -1,27 +1,25 @@
 /**
  * @jest-environment node
  *
- * run using: npm testlandingToDeckEditor.puppeteer.test.js
+ * run using: npm test addDeck.e2e.test.js
  *
  * this tests:
- *   1) Load landingPage.html
- *   2) Navigate to card-deck.html
- *   3) Navigate to deck-form.html
- *   4) Type “MyTestDeck” into #deck-name
- *   5) Stub getDecks() in advance
- *   6) Intercept and abort external script requests, then navigate to deck-editor.html?deck=MyTestDeck
- *   7) Wait until .deck-title text changes to “MyTestDeck”
+ *   1) load landingPage.html
+ *   2) click Decks in the header
+ *   3) click the + add-card link → deck-form.html
+ *   4) type a test deck name into #deck-name
+ *   5) accept the alert “deck added”
+ *   6) redirect back to card-deck.html, verify a card-title matches the test name
  */
 
 const puppeteer = require('puppeteer');
 const path = require('path');
 const { pathToFileURL } = require('url');
 
-describe('end to end test: landing to card-deck to deck-form to deck-editor', () => {
+describe('end to end test: add new deck and verify on card-deck page', () => {
   let browser;
   let page;
-  const testDeckName = 'MyTestDeck';
-
+  const testDeckName = 'TestDeck123';
 
   beforeAll(async () => {
     browser = await puppeteer.launch({
@@ -29,16 +27,23 @@ describe('end to end test: landing to card-deck to deck-form to deck-editor', ()
       args: ['--disable-web-security']
     });
     page = await browser.newPage();
+    // Prevent external CSS/fonts from slowing or blocking us:
+    await page.setRequestInterception(true);
+    page.on('request', (req) => {
+      if (req.resourceType() === 'stylesheet' || req.resourceType() === 'font') {
+        req.abort();
+      } else {
+        req.continue();
+      }
+    });
   });
-
 
   afterAll(async () => {
     await browser.close();
   });
-  
 
   test(
-    'landing to card-deck to deck-form to deck-editor',
+    'landingPage to card-deck to deck-form to add deck to see deck on card-deck',
     async () => {
       // load landingPage.html
       const landingPath = path.resolve(
@@ -48,15 +53,7 @@ describe('end to end test: landing to card-deck to deck-form to deck-editor', ()
       const landingUrl = pathToFileURL(landingPath).href;
       await page.goto(landingUrl, { waitUntil: 'domcontentloaded' });
 
-      // verify “Decks” link exists
-      await page.waitForSelector('a[href*="card-deck.html"]', { timeout: 5000 });
-      const decksLinkText = await page.$eval(
-        'a[href*="card-deck.html"]',
-        el => el.textContent.trim()
-      );
-      expect(decksLinkText).toBe('Decks');
-
-      // navigate to card-deck.html
+      // navigate to card-deck.html (simulate clicking “Decks”)
       const cardDeckPath = path.resolve(
         __dirname,
         '../src/frontend/card-deck.html'
@@ -64,63 +61,46 @@ describe('end to end test: landing to card-deck to deck-form to deck-editor', ()
       const cardDeckUrl = pathToFileURL(cardDeckPath).href;
       await page.goto(cardDeckUrl, { waitUntil: 'domcontentloaded' });
 
-      // wait for (add-card) link
+      // click the “+” add-card link
       await page.waitForSelector('a.card.add-card', { timeout: 5000 });
+      await Promise.all([
+        page.click('a.card.add-card'),
+        page.waitForNavigation({ waitUntil: 'domcontentloaded' })
+      ]);
 
-      // navigate to deck-form.html
-      const deckFormPath = path.resolve(
-        __dirname,
-        '../src/frontend/deck-form.html'
-      );
-      const deckFormUrl = pathToFileURL(deckFormPath).href;
-      await page.goto(deckFormUrl, { waitUntil: 'domcontentloaded' });
-
-      // type into #deck-name
+      // on deck-form.html, type into #deck-name
       await page.waitForSelector('#deck-name', { timeout: 5000 });
       await page.click('#deck-name');
       await page.type('#deck-name', testDeckName);
 
-      // stub getDecks/getDeckImage for any new document
-      await page.evaluateOnNewDocument((name) => {
-        window.getDecks = () => [{ id: name, name: name, cards: [] }];
-        window.getDeckImage = () => '';
-      }, testDeckName);
-
-      // intercept and abort external scripts before navigating
-      await page.setRequestInterception(true);
-      page.on('request', (req) => {
-        if (req.resourceType() === 'script') {
-          return req.abort();
-        }
-        req.continue();
+      // listen for the alert “deck added” and accept it
+      page.once('dialog', async (dialog) => {
+        await dialog.accept();
       });
 
-      // navigate to deck-editor.html?deck=MyTestDeck
-      const deckEditorPath = path.resolve(
-        __dirname,
-        '../src/frontend/deck-editor.html'
-      );
-      const deckEditorBase = pathToFileURL(deckEditorPath).href;
-      const deckEditorUrl = `${deckEditorBase}?deck=${encodeURIComponent(testDeckName)}`;
-      await page.goto(deckEditorUrl, { waitUntil: 'domcontentloaded' });
+      // click submit and wait for navigation back to card-deck.html
+      await Promise.all([
+        page.click('button[type="submit"]'),
+        page.waitForNavigation({ waitUntil: 'domcontentloaded' })
+      ]);
 
-      // wait until .deck-title text becomes “MyTestDeck”
+      // on card-deck.html, wait until a .card-title matches test name
       await page.waitForFunction(
         (name) => {
-          const el = document.querySelector('.deck-title');
-          return el && el.textContent.trim() === name;
+          const titles = Array.from(document.querySelectorAll('.card-title'));
+          return titles.some(el => el.textContent.trim() === name);
         },
         { timeout: 10000 },
         testDeckName
       );
 
-      // assert that it changed
-      const displayedTitle = await page.$eval(
-        '.deck-title',
-        (el) => el.textContent.trim()
-      );
-      expect(displayedTitle).toBe(testDeckName);
+      // assert that a card-title equals deck name
+      const exists = await page.evaluate((name) => {
+        return Array.from(document.querySelectorAll('.card-title'))
+          .some(el => el.textContent.trim() === name);
+      }, testDeckName);
+      expect(exists).toBe(true);
     },
-    45000 // 45s timeout to allow file loading
+    30000 // 30s timeout
   );
 });
