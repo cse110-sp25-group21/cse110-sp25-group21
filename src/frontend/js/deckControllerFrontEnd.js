@@ -77,7 +77,7 @@ function removeCardFromDeck(deckId, restaurantId) {
 }
 
 function getDeckImage(deckID) {
-  return "design/cardCover_default.jpg";
+  return "../design/deckCover_default.jpg";
 }
 
 // Expose to global scope
