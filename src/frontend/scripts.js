@@ -259,10 +259,11 @@ document.addEventListener('DOMContentLoaded', function () {
       event.preventDefault();
 
       let deckName = document.getElementById('deck-name').value;
-      let newDeck = createDeck(deckName);
+      createDeck(deckName);
 
       console.log("Saved new deck");
-      window.location.href = 'deck-editor.html?deck=' + deckName;
+      const deckParam = new URLSearchParams({ deck: deckName });
+      window.location.href = `deck-editor.html?${deckParam.toString()}`;
     });
   }
 });
