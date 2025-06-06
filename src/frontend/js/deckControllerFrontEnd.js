@@ -1,42 +1,65 @@
 // Load decks from localStorage key "restaurantsData"
-let decks = (JSON.parse(localStorage.getItem("restaurantsData")) || {}).decks || [
-  {
-    id: "fast_food",
-    name: "Fast Food Favorites",
-    isAtomic: true,
-    cards: ["Chick-fil-A", "Hamburger Hut", "hello"]
-  },
-  {
-    id: "ucsd_dining_halls",
-    name: "UCSD Dining Halls",
-    isAtomic: true,
-    cards: ["Cava Mediterranean", "Tacos El Rey"]
+let decks = [];
+
+// Initialize decks on first load
+function loadDecks() {
+  const savedData = JSON.parse(localStorage.getItem("restaurantsData")) || {};
+  
+  // If no decks exist, create the default ones
+  if (!savedData.decks || savedData.decks.length === 0) {
+    decks = [
+      {
+        id: "fast_food",
+        name: "Fast Food Favorites",
+        isAtomic: true,
+        cards: ["Chick-fil-A", "Hamburger Hut"]
+      },
+      {
+        id: "ucsd_dining_halls",
+        name: "UCSD Dining Halls",
+        isAtomic: true,
+        cards: ["Cava Mediterranean", "Tacos El Rey"]
+      }
+    ];
+    saveDecks(); // Save the defaults
+  } else {
+    decks = savedData.decks;
   }
-];
+}
 
 // Save current decks into restaurantsData key
 function saveDecks() {
   const currentData = JSON.parse(localStorage.getItem("restaurantsData")) || {};
   currentData.decks = decks;
   localStorage.setItem("restaurantsData", JSON.stringify(currentData));
+  console.log("Saved decks to localStorage:", currentData);
 }
 
 // Return the current list of decks
 function getDecks() {
+  if (decks.length === 0) {
+    loadDecks(); // Only load if decks is empty
+  }
   return decks;
 }
 
 // Create a new deck
 function createDeck(name, isAtomic = false) {
+  // Make sure decks are loaded
+  if (decks.length === 0) {
+    loadDecks();
+  }
+  
   const id = name.toLowerCase().replace(/\s+/g, "_");
   if (decks.some((deck) => deck.id === id)) {
     console.error(`Deck with name "${name}" already exists`);
     return null;
   }
-
+  
   const newDeck = { id, name, isAtomic, cards: [] };
   decks.push(newDeck);
   saveDecks();
+  console.log("Created new deck:", newDeck);
   return newDeck;
 }
 
@@ -53,7 +76,6 @@ function deleteDeck(deckId) {
 function addCardToDeck(deckId, restaurantId) {
   const deck = decks.find((d) => d.id === deckId);
   if (!deck) return false;
-
   if (!deck.cards.includes(restaurantId)) {
     deck.cards.push(restaurantId);
     saveDecks();
@@ -66,7 +88,6 @@ function addCardToDeck(deckId, restaurantId) {
 function removeCardFromDeck(deckId, restaurantId) {
   const deck = decks.find((d) => d.id === deckId);
   if (!deck) return false;
-
   const index = deck.cards.indexOf(restaurantId);
   if (index !== -1) {
     deck.cards.splice(index, 1);

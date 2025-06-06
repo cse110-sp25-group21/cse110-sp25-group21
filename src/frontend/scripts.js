@@ -163,7 +163,14 @@ function viewRestaurant() {
  * @returns {void}
  */
 window.onload = function () {
-  const userCreatedRestaurants = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
+  let userCreatedRestaurants;
+  try {
+    const data = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    userCreatedRestaurants = Array.isArray(data) ? data : [];
+  } catch (e) {
+    userCreatedRestaurants = [];
+  }
+  
   const params = new URLSearchParams(window.location.search);
   const currentDeckId = params.get("deck");
 
@@ -196,7 +203,7 @@ window.onload = function () {
 };
 
 /**
-  * Handles the form submission event.
+  * Handles the card form submission event.
   * Prevents the default page reload, creates a new restaurant object,
   * appends it to localStorage, and redirects to the main card deck view.
 */
@@ -209,7 +216,15 @@ document.addEventListener('DOMContentLoaded', function () {
       event.preventDefault();
 
       const deckId = document.getElementById('deck-id').value;
-
+      const restuarantName = document.getElementById('restaurant-name').value.trim();
+      if (!restuarantName){
+        alert('Please enter a restaurant name');
+        return;
+      }
+      if (!deckId) {
+        alert('Please select a deck');
+        return;
+      }
       const newRestaurant = {
         title: document.getElementById('restaurant-name').value.trim(),
         image: '../design/cardCover_default.jpg',
@@ -222,12 +237,16 @@ document.addEventListener('DOMContentLoaded', function () {
       };
 
 
-      const existing = JSON.parse(localStorage.getItem('restaurantsData')) || [];
-      existing.push(newRestaurant);
+      const existing = JSON.parse(localStorage.getItem('restaurantsData')) || {};
+      if (!existing.restaurants) existing.restaurants = [];
+      existing.restaurants.push(newRestaurant);
       localStorage.setItem('restaurantsData', JSON.stringify(existing));
-
-      console.log("Saved new restaurant:", newRestaurant);
-      window.location.href = 'card-deck.html';
+      const success = addCardToDeck(deckId, restuarantName);
+      if (success){
+        console.log("Saved new restaurant:", newRestaurant);
+        console.log("Add restaurant to deck: ", deckId)
+        window.location.href = 'card-deck.html';
+      }
     });
   }
 });
@@ -244,3 +263,28 @@ if (editDeckButton) {
     });
   }
 }
+
+/**
+  * Handles the deck form submission event.
+  * Prevents the default page reload, creates a new deck object,
+  * appends it to localStorage, and redirects to the deck editor view.
+*/
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('deck-form');
+  if (form) {
+    console.log("Form detected. Adding submit handler.");
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      let deckName = document.getElementById('deck-name').value.trim();
+      const newDeck = createDeck(deckName);
+
+      if(!newDeck) {
+        alert('Deck with this name already exists)');
+      }
+
+      console.log("Saved new deck: ", newDeck);
+      window.location.href = `deck-editor.html?deck=${newDeck.id}`; });
+  }
+});
