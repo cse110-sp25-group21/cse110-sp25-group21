@@ -1,3 +1,9 @@
+# How To Open Our Project
+[live demo](cse110-sp25-group21/cse110-sp25-group21)
+
+if that doesn't work, please click on
+src -> frontend
+
 # Hello! We are cse110-sp25-group21 aka SeekDeep v2.1
 @ryunzz (Ryan), @darkotoni (Darian), @EdisonZhangUCSD (Edison), @coderfreeze (Vijay), @ttran29 (Tommy), @CharlotteKim123 (Charlotte), @ChesterHuey (Chester), @sophiepng (Sophie), @Jvaladeus (Akhil), @lisafritsche (Lisa), and @TeslaAngel (Mohan)
 
