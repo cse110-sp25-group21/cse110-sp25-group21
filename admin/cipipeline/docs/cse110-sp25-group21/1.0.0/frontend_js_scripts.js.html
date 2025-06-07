@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: frontend/js/scripts.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: frontend/js/scripts.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * @fileoverview Restaurant card selector application for Powell's Bowells
  * Manages restaurant data display and navigation between cards
  * @author Powell's Bowells Team
@@ -38,7 +66,7 @@ var defaultStaticRestaurants = [
     rating: 5,
     type: 'Fast Food',
     phone: '(858) 450-4417',
-    website: 'https://www.chick-fil-a.com/locations/ca/la-jolla-village?utm_source=yext&utm_medium=link',
+    website: 'https://www.chick-fil-a.com/locations/ca/la-jolla-village?utm_source=yext&amp;utm_medium=link',
     address: '3351 Nobel Dr, La Jolla, CA 92037',
     hours: '8 AM - 11 PM'
   },
@@ -48,7 +76,7 @@ var defaultStaticRestaurants = [
     rating: 5,
     type: 'Fast Food',
     phone: '(858) 450-4417',
-    website: 'https://www.chick-fil-a.com/locations/ca/la-jolla-village?utm_source=yext&utm_medium=link',
+    website: 'https://www.chick-fil-a.com/locations/ca/la-jolla-village?utm_source=yext&amp;utm_medium=link',
     address: '3351 Nobel Dr, La Jolla, CA 92037',
     hours: '8 AM - 11 PM'
   },
@@ -114,8 +142,8 @@ function updateArrowVisibility() {
   var nextBtn = document.getElementById('next');
   var prevBtn = document.getElementById('prev');
   
-  if (nextBtn && prevBtn) {
-    if (restaurants.length <= 1) {
+  if (nextBtn &amp;&amp; prevBtn) {
+    if (restaurants.length &lt;= 1) {
       // Hide arrows when there's 0 or 1 restaurant
       nextBtn.style.display = 'none';
       prevBtn.style.display = 'none';
@@ -136,10 +164,10 @@ function updateArrowVisibility() {
  */
 function generateStarRating(rating) {
   var stars = '';
-  for (var i = 0; i < rating; i++) {
+  for (var i = 0; i &lt; rating; i++) {
     stars += '★';
   }
-  for (var j = rating; j < 5; j++) {
+  for (var j = rating; j &lt; 5; j++) {
     stars += '☆';
   }
   return stars;
@@ -249,7 +277,7 @@ function viewRestaurant() {
 function loadUserCreatedRestaurants() {
   try {
     const data = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-    return (data && data.restaurants) ? data.restaurants : [];
+    return (data &amp;&amp; data.restaurants) ? data.restaurants : [];
   } catch (e) {
     console.warn('Failed to load user restaurants:', e);
     return [];
@@ -368,7 +396,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (typeof getDecks === 'function') {
         const deck = getDecks().find(d => d.id === deckId);
-        if (deck && deck.cards.includes(restaurantName)) {
+        if (deck &amp;&amp; deck.cards.includes(restaurantName)) {
           alert('Error: A restaurant with this name already exists in this deck. Please choose a different name.');
           return;
         }
@@ -434,4 +462,26 @@ document.addEventListener('DOMContentLoaded', function () {
       window.location.href = 'card-deck.html';
     });
   }
-});
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addCardToDeck">addCardToDeck</a></li><li><a href="global.html#authenticateUser">authenticateUser</a></li><li><a href="global.html#config">config</a></li><li><a href="global.html#createDeck">createDeck</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#currentIndex">currentIndex</a></li><li><a href="global.html#defaultStaticRestaurants">defaultStaticRestaurants</a></li><li><a href="global.html#deleteDeck">deleteDeck</a></li><li><a href="global.html#editDeck">editDeck</a></li><li><a href="global.html#filterRestaurantsByDeck">filterRestaurantsByDeck</a></li><li><a href="global.html#generateStarRating">generateStarRating</a></li><li><a href="global.html#getDeckImage">getDeckImage</a></li><li><a href="global.html#getDecks">getDecks</a></li><li><a href="global.html#getShuffledDeck">getShuffledDeck</a></li><li><a href="global.html#getUserActivity">getUserActivity</a></li><li><a href="global.html#getUserPreferences">getUserPreferences</a></li><li><a href="global.html#getUserProfile">getUserProfile</a></li><li><a href="global.html#goNext">goNext</a></li><li><a href="global.html#goPrev">goPrev</a></li><li><a href="global.html#initializeRestaurantDisplay">initializeRestaurantDisplay</a></li><li><a href="global.html#loadUserCreatedRestaurants">loadUserCreatedRestaurants</a></li><li><a href="global.html#logUserActivity">logUserActivity</a></li><li><a href="global.html#removeCardFromDeck">removeCardFromDeck</a></li><li><a href="global.html#removeFromFavorites">removeFromFavorites</a></li><li><a href="global.html#renderRestaurant">renderRestaurant</a></li><li><a href="global.html#resetPassword">resetPassword</a></li><li><a href="global.html#saveToFavorites">saveToFavorites</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#setUserPreferences">setUserPreferences</a></li><li><a href="global.html#setupNavigationEventListeners">setupNavigationEventListeners</a></li><li><a href="global.html#updateArrowVisibility">updateArrowVisibility</a></li><li><a href="global.html#updateRestaurantElements">updateRestaurantElements</a></li><li><a href="global.html#updateUserProfile">updateUserProfile</a></li><li><a href="global.html#viewRestaurant">viewRestaurant</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Fri Jun 06 2025 19:56:27 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
