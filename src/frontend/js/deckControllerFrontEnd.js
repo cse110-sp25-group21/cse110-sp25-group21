@@ -1,13 +1,21 @@
+/**
+ * Deck Controller Frontend
+ */
+
 // Load decks from localStorage key "restaurantsData"
 let decks = [];
 
-// Clear corrupted localStorage for testing
+/**
+ * Clear corrupted localStorage for testing
+ */
 function clearLocalStorage() {
   localStorage.removeItem("restaurantsData");
   console.log("Cleared localStorage");
 }
 
-// Initialize decks on first load
+/**
+ * Initialize decks on first load
+ */
 function loadDecks() {
   let savedData = JSON.parse(localStorage.getItem("restaurantsData")) || {};
   
@@ -49,7 +57,9 @@ function loadDecks() {
   }
 }
 
-// Save current decks into restaurantsData key
+/**
+ * Save current decks into restaurantsData key
+ */
 function saveDecks() {
   let currentData = JSON.parse(localStorage.getItem("restaurantsData")) || {};
   
@@ -69,7 +79,10 @@ function saveDecks() {
   console.log("Saved decks to localStorage:", currentData);
 }
 
-// Return the current list of decks
+/**
+ * Return the current list of decks
+ * @returns Current deck list
+ */
 function getDecks() {
   if (decks.length === 0) {
     loadDecks(); // Only load if decks is empty
@@ -77,7 +90,12 @@ function getDecks() {
   return decks;
 }
 
-// Create a new deck
+/**
+ * Create a new deck
+ * @param {string} name - Name of Deck
+ * @param {boolean} isAtomic - Whether the deck is atomic (true) or composite (false)
+ * @returns {Object} Newly created deck
+ */
 function createDeck(name, isAtomic = false) {
   // Make sure decks are loaded
   if (decks.length === 0) {
@@ -97,7 +115,11 @@ function createDeck(name, isAtomic = false) {
   return newDeck;
 }
 
-// Delete a deck
+/**
+ * Delete a deck
+ * @param {string} deckId - ID of the deck to delete
+ * @returns {boolean} true if deck was deleted, false if deck wasn't found
+ */
 function deleteDeck(deckId) {
   const initialLength = decks.length;
   decks = decks.filter((deck) => deck.id !== deckId);
@@ -106,8 +128,13 @@ function deleteDeck(deckId) {
   return changed;
 }
 
-// Add a card to a deck
-function addCardToDeck(deckId, restaurantId) {
+/**
+ * Adds a card to a deck
+ * @param {string} deckID - ID of the deck to add card to
+ * @param {string} restaurantId - ID of the restaurant to add as a card
+ * @returns {boolean} true if card was added, false if it already exists or deck not found
+ */
+function addCardToDeck(deckID, restaurantId) {
   const deck = decks.find((d) => d.id === deckId);
   if (!deck) return false;
   if (!deck.cards.includes(restaurantId)) {
@@ -118,7 +145,12 @@ function addCardToDeck(deckId, restaurantId) {
   return false;
 }
 
-// Remove a card from a deck
+/**
+ * Remove a card from a deck
+ * @param {string} deckId - ID of the deck to remove card from
+ * @param {string} restaurantId ID of the restaurant to add as a card
+ * @returns {boolean} true if card was removed, false if it wasn't found or deck not found
+ */
 function removeCardFromDeck(deckId, restaurantId) {
   const deck = decks.find((d) => d.id === deckId);
   if (!deck) return false;
@@ -131,6 +163,11 @@ function removeCardFromDeck(deckId, restaurantId) {
   return false;
 }
 
+/**
+ * Returns default deck cover image
+ * @param {string} deckID - ID of the deck to return image
+ * @returns {string} - path to deck cover image
+ */
 function getDeckImage(deckID) {
   return "../design/deckCover_default.jpg";
 }

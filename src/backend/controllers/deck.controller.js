@@ -1,3 +1,7 @@
+/**
+ * Deck Controller Backend
+ */
+
 // src/backend/controllers/deckController.js
 
 /**
@@ -114,7 +118,6 @@ function createDeck(name, isAtomic = false) {
  * @param {string} deckId - ID of the deck to delete
  * @return {boolean} true if deck was deleted, false if deck wasn't found
  * 
- * this should work lmk if it doesnt -ryunzz
  */
 function deleteDeck(deckId) {
   const initialLength = decks.length;

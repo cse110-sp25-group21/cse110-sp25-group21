@@ -1,4 +1,7 @@
-// User Controller - User Management Functions
+/**
+ * User Controller
+ * Contains user Management Functions
+ */
 
 /**
  * Create a new user profile
