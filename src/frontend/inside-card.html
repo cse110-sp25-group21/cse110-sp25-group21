@@ -75,7 +75,7 @@
                 </div>
                 <div class="menu-section">
                     <h3 style="font-size: 2rem; margin-top: 2rem;">Menu</h3>
-                    <ul style="list-style: none; padding: 0; margin: 0.5rem 0 0 0;">
+                    <ul class="menu-list" style="list-style: none; padding: 0; margin: 0.5rem 0 0 0;">
                         <li>Food 1</li>
                         <li>Food 2</li>
                         <li>Food 3</li>
@@ -118,12 +118,39 @@
                     stars += '☆';
                 }
                 document.querySelector('.rating').textContent = stars;
+
+                // Handle menu display
+                const menuList = document.querySelector('.menu-list');
+                console.log('Restaurant menu data:', restaurant.menu); // Debug log
+                
+                if (restaurant.menu && restaurant.menu.trim()) {
+                    // Split menu by commas and clean up whitespace
+                    const menuItems = restaurant.menu.split(',').map(item => item.trim()).filter(item => item);
+                    console.log('Processed menu items:', menuItems); // Debug log
+                    
+                    if (menuItems.length > 0) {
+                        // Clear existing menu items
+                        menuList.innerHTML = '';
+                        
+                        // Add each menu item (limit to 3 for best display)
+                        const itemsToShow = menuItems.slice(0, 3);
+                        itemsToShow.forEach(item => {
+                            const li = document.createElement('li');
+                            li.textContent = item;
+                            li.style.marginBottom = '0.5rem';
+                            menuList.appendChild(li);
+                        });
+                    
+                    } 
+                }
+            
             }
+
+
         })
 
-        document.querySelector('.back-button').addEventListener('click', () => {
-            window.location.href = 'card-select.html';
-        });
+
+
     </script>
 </body>
 

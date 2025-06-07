@@ -289,10 +289,14 @@ document.addEventListener('DOMContentLoaded', function () {
       event.preventDefault();
 
       const deckId = document.getElementById('deck-id').value;
-      const restuarantName = document.getElementById('restaurant-name').value.trim();
+      const restaurantName = document.getElementById('restaurant-name').value.trim();
+      const menuItem1 = document.getElementById('menu-item-1').value.trim();
+      const menuItem2 = document.getElementById('menu-item-2').value.trim();
+      const menuItem3 = document.getElementById('menu-item-3').value.trim();
 
-      
-      if (!restuarantName){
+      const menuItems = [menuItem1, menuItem2, menuItem3].filter(item => item != '');
+      const menuString = menuItems.join(',');
+      if (!restaurantName){
         alert('Please enter a restaurant name');
         return;
       }
@@ -305,21 +309,28 @@ document.addEventListener('DOMContentLoaded', function () {
       const newRestaurant = {
         title: document.getElementById('restaurant-name').value.trim(),
         image: uploadedImage || '../design/cardCover_default.jpg',
+        rating: parseInt(document.getElementById('rating').value),
         type: document.getElementById('food-genre').value.trim(),
         phone: document.getElementById('phone').value.trim(),
         website: document.getElementById('website').value.trim(),
         address: document.getElementById('address').value.trim(),
         hours: document.getElementById('business-hour').value.trim(),
-        menu:  document.getElementById('menu').value.trim(),
+        menu: menuString,
         deck: deckId
       };
 
-
+      if (typeof getDecks === 'function') {
+        const deck = getDecks().find(d => d.id === deckId);
+        if (deck && deck.cards.includes(restaurantName)) {
+          alert('Error: A restaurant with this name already exists in this deck. Please choose a different name.');
+          return;
+        }
+      }
       const existing = JSON.parse(localStorage.getItem('restaurantsData')) || {};
       if (!existing.restaurants) existing.restaurants = [];
       existing.restaurants.push(newRestaurant);
       localStorage.setItem('restaurantsData', JSON.stringify(existing));
-      const success = addCardToDeck(deckId, restuarantName);
+      const success = addCardToDeck(deckId, restaurantName);
       if (success){
         console.log("Saved new restaurant:", newRestaurant);
         console.log("Add restaurant to deck: ", deckId)
