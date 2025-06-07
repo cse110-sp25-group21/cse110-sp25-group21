@@ -135,7 +135,7 @@ function deleteDeck(deckId) {
  * @returns {boolean} true if card was added, false if it already exists or deck not found
  */
 function addCardToDeck(deckID, restaurantId) {
-  const deck = decks.find((d) => d.id === deckId);
+  const deck = decks.find((d) => d.id === deckID);
   if (!deck) return false;
   if (!deck.cards.includes(restaurantId)) {
     deck.cards.push(restaurantId);
@@ -157,10 +157,38 @@ function removeCardFromDeck(deckId, restaurantId) {
   const index = deck.cards.indexOf(restaurantId);
   if (index !== -1) {
     deck.cards.splice(index, 1);
+    
+    // Check if this restaurant is used in any other deck
+    const isUsedInOtherDecks = decks.some(d => 
+      d.id !== deckId && d.cards.includes(restaurantId)
+    );
+    
+    // If not used in any other deck, remove from global restaurant storage
+    if (!isUsedInOtherDecks) {
+      removeRestaurantFromStorage(restaurantId);
+    }
+    
     saveDecks();
     return true;
   }
   return false;
+}
+
+/**
+ * Remove a restaurant from global storage completely
+ * @param {string} restaurantId - Name/ID of the restaurant to remove
+ */
+function removeRestaurantFromStorage(restaurantId) {
+  let currentData = JSON.parse(localStorage.getItem('restaurantsData')) || {};
+  
+  if (currentData.restaurants && Array.isArray(currentData.restaurants)) {
+    // Remove restaurant from the global storage
+    currentData.restaurants = currentData.restaurants.filter(restaurant => 
+      restaurant.title !== restaurantId
+    );
+    
+    localStorage.setItem('restaurantsData', JSON.stringify(currentData));
+  }
 }
 
 /**
@@ -179,4 +207,5 @@ window.createDeck = createDeck;
 window.deleteDeck = deleteDeck;
 window.addCardToDeck = addCardToDeck;
 window.removeCardFromDeck = removeCardFromDeck;
+window.removeRestaurantFromStorage = removeRestaurantFromStorage;
 window.clearLocalStorage = clearLocalStorage;

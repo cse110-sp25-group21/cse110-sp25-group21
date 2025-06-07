@@ -329,6 +329,39 @@ document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('restaurant-form');
   if (form) {
     console.log("Form detected. Adding submit handler.");
+    
+    // Add real-time duplicate checking as user types
+    const restaurantNameInput = document.getElementById('restaurant-name');
+    if (restaurantNameInput) {
+      restaurantNameInput.addEventListener('input', function() {
+        const restaurantName = this.value.trim();
+        if (restaurantName.length > 2) { // Only check after user types at least 3 characters
+          try {
+            const userCreatedRestaurants = loadUserCreatedRestaurants() || [];
+            const allRestaurants = [...(window.defaultStaticRestaurants || []), ...userCreatedRestaurants];
+            
+            const duplicateExists = allRestaurants.some(restaurant => {
+              if (!restaurant || !restaurant.title) return false;
+              return restaurant.title.toLowerCase() === restaurantName.toLowerCase();
+            });
+            
+            if (duplicateExists) {
+              this.style.borderColor = '#ff4444';
+              this.title = 'A restaurant with this name already exists';
+            } else {
+              this.style.borderColor = '';
+              this.title = '';
+            }
+          } catch (error) {
+            this.style.borderColor = '';
+            this.title = '';
+          }
+        } else {
+          this.style.borderColor = '';
+          this.title = '';
+        }
+      });
+    }
 
     form.addEventListener('submit', function (event) {
       event.preventDefault();
@@ -366,9 +399,29 @@ document.addEventListener('DOMContentLoaded', function () {
         deck: deckId
       };
 
+      // Check for duplicate restaurant names globally (across all restaurants)
+      try {
+        const userCreatedRestaurants = loadUserCreatedRestaurants() || [];
+        const allRestaurants = [...(window.defaultStaticRestaurants || []), ...userCreatedRestaurants];
+        
+        // Check if restaurant name already exists (case-insensitive)
+        const duplicateExists = allRestaurants.some(restaurant => {
+          if (!restaurant || !restaurant.title) return false;
+          return restaurant.title.toLowerCase() === restaurantName.toLowerCase();
+        });
+        
+        if (duplicateExists) {
+          alert('Error: A restaurant with this name already exists. Please choose a different name.');
+          return;
+        }
+      } catch (error) {
+        // Silent error handling
+      }
+      
+      // Additional check: verify deck-specific duplicates as well
       if (typeof getDecks === 'function') {
         const deck = getDecks().find(d => d.id === deckId);
-        if (deck && deck.cards.includes(restaurantName)) {
+        if (deck && deck.cards.some(card => card.toLowerCase() === restaurantName.toLowerCase())) {
           alert('Error: A restaurant with this name already exists in this deck. Please choose a different name.');
           return;
         }

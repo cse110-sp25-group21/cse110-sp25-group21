@@ -183,11 +183,12 @@
           reader.onload = function(event) {
             uploadedImageData = event.target.result;
             
-            // Replace container content with image
+            // Add CSS class for styling when image is present
+            picContainer.classList.add('has-image');
+            
+            // Replace container content with image (using CSS for styling)
             picContainer.innerHTML = `
-              <img src="${uploadedImageData}" 
-                  style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;" 
-                  alt="Restaurant photo">
+              <img src="${uploadedImageData}" alt="Restaurant photo">
             `;
             
             console.log('Photo uploaded successfully');
