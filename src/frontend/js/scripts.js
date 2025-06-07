@@ -224,12 +224,13 @@ function viewRestaurant() {
  * @function
  * @returns {void}
  */
-window.onload = function () {
+function initializeApp() {
   let userCreatedRestaurants;
   try {
     const data = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
     userCreatedRestaurants = (data && data.restaurants) ? data.restaurants : [];
   } catch (e) {
+    console.warn('Failed to load user restaurants from localStorage:', e);
     userCreatedRestaurants = [];
   }
   
@@ -237,14 +238,17 @@ window.onload = function () {
   const currentDeckId = params.get("deck");
 
   const allRestaurants = [...defaultStaticRestaurants, ...userCreatedRestaurants];
-  const deck = getDecks().find(d => d.id === currentDeckId);
-
-  if (deck) {
-    restaurants = allRestaurants.filter(r => deck.cards.includes(r.title));
+  
+  if (typeof getDecks === 'function') {
+    const deck = getDecks().find(d => d.id === currentDeckId);
+    if (deck) {
+      restaurants = allRestaurants.filter(r => deck.cards.includes(r.title));
+    } else {
+      restaurants = allRestaurants; 
+    }
   } else {
-    restaurants = allRestaurants; 
+    restaurants = allRestaurants;
   }
-
 
   var nextBtn = document.getElementById('next');
   var prevBtn = document.getElementById('prev');
@@ -260,13 +264,18 @@ window.onload = function () {
   }
 
   updateArrowVisibility();
-  
-  if (restaurants.length > 0) {
-    renderRestaurant();
-  } else {
-    renderRestaurant(); 
-  }
-};
+  renderRestaurant();
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+  initializeApp();
+}
+
+// Legacy support for window.onload
+window.onload = initializeApp;
 
 /**
   * Handles the card form submission event.
