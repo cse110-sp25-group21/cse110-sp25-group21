@@ -192,17 +192,50 @@ function removeRestaurantFromStorage(restaurantId) {
 }
 
 /**
- * Returns default deck cover image
- * @param {string} deckID - ID of the deck to return image
- * @returns {string} - path to deck cover image
+ * Returns deck cover image (custom or default)
+ * @param {Object} deck - Deck object (can also accept deckID for backward compatibility)
+ * @returns {string} - path or data URL for deck cover image
  */
-function getDeckImage(deckID) {
+function getDeckImage(deck) {
+  // Handle backward compatibility - if passed a string, find the deck
+  if (typeof deck === 'string') {
+    const deckId = deck;
+    const decks = getDecks();
+    deck = decks.find(d => d.id === deckId);
+  }
+  
+  // Return custom image if it exists, otherwise default
+  if (deck && deck.customImage) {
+    return deck.customImage;
+  }
   return "../design/deckCover_default.jpg";
+}
+
+/**
+ * Update deck image
+ * @param {string} deckId - ID of the deck to update
+ * @param {string} imageData - Base64 image data
+ * @returns {boolean} true if successful, false otherwise
+ */
+function updateDeckImage(deckId, imageData) {
+  const deck = decks.find(d => d.id === deckId);
+  if (!deck) {
+    console.error(`Deck not found: ${deckId}`);
+    return false;
+  }
+  
+  // Update the deck with custom image
+  deck.customImage = imageData;
+  saveDecks();
+  
+  console.log(`Updated image for deck: ${deckId}`);
+  return true;
 }
 
 // Expose to global scope
 window.getDecks = getDecks;
 window.getDeckImage = getDeckImage;
+window.updateDeckImage = updateDeckImage;
 window.createDeck = createDeck;
 window.deleteDeck = deleteDeck;
 window.addCardToDeck = addCardToDeck;

@@ -23,8 +23,29 @@
         <a href="../frontend/card-deck.html">Decks</a>
       </nav>
     </nav>
-    <button class="change-deck-photo-button">Change Deck Photo</button>
+    <button class="change-deck-photo-button" id="change-deck-photo-btn">Change Deck Photo</button>
   </header>
+
+  <!-- Photo Upload Modal -->
+  <div class="photo-upload-modal" id="photo-upload-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Change Deck Photo</h3>
+        <button class="close-modal" id="close-modal">×</button>
+      </div>
+      <div class="photo-upload-area" id="photo-upload-area">
+                            <div class="upload-placeholder">
+                        <div class="upload-icon">📷</div>
+                        <p>Click to upload or drag and drop</p>
+                        <p class="upload-hint">PNG, JPG up to 10MB (auto-compressed)</p>
+                    </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cancel-btn" id="cancel-btn">Cancel</button>
+        <button class="save-photo-btn" id="save-photo-btn" style="display: none;">Save Photo</button>
+      </div>
+    </div>
+  </div>
 
   <main class="main-content">
     <div class="deck-title-container">
@@ -138,6 +159,168 @@
 
         // Run on load
         document.addEventListener("DOMContentLoaded", renderDeckEditor);
+
+        // Photo upload functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const changeDeckPhotoBtn = document.getElementById('change-deck-photo-btn');
+            const photoUploadModal = document.getElementById('photo-upload-modal');
+            const closeModal = document.getElementById('close-modal');
+            const cancelBtn = document.getElementById('cancel-btn');
+            const savePhotoBtn = document.getElementById('save-photo-btn');
+            const photoUploadArea = document.getElementById('photo-upload-area');
+            
+            let selectedImageData = null;
+            
+            // Image compression function
+            function compressImage(file, maxWidth = 800, maxHeight = 600, quality = 0.8) {
+                return new Promise((resolve) => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    const img = new Image();
+                    
+                    img.onload = function() {
+                        // Calculate new dimensions
+                        let { width, height } = img;
+                        
+                        if (width > maxWidth || height > maxHeight) {
+                            const ratio = Math.min(maxWidth / width, maxHeight / height);
+                            width *= ratio;
+                            height *= ratio;
+                        }
+                        
+                        // Set canvas size
+                        canvas.width = width;
+                        canvas.height = height;
+                        
+                        // Draw and compress
+                        ctx.drawImage(img, 0, 0, width, height);
+                        
+                        // Convert to base64 with compression
+                        const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+                        resolve(compressedDataUrl);
+                    };
+                    
+                    img.src = URL.createObjectURL(file);
+                });
+            }
+            
+            // Create hidden file input
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'image/*';
+            fileInput.style.display = 'none';
+            document.body.appendChild(fileInput);
+            
+            // Open modal when button is clicked
+            changeDeckPhotoBtn.addEventListener('click', function() {
+                photoUploadModal.style.display = 'flex';
+                selectedImageData = null;
+                resetUploadArea();
+            });
+            
+            // Close modal functions
+            function closeModalFunc() {
+                photoUploadModal.style.display = 'none';
+                selectedImageData = null;
+                resetUploadArea();
+            }
+            
+            closeModal.addEventListener('click', closeModalFunc);
+            cancelBtn.addEventListener('click', closeModalFunc);
+            
+            // Close modal when clicking outside
+            photoUploadModal.addEventListener('click', function(e) {
+                if (e.target === photoUploadModal) {
+                    closeModalFunc();
+                }
+            });
+            
+            // Reset upload area to initial state
+            function resetUploadArea() {
+                photoUploadArea.classList.remove('has-image');
+                photoUploadArea.innerHTML = `
+                    <div class="upload-placeholder">
+                        <div class="upload-icon">📷</div>
+                        <p>Click to upload or drag and drop</p>
+                        <p class="upload-hint">PNG, JPG up to 10MB (auto-compressed)</p>
+                    </div>
+                `;
+                savePhotoBtn.style.display = 'none';
+            }
+            
+            // Click to upload
+            photoUploadArea.addEventListener('click', function() {
+                if (!photoUploadArea.classList.contains('has-image')) {
+                    fileInput.click();
+                }
+            });
+            
+            // Handle file selection
+            fileInput.addEventListener('change', async function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // Check file size (10MB limit for original file)
+                    if (file.size > 10 * 1024 * 1024) {
+                        alert('File size must be less than 10MB');
+                        return;
+                    }
+                    
+                    try {
+                        // Show loading state
+                        photoUploadArea.innerHTML = `
+                            <div class="upload-placeholder">
+                                <div class="upload-icon">⏳</div>
+                                <p>Compressing image...</p>
+                            </div>
+                        `;
+                        
+                        // Compress the image
+                        selectedImageData = await compressImage(file);
+                        
+                        // Check compressed size (rough estimate)
+                        const compressedSizeKB = Math.round((selectedImageData.length * 3) / 4 / 1024);
+                        console.log(`Compressed image size: ~${compressedSizeKB}KB`);
+                        
+                        // If still too large, compress more aggressively
+                        if (compressedSizeKB > 500) { // 500KB limit
+                            console.log('Image still large, compressing more aggressively...');
+                            selectedImageData = await compressImage(file, 600, 450, 0.6);
+                        }
+                        
+                        // Update upload area with compressed image
+                        photoUploadArea.classList.add('has-image');
+                        photoUploadArea.innerHTML = `
+                            <img src="${selectedImageData}" alt="Deck photo preview">
+                        `;
+                        
+                        // Show save button
+                        savePhotoBtn.style.display = 'block';
+                        
+                    } catch (error) {
+                        console.error('Error compressing image:', error);
+                        alert('Error processing image. Please try a different file.');
+                        resetUploadArea();
+                    }
+                }
+            });
+            
+            // Save photo
+            savePhotoBtn.addEventListener('click', function() {
+                if (selectedImageData) {
+                    const deckId = getDeckIdFromUrl();
+                    if (deckId) {
+                        const success = updateDeckImage(deckId, selectedImageData);
+                        if (success) {
+                            alert('Deck photo updated successfully!');
+                            closeModalFunc();
+                            // The deck image will be updated when users navigate back to the deck view
+                        } else {
+                            alert('Failed to update deck photo');
+                        }
+                    }
+                }
+            });
+        });
     </script>
 
 </body>
