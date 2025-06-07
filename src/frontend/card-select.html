@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
@@ -9,14 +8,13 @@
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/cardSelect.css">
 </head>
-
 <body>
-  
+ 
   <header>
       <a href="card-deck.html">
         <button class="back-button">Back</button>
       </a>
-      
+     
       <nav class="header-nav">
       <nav class="nav-links">
               <a href="../frontend/landingPage.html">Home</a>
@@ -26,17 +24,14 @@
           </nav>
       </nav>
   </header>
-
-  
+ 
   <main class="main-content">
     <section class="deck-header">
       <h1 id="deck-title">Deck Title</h1>
       <button id="edit-deck" class="card-button">Edit Deck</button>
     </section>
-
     <section class="card-select">
       <button id="prev" class="card-button">←</button>
-
       <div class="card">
         <img id="restaurant-image" src="../design/cardCover_default.jpg" alt="Restaurant cover" />
         <div class="card-details">
@@ -46,11 +41,9 @@
           </div>
         </div>
       </div>
-
       <button id="next" class="card-button">→</button>
     </section>
   </main>
-
   <!-- Footer -->
   <footer>
     <div class="header-brand">
@@ -63,27 +56,23 @@
       <div>Phone: (123) 456-7890</div>
     </div>
   </footer>
-
   <script src="../frontend/js/deckControllerFrontEnd.js"></script>
-  <script src="../frontend/scripts.js"></script>
-
+  <script src="../frontend/js/scripts.js"></script>
   <script>
     function getDeckIdFromUrl() {
       const params = new URLSearchParams(window.location.search);
       return params.get("deck");
     }
-
     document.addEventListener("DOMContentLoaded", () => {
       const deckId = getDeckIdFromUrl();
       const deck = getDecks().find(d => d.id === deckId);
-
       if (deck) {
         document.getElementById("deck-title").textContent = deck.name;
       } else {
         document.getElementById("deck-title").textContent = "Deck Not Found";
       }
     });
+
   </script>
 </body>
-
 </html>
