@@ -1,6 +1,6 @@
 /**
  * @jest-environment node
- *
+ * 
  * run using: npm test landingToDeck.puppeteer.test.js
  *
  * this tests:
@@ -10,9 +10,14 @@
  */
 
 const puppeteer = require('puppeteer');
-const path = require('path');
+const { resolve } = require('path');
+const { pathToFileURL } = require('url');
 
-describe('end to end test: landingPage to card-deck edit/done toggle', () => {
+const NAV_WAIT_UNTIL   = 'domcontentloaded';
+const NAV_TIMEOUT      = 20000;
+const SELECTOR_TIMEOUT =  5000;
+
+describe('E2E: landingPage → card-deck Edit/Done toggle', () => {
   let browser;
   let page;
 
@@ -22,78 +27,60 @@ describe('end to end test: landingPage to card-deck edit/done toggle', () => {
       args: ['--disable-web-security']
     });
     page = await browser.newPage();
-  });
+  }, NAV_TIMEOUT);
 
   afterAll(async () => {
     await browser.close();
   });
 
-  test('landingPage.html → click decks in header → card-deck.html → Edit/Done button toggles',
+  test(
+    'navigates from landing to card-deck and toggles Edit/Done',
     async () => {
-      const landingPath = path.resolve(
-        __dirname,
-        '../src/frontend/landingPage.html'
-      );
-      const landingUrl = 'file://' + landingPath;
-
-      const cardDeckPath = path.resolve(
-        __dirname,
-        '../src/frontend/card-deck.html'
-      );
-      const cardDeckUrl = 'file://' + cardDeckPath;
-
       // load landingPage.html
-      await page.goto(landingUrl, { waitUntil: 'domcontentloaded' });
+      const landingFile = resolve(__dirname, '../src/frontend/landingPage.html');
+      const landingUrl  = pathToFileURL(landingFile).href;
+      await page.goto(landingUrl, { waitUntil: NAV_WAIT_UNTIL, timeout: NAV_TIMEOUT });
 
-      // verify that “Decks” link exists on landing page
-      // landingPage.html has:
-      // <a href="../frontend/card-deck.html">Decks</a>
-      // confirm the links text is there:
-      const decksLinkText = await page.$eval(
-        'a[href*="card-deck.html"]',
-        (el) => el.textContent.trim()
-      );
-      expect(decksLinkText).toBe('Decks');
+      // verify “Decks” link exists
+      const deckLinkSel = 'a[href*="card-deck.html"]';
+      await page.waitForSelector(deckLinkSel, { timeout: SELECTOR_TIMEOUT });
+      const linkText = await page.$eval(deckLinkSel, el => el.textContent.trim());
+      expect(linkText).toBe('Decks');
 
       // navigate to card-deck.html
-      await page.goto(cardDeckUrl, { waitUntil: 'domcontentloaded' });
-
-      // confirm its in card-deck.html
+      const deckFile = resolve(__dirname, '../src/frontend/card-deck.html');
+      const deckUrl  = pathToFileURL(deckFile).href;
+      await page.goto(deckUrl, { waitUntil: NAV_WAIT_UNTIL, timeout: NAV_TIMEOUT });
       expect(page.url().endsWith('card-deck.html')).toBe(true);
 
-      // wait for edit button to appear
-      await page.waitForSelector('.edit-button');
+      // toggle the Edit/Done button
+      const editBtnSel = '.edit-button';
+      await page.waitForSelector(editBtnSel, { timeout: SELECTOR_TIMEOUT });
 
-      // verify initial text is Edit
-      let buttonText = await page.$eval('.edit-button', (el) => el.textContent.trim());
-      expect(buttonText).toBe('Edit');
+      // initial state is “Edit”
+      let txt = await page.$eval(editBtnSel, el => el.textContent.trim());
+      expect(txt).toBe('Edit');
 
-      // click Edit and wait until its text becomes Done
-      await page.click('.edit-button');
-      await page.waitForFunction(() => {
-        const btn = document.querySelector('.edit-button');
-        return btn && btn.textContent.trim() === 'Done';
-      });
-
-      buttonText = await page.$eval(
-        '.edit-button',
-        (el) => el.textContent.trim()
+      // click → wait for “Done”
+      await page.click(editBtnSel);
+      await page.waitForFunction(
+        sel => document.querySelector(sel)?.textContent.trim() === 'Done',
+        { timeout: SELECTOR_TIMEOUT },
+        editBtnSel
       );
-      expect(buttonText).toBe('Done');
+      txt = await page.$eval(editBtnSel, el => el.textContent.trim());
+      expect(txt).toBe('Done');
 
-      // click Done again → wait until text is Edit
-      await page.click('.edit-button');
-      await page.waitForFunction(() => {
-        const btn = document.querySelector('.edit-button');
-        return btn && btn.textContent.trim() === 'Edit';
-      });
-
-      buttonText = await page.$eval(
-        '.edit-button',
-        (el) => el.textContent.trim()
+      // click again → wait for “Edit”
+      await page.click(editBtnSel);
+      await page.waitForFunction(
+        sel => document.querySelector(sel)?.textContent.trim() === 'Edit',
+        { timeout: SELECTOR_TIMEOUT },
+        editBtnSel
       );
-      expect(buttonText).toBe('Edit');
+      txt = await page.$eval(editBtnSel, el => el.textContent.trim());
+      expect(txt).toBe('Edit');
     },
-    20000 // 20s timeout
+    NAV_TIMEOUT
   );
 });
