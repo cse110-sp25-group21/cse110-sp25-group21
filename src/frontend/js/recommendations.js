@@ -1,11 +1,17 @@
-// recommendations.js
-// This module tracks clicks on .card elements and updates a "Recommended for You" section
-// Can be connected to the real card components when they are ready
+/**
+ * recommendations.js
+ * This module tracks clicks on .card elements and updates a "Recommended for You" section
+ * Can be connected to the real card components
+ */
 
 // Click count object - using Map for security
 let cardClickCounts = new Map();
 
-// Function: Track clicks on cards
+/**
+ * Track clicks on cards
+ * @param {Object} cardElement - Card to be tracked
+ * @returns {void}
+ */
 function trackCardClicks(cardElement) {
   const cardName = cardElement.innerText.trim();
   
@@ -23,13 +29,17 @@ function trackCardClicks(cardElement) {
   updateRecommendations();
 }
 
-// Function: Update recommendations list
+/**
+ * Update recommendations list based on click data
+ * @returns {void} 
+ */
 function updateRecommendations() {
   const sortedCards = Array.from(cardClickCounts.entries())
     .sort((a, b) => b[1] - a[1])
     .map(entry => entry[0]);
 
-  const recList = document.getElementById("recommendation-list"); //TODO: Make section in html
+  const recList = document.getElementById("recommendation-list"); 
+  //TODO: Make section in html
   if (!recList) return; // Safety check
   
   recList.innerHTML = ""; // Clear old list
@@ -48,7 +58,9 @@ function updateRecommendations() {
   saveClickData();
 }
 
-// Function: Initialize tracking (connect to cards)
+/**
+ * Initialize tracking (connect to cards)
+ */
 function initCardTracking() {
   const cards = document.querySelectorAll(".card");
   cards.forEach(card => {
@@ -56,13 +68,17 @@ function initCardTracking() {
   });
 }
 
-// Run the tracking setup on page load
+/**
+ * Run the tracking setup on page load
+ */
 document.addEventListener("DOMContentLoaded", () => {
   loadClickData(); // Load saved data first
   initCardTracking();
 });
 
-// Save/load click data to localStorage
+/**
+ * Save/load click data to localStorage
+ */
 function saveClickData() {
   try {
     // Convert Map to Object for JSON serialization
@@ -73,6 +89,9 @@ function saveClickData() {
   }
 }
 
+/**
+ * Loads click data back into Map and updates recommendations
+ */
 function loadClickData() {
   try {
     const saved = localStorage.getItem('cardClickCounts');
