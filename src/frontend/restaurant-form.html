@@ -53,17 +53,31 @@
         
         <!-- Row 3: Menu -->
         <div class="form-row">
-          <label for="menu" class="form-label">Menu</label>
-          <textarea id="menu" name="menu" placeholder="enter menu here..." class="form-textarea"></textarea>
+          <label class="form-label">Menu Items</label>
+          <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <input type="text" id="menu-item-1" name="menu-item-1" placeholder="Menu item 1..." class="form-input">
+            <input type="text" id="menu-item-2" name="menu-item-2" placeholder="Menu item 2..." class="form-input">
+            <input type="text" id="menu-item-3" name="menu-item-3" placeholder="Menu item 3..." class="form-input">
+          </div>
         </div>
-        
-        <!-- Row 4: Business Hour -->
+        <!-- Row 4: Rating Dropdown -->
+        <div class="form-row">
+          <label for="rating" class="form-label">Rating</label>
+          <select id="rating" name="rating" class="form-input">
+            <option value="1">⭐ (1 star)</option>
+            <option value="2">⭐⭐ (2 stars)</option>
+            <option value="3">⭐⭐⭐ (3 stars)</option>
+            <option value="4">⭐⭐⭐⭐ (4 stars)</option>
+            <option value="5" selected>⭐⭐⭐⭐⭐ (5 stars)</option>
+          </select>
+        </div>   
+        <!-- Row 5: Business Hour -->
         <div class="form-row">
           <label for="business-hour" class="form-label">Business Hour</label>
           <input type="text" id="business-hour" name="business-hour" placeholder="enter business hour here..." class="form-input">
         </div>
         
-        <!-- Row 5: Address, Website, Phone in 3 columns -->
+        <!-- Row 6: Address, Website, Phone in 3 columns -->
         <div class="form-row form-columns">
           <div class="form-column">
             <label for="address" class="form-label">Address <span class="icon">📍</span></label>
@@ -79,11 +93,11 @@
           </div>
         </div>
         
-        <!-- Row 6: Map placeholder -->
+        <!-- Row 7: pic placeholder -->
         <div class="form-row">
-          <label for="map" class="form-label">Map</label>
-          <div class="map-container" id="map" aria-label="Map display area">
-            <div class="map-placeholder">📷</div>
+          <label for="pic" class="form-label">Upload Picture</label>
+          <div class="pic-container" id="pic" aria-label="pic display area">
+            <div class="pic-placeholder">📷</div>
           </div>
         </div>
         
@@ -93,6 +107,7 @@
             Submit
           </button>
         </div>
+      
       </form>
     </div>
   </section>
@@ -108,6 +123,8 @@
       <div>Phone: (123) 456-7890</div>
     </div>
   </footer>
+  <script src="../frontend/js/deckControllerFrontEnd.js"></script>
+  <script src="../frontend/js/scripts.js"></script>
   <script>
     // Populate deck dropdown with actual decks
     document.addEventListener('DOMContentLoaded', function() {
@@ -134,10 +151,57 @@
         option.textContent = 'No decks available - create a deck first';
         deckSelect.appendChild(option);
       }
+
     });
+    // Photo upload functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const picContainer = document.getElementById('pic');
+      
+      // Create hidden file input
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = 'image/*';
+      fileInput.style.display = 'none';
+      document.body.appendChild(fileInput);
+      
+      // Store the uploaded image data
+      let uploadedImageData = null;
+      
+      // Add click event to pic container
+      picContainer.addEventListener('click', function() {
+        console.log('Photo area clicked');
+        fileInput.click();
+      });
+      
+      // Handle file selection
+      fileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          console.log('File selected:', file.name);
+          
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            uploadedImageData = event.target.result;
+            
+            // Add CSS class for styling when image is present
+            picContainer.classList.add('has-image');
+            
+            // Replace container content with image (using CSS for styling)
+            picContainer.innerHTML = `
+              <img src="${uploadedImageData}" alt="Restaurant photo">
+            `;
+            
+            console.log('Photo uploaded successfully');
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+      
+      // Make image data available for form submission
+      window.getUploadedImage = () => uploadedImageData;
+    });
+
     </script>
 </body>
 </html> 
-<script src="js/deckControllerFrontEnd.js"></script>
-<script src="scripts.js"></script>
 

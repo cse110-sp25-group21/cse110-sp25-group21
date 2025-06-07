@@ -135,7 +135,7 @@ function deleteDeck(deckId) {
  * @returns {boolean} true if card was added, false if it already exists or deck not found
  */
 function addCardToDeck(deckID, restaurantId) {
-  const deck = decks.find((d) => d.id === deckId);
+  const deck = decks.find((d) => d.id === deckID);
   if (!deck) return false;
   if (!deck.cards.includes(restaurantId)) {
     deck.cards.push(restaurantId);
@@ -157,6 +157,17 @@ function removeCardFromDeck(deckId, restaurantId) {
   const index = deck.cards.indexOf(restaurantId);
   if (index !== -1) {
     deck.cards.splice(index, 1);
+    
+    // Check if this restaurant is used in any other deck
+    const isUsedInOtherDecks = decks.some(d => 
+      d.id !== deckId && d.cards.includes(restaurantId)
+    );
+    
+    // If not used in any other deck, remove from global restaurant storage
+    if (!isUsedInOtherDecks) {
+      removeRestaurantFromStorage(restaurantId);
+    }
+    
     saveDecks();
     return true;
   }
@@ -164,19 +175,70 @@ function removeCardFromDeck(deckId, restaurantId) {
 }
 
 /**
- * Returns default deck cover image
- * @param {string} deckID - ID of the deck to return image
- * @returns {string} - path to deck cover image
+ * Remove a restaurant from global storage completely
+ * @param {string} restaurantId - Name/ID of the restaurant to remove
  */
-function getDeckImage(deckID) {
+function removeRestaurantFromStorage(restaurantId) {
+  let currentData = JSON.parse(localStorage.getItem('restaurantsData')) || {};
+  
+  if (currentData.restaurants && Array.isArray(currentData.restaurants)) {
+    // Remove restaurant from the global storage
+    currentData.restaurants = currentData.restaurants.filter(restaurant => 
+      restaurant.title !== restaurantId
+    );
+    
+    localStorage.setItem('restaurantsData', JSON.stringify(currentData));
+  }
+}
+
+/**
+ * Returns deck cover image (custom or default)
+ * @param {Object} deck - Deck object (can also accept deckID for backward compatibility)
+ * @returns {string} - path or data URL for deck cover image
+ */
+function getDeckImage(deck) {
+  // Handle backward compatibility - if passed a string, find the deck
+  if (typeof deck === 'string') {
+    const deckId = deck;
+    const decks = getDecks();
+    deck = decks.find(d => d.id === deckId);
+  }
+  
+  // Return custom image if it exists, otherwise default
+  if (deck && deck.customImage) {
+    return deck.customImage;
+  }
   return "../design/deckCover_default.jpg";
+}
+
+/**
+ * Update deck image
+ * @param {string} deckId - ID of the deck to update
+ * @param {string} imageData - Base64 image data
+ * @returns {boolean} true if successful, false otherwise
+ */
+function updateDeckImage(deckId, imageData) {
+  const deck = decks.find(d => d.id === deckId);
+  if (!deck) {
+    console.error(`Deck not found: ${deckId}`);
+    return false;
+  }
+  
+  // Update the deck with custom image
+  deck.customImage = imageData;
+  saveDecks();
+  
+  console.log(`Updated image for deck: ${deckId}`);
+  return true;
 }
 
 // Expose to global scope
 window.getDecks = getDecks;
 window.getDeckImage = getDeckImage;
+window.updateDeckImage = updateDeckImage;
 window.createDeck = createDeck;
 window.deleteDeck = deleteDeck;
 window.addCardToDeck = addCardToDeck;
 window.removeCardFromDeck = removeCardFromDeck;
+window.removeRestaurantFromStorage = removeRestaurantFromStorage;
 window.clearLocalStorage = clearLocalStorage;

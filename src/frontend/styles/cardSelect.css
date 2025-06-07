@@ -51,9 +51,10 @@
 .card img {
   width: 100%;
   height: 350px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 16px 16px 0 0;
   flex-shrink: 0;
+  background-color: #f8f9fa;
 }
 
 .card-details {

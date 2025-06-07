@@ -75,7 +75,7 @@
                 </div>
                 <div class="menu-section">
                     <h3 style="font-size: 2rem; margin-top: 2rem;">Menu</h3>
-                    <ul style="list-style: none; padding: 0; margin: 0.5rem 0 0 0;">
+                    <ul class="menu-list" style="list-style: none; padding: 0; margin: 0.5rem 0 0 0;">
                         <li>Food 1</li>
                         <li>Food 2</li>
                         <li>Food 3</li>
@@ -103,7 +103,7 @@
             const restaurant = JSON.parse(sessionStorage.getItem('selectedRestaurant'));
             console.log(restaurant);
             if (restaurant) {
-                document.querySelector('.image').src = restaurant.image;
+                document.querySelector('.image').src = restaurant.image || '../design/cardCover_default.jpg';
                 document.querySelector('.title').textContent = restaurant.title;
                 document.querySelector('.hours').textContent = restaurant.hours;
                 document.querySelector('.type').textContent = restaurant.type;
@@ -118,59 +118,42 @@
                     stars += '☆';
                 }
                 document.querySelector('.rating').textContent = stars;
+
+                // Handle menu display
+                const menuList = document.querySelector('.menu-list');
+                console.log('Restaurant menu data:', restaurant.menu); // Debug log
+                
+                if (restaurant.menu && restaurant.menu.trim()) {
+                    // Split menu by commas and clean up whitespace
+                    const menuItems = restaurant.menu.split(',').map(item => item.trim()).filter(item => item);
+                    console.log('Processed menu items:', menuItems); // Debug log
+                    
+                    if (menuItems.length > 0) {
+                        // Clear existing menu items
+                        menuList.innerHTML = '';
+                        
+                        // Add each menu item (limit to 3 for best display)
+                        const itemsToShow = menuItems.slice(0, 3);
+                        itemsToShow.forEach(item => {
+                            const li = document.createElement('li');
+                            li.textContent = item;
+                            li.style.marginBottom = '0.5rem';
+                            menuList.appendChild(li);
+                        });
+                    
+                    } 
+                }
+            
             }
+
+
         })
 
-        document.querySelector('.back-button').addEventListener('click', () => {
-            window.location.href = 'card-select.html';
-        });
+
+
     </script>
 </body>
 
 </html>
 
 
-
-<!-- <style>
-   
-    .main-content {
-        padding: 2rem 2rem 0 2rem;
-    }
-
-    .restaurant-view {
-        display: flex;
-        gap: 0.5rem;
-        width: 100%;
-    }
-
-    .left-panel {
-        flex: 0 0 60%;
-        padding-right: 0.5rem;
-    }
-
-    .left-panel > * {
-        margin-bottom: 1.25rem;
-    }
-    .left-panel > *:last-child {
-        margin-bottom: 0;
-    }
-
-    .right-panel {
-        flex: 0 0 40%;
-        padding-left: 0.5rem;
-        font-size: 1.75rem;
-    }
-
-    .image {
-        width: 80%;
-        height: 40%;
-        aspect-ratio: 1 / 1;
-        background-color: #e0e0e0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-        color: #555;
-        max-width: 100%;
-    }
-  </style> -->
