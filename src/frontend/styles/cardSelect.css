@@ -156,6 +156,8 @@
 }
 
 #powell-recommendation {
+  position: absolute;
+  left: 37%;
   background: linear-gradient(90deg, #ff9966, #ff5e62);
   padding: 1rem 1.5rem;
   border-radius: 12px;
