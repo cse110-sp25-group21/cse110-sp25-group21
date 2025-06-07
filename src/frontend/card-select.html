@@ -17,7 +17,7 @@
      
       <nav class="header-nav">
       <nav class="nav-links">
-              <a href="../frontend/landingPage.html">Home</a>
+              <a href="../frontend/index.html">Home</a>
               <a href="../frontend/restaurant-form.html">Add Restaurant</a>
               <a href="../frontend/card-deck.html">Decks</a>
               <a href = "#footer">Contact</a>
@@ -28,11 +28,14 @@
   <main class="main-content">
     <section class="deck-header">
       <h1 id="deck-title">Deck Title</h1>
+      <div id="powell-recommendation"></div>
+      </div>
       <button id="edit-deck" class="card-button">Edit Deck</button>
     </section>
     <section class="card-select">
       <button id="prev" class="card-button">←</button>
       <div class="card">
+        
         <img id="restaurant-image" src="../design/cardCover_default.jpg" alt="Restaurant cover" />
         <div class="card-details">
           <h2 id="restaurant-title">Restaurant Title</h2>
@@ -57,6 +60,7 @@
     </div>
   </footer>
   <script src="../frontend/js/deckControllerFrontEnd.js"></script>
+  <script src="../frontend/js/recommendations.js"></script>
   <script src="../frontend/js/scripts.js"></script>
   <script>
     function getDeckIdFromUrl() {
