@@ -132,26 +132,23 @@ function updateArrowVisibility() {
  * @returns {void}
  */
 function renderRestaurant() {
+  var restaurantImageElement = document.getElementById('restaurant-image');
+  var restaurantTitleElement = document.getElementById('restaurant-title');
+  var restaurantRatingElement = document.getElementById('restaurant-rating');
+  
   // Handle empty deck case
   if (restaurants.length === 0) {
-    var imgElement = document.getElementById('restaurant-image');
-    var titleElement = document.getElementById('restaurant-title');
-    var ratingElement = document.getElementById('restaurant-rating');
-    
-    if (imgElement) imgElement.src = '../design/cardCover_default.jpg';
-    if (titleElement) titleElement.textContent = 'No restaurants in this deck';
-    if (ratingElement) ratingElement.textContent = '';
+    if (restaurantImageElement) restaurantImageElement.src = '../design/cardCover_default.jpg';
+    if (restaurantTitleElement) restaurantTitleElement.textContent = 'No restaurants in this deck';
+    if (restaurantRatingElement) restaurantRatingElement.textContent = '';
     return;
   }
 
   var restaurant = restaurants[currentIndex];
-  var imgElement = document.getElementById('restaurant-image');
-  var titleElement = document.getElementById('restaurant-title');
-  var ratingElement = document.getElementById('restaurant-rating');
 
-  if (imgElement) imgElement.src = restaurant.image;
-  if (titleElement) titleElement.textContent = restaurant.title;
-  if (ratingElement) {
+  if (restaurantImageElement) restaurantImageElement.src = restaurant.image;
+  if (restaurantTitleElement) restaurantTitleElement.textContent = restaurant.title;
+  if (restaurantRatingElement) {
     var stars = '';
     for (var i = 0; i < restaurant.rating; i++) {
       stars += '★';
@@ -159,7 +156,7 @@ function renderRestaurant() {
     for (var j = restaurant.rating; j < 5; j++) {
       stars += '☆';
     }
-    ratingElement.textContent = stars;
+    restaurantRatingElement.textContent = stars;
   }
 }
 
@@ -198,7 +195,7 @@ function editDeck() {
   const currentDeckId = params.get("deck");
   
   if (currentDeckId) {
-    window.location.href = `deck-editor.html?deck=${currentDeckId}`;
+    window.location.href = `deck-editor.html?deck=${encodeURIComponent(currentDeckId)}`;
   } else {
     console.error('No deck ID found in URL');
   }
@@ -213,7 +210,7 @@ function editDeck() {
  */
 function viewRestaurant() {
   var restaurant = restaurants[currentIndex];
-  console.log('⬇️ saving restaurant:', restaurant);
+  console.log('saving restaurant:', restaurant);
   sessionStorage.setItem('selectedRestaurant', JSON.stringify(restaurant));
 
   // Redirect to restaurant detail page
@@ -231,7 +228,6 @@ window.onload = function () {
   let userCreatedRestaurants;
   try {
     const data = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-    // Fix: Access restaurants from the .restaurants property, not the root array
     userCreatedRestaurants = (data && data.restaurants) ? data.restaurants : [];
   } catch (e) {
     userCreatedRestaurants = [];
@@ -259,19 +255,16 @@ window.onload = function () {
   if (prevBtn) prevBtn.onclick = goPrev;
   if (editBtn) editBtn.onclick = editDeck;
 
-  // Set up card click handler with proper event delegation
   if (cardElement) {
     cardElement.onclick = viewRestaurant;
   }
 
-  // Update arrow visibility based on deck size
   updateArrowVisibility();
   
-  // Render first restaurant
   if (restaurants.length > 0) {
     renderRestaurant();
   } else {
-    renderRestaurant(); // This will handle the empty deck case
+    renderRestaurant(); 
   }
 };
 
@@ -293,6 +286,8 @@ document.addEventListener('DOMContentLoaded', function () {
       const menuItem1 = document.getElementById('menu-item-1').value.trim();
       const menuItem2 = document.getElementById('menu-item-2').value.trim();
       const menuItem3 = document.getElementById('menu-item-3').value.trim();
+      const ratingElement = document.getElementById('rating');
+      const rating = ratingElement ? parseInt(ratingElement.value, 10) : 3;
 
       const menuItems = [menuItem1, menuItem2, menuItem3].filter(item => item != '');
       const menuString = menuItems.join(',');
@@ -309,7 +304,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const newRestaurant = {
         title: document.getElementById('restaurant-name').value.trim(),
         image: uploadedImage || '../design/cardCover_default.jpg',
-        rating: parseInt(document.getElementById('rating').value),
+        rating: isNaN(rating) ? 3 : rating,
         type: document.getElementById('food-genre').value.trim(),
         phone: document.getElementById('phone').value.trim(),
         website: document.getElementById('website').value.trim(),
@@ -348,7 +343,7 @@ if (editDeckButton) {
 
   if (currentDeckId) {
     editDeckButton.addEventListener("click", () => {
-      window.location.href = `deck-editor.html?deck=${currentDeckId}`;
+      window.location.href = `deck-editor.html?deck=${encodeURIComponent(currentDeckId)}`;
     });
   }
 }
