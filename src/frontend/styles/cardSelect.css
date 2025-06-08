@@ -19,7 +19,6 @@
 }
 
 /* Buttons */
-
 .card-button:hover,
 .back-button:hover {
   background-color: #F97316;
@@ -94,8 +93,9 @@
 }
 
 .deck-header h1 {
-  margin: 0;
-  font-size: 3rem;
+  margin-top: 20px;
+  padding-left: 10px;
+  font-size: 2.5rem;
   color: #FF964F;
 }
 
@@ -155,25 +155,33 @@
   }
 }
 
+.deck-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative; 
+}
 #powell-recommendation {
   position: absolute;
-  left: 37%;
+  left: 50%;
+  transform: translateX(-50%);
   background: linear-gradient(90deg, #ff9966, #ff5e62);
   padding: 1rem 1.5rem;
   border-radius: 12px;
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease;
   max-width: 600px;
+  text-align: center;
 }
 
 #powell-recommendation:hover {
-  transform: scale(1.03) translateY(-3px);
+  transform: translate((-3px));
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
   background: linear-gradient(90deg, #ff5e62, #ff9966);
   cursor: pointer;
   letter-spacing: 0.5px;
+  text-align: center;
 }
