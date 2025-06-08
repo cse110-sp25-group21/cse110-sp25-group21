@@ -1,5 +1,5 @@
 # How To Open Our Project
-[live demo]([cse110-sp25-group21/cse110-sp25-group21](https://cse110-sp25-group21.github.io/cse110-sp25-group21/))
+https://cse110-sp25-group21.github.io/cse110-sp25-group21/
 
 
 # Hello! We are cse110-sp25-group21 aka SeekDeep v2.1
