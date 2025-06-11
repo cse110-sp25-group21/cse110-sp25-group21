@@ -1,6 +1,8 @@
 # How To Open Our Project
 https://cse110-sp25-group21.github.io/cse110-sp25-group21/
 
+# How to Use Our Project
+![How-To Gif](https://s8.ezgif.com/tmp/ezgif-8c3c57c75a62e1.gif)
 
 # Hello! We are cse110-sp25-group21 aka SeekDeep v2.1
 @ryunzz (Ryan), @darkotoni (Darian), @EdisonZhangUCSD (Edison), @coderfreeze (Vijay), @ttran29 (Tommy), @CharlotteKim123 (Charlotte), @ChesterHuey (Chester), @sophiepng (Sophie), @Jvaladeus (Akhil), @lisafritsche (Lisa), and @TeslaAngel (Mohan)
